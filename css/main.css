@@ -121,7 +121,7 @@ body {
     display: flex;
 }
 
-.header__personalInfos {
+.header__personal-infos {
     list-style-type: none;
     margin: 0;
     padding: 0 0 0 17px;
@@ -130,6 +130,14 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.header__personal-infos-item:first-child {
+    padding-bottom: 8px;
+}
+
+.header__personal-infos-item:not(:first-child) {
+    font-size: 1.1rem;
 }
 
 .header__contact {
@@ -144,6 +152,10 @@ body {
     align-items: flex-end;
     justify-content: center;
     font-weight: normal;
+}
+
+.header__contact-item:not(:last-child) {
+    padding-bottom: 5px;
 }
 
 .header__icon-contact {
@@ -189,13 +201,20 @@ body {
     padding-left: 15px;
 }
 
+.skill__icon-wrapper {
+    min-width: 40px;
+    display: inline-block;
+}
+
 .skill__content {
     display: flex;
     justify-content: space-around;
+    padding-left: 45px;
 }
 
 .skill__title {
     margin: 0 0 10px;
+    text-align: center;
 }
 
 .skill__list {
@@ -228,6 +247,7 @@ body {
     margin: 3px 0 0;
     flex-grow: 2;
     text-align: right;
+    font-weight: normal;
 }
 
 .experience__content {
