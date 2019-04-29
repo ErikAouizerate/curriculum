@@ -100,8 +100,9 @@ textarea {
 body {
     width: 21cm; 
     height:  29.7cm;
-    background-color: #FFFBF5;
     font-family: 'Roboto', sans-serif, Arial;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
@@ -171,7 +172,7 @@ body {
 }
 
 .main {
-    height: 80%;
+    background-color: #FFFBF5;
     padding-left: 15px;
     padding-right: 20px;
 }
@@ -269,8 +270,6 @@ body {
 .footer {
     min-height: 20px;
     background-color: #417378;
-    position: relative;
-    bottom: -85px;
 }
 
 
