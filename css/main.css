@@ -177,6 +177,12 @@ body {
     padding-right: 20px;
 }
 
+.section__intro {
+    margin: 10px;
+    font-style: italic;
+    text-align: center;
+}
+
 .section__title {
     font-size: 1.8rem;
     font-weight: normal;
@@ -203,8 +209,16 @@ body {
 }
 
 .skill__icon-wrapper {
-    min-width: 40px;
+    min-width: 35px;
     display: inline-block;
+}
+
+.skill__icon-wrapper_double {
+    min-width: 65px;
+}
+
+.skill__icon-wrapper_large {
+    min-width: 45px;
 }
 
 .skill__content {
