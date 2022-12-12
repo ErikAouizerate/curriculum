@@ -11,9 +11,9 @@
    ========================================================================== */
 
 html {
-    color: #222;
-    font-size: 1em;
-    line-height: 1.4;
+  color: #222;
+  font-size: 1em;
+  line-height: 1.4;
 }
 
 /*
@@ -27,13 +27,13 @@ html {
  */
 
 ::-moz-selection {
-    background: #b3d4fc;
-    text-shadow: none;
+  background: #b3d4fc;
+  text-shadow: none;
 }
 
 ::selection {
-    background: #b3d4fc;
-    text-shadow: none;
+  background: #b3d4fc;
+  text-shadow: none;
 }
 
 /*
@@ -41,12 +41,12 @@ html {
  */
 
 hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
 }
 
 /*
@@ -61,7 +61,7 @@ iframe,
 img,
 svg,
 video {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 /*
@@ -69,9 +69,9 @@ video {
  */
 
 fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
 
 /*
@@ -79,7 +79,7 @@ fieldset {
  */
 
 textarea {
-    resize: vertical;
+  resize: vertical;
 }
 
 /* ==========================================================================
@@ -87,10 +87,10 @@ textarea {
    ========================================================================== */
 
 .browserupgrade {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
 }
 
 /* ==========================================================================
@@ -98,194 +98,192 @@ textarea {
    ========================================================================== */
 
 body {
-    width: 21cm; 
-    height:  29.7cm;
-    font-family: 'Roboto', sans-serif, Arial;
-    display: flex;
-    flex-direction: column;
+  width: 21cm;
+  height: 29.7cm;
+  font-family: "Roboto", sans-serif, Arial;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
-    background-color: #F1ECE9;
+  background-color: #f1ece9;
 }
 
 .header__position {
-    background-color: #417378;
-    color: #F1ECE9;
-    text-align: right; 
-    margin: 0;
-    padding-right: 23px;
-    font-size: 1.4em;
-
+  background-color: #417378;
+  color: #f1ece9;
+  text-align: right;
+  margin: 0;
+  padding-right: 46px;
+  font-size: 1.4em;
 }
 .header__content {
-    display: flex;
+  display: flex;
 }
 
 .header__personal-infos {
-    list-style-type: none;
-    margin: 0;
-    padding: 0 0 0 17px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0 0 0 17px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .header__personal-infos-item:first-child {
-    padding-bottom: 8px;
+  padding-bottom: 8px;
 }
 
 .header__personal-infos-item:not(:first-child) {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 .header__contact {
-    list-style-type: none;
-    margin: 0;
-    padding: 0 16px 0 0;
-    font-size: 1.1rem;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 2;
-    align-items: flex-end;
-    justify-content: center;
-    font-weight: normal;
+  list-style-type: none;
+  margin: 0;
+  padding: 0 16px 0 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  align-items: flex-end;
+  justify-content: center;
+  font-weight: normal;
 }
 
 .header__contact-item:not(:last-child) {
-    padding-bottom: 5px;
+  padding-bottom: 5px;
 }
 
 .header__icon-contact {
-    width: 30px;
-    display: inline-block;
-    text-align: center;
+  width: 30px;
+  display: inline-block;
+  text-align: center;
 }
 
 .header__profilePicture {
-    height: 130px;
-    width: auto;
-    margin: -20px 10px 10px;
+  height: 130px;
+  width: auto;
+  margin: -20px 10px 10px;
 }
 
 .main {
-    background-color: #FFFBF5;
-    padding-left: 15px;
-    padding-right: 20px;
+  background-color: #fffbf5;
+  padding-left: 15px;
+  padding-right: 20px;
 }
 
 .section__intro {
-    margin: 10px;
-    font-style: italic;
-    text-align: center;
+  margin: 10px;
+  font-style: italic;
+  text-align: center;
 }
 
 .section__title {
-    font-size: 1.8rem;
-    font-weight: normal;
-    display: flex;
+  font-size: 1.8rem;
+  font-weight: normal;
+  display: flex;
 }
 
 .section__title--no-margin {
-    padding-top: 10px;
-    margin-top: 0;
+  padding-top: 10px;
+  margin-top: 0;
 }
 
 .section__icon {
-    font-size: 1.7rem;
-    margin-right: 15px;
-    position: relative;
-    bottom: -3px;
-    min-width: 30px;
+  font-size: 1.7rem;
+  margin-right: 15px;
+  position: relative;
+  bottom: -3px;
+  min-width: 30px;
 }
 
 .section__label {
-    border-bottom: 1px solid black;
-    flex-grow: 2;
-    padding-left: 15px;
+  border-bottom: 1px solid black;
+  flex-grow: 2;
+  padding-left: 15px;
 }
 
 .skill__icon-wrapper {
-    min-width: 35px;
-    display: inline-block;
+  min-width: 35px;
+  display: inline-block;
 }
 
 .skill__icon-wrapper_double {
-    min-width: 65px;
+  min-width: 65px;
 }
 
 .skill__icon-wrapper_large {
-    min-width: 45px;
+  min-width: 45px;
 }
 
 .skill__content {
-    display: flex;
-    justify-content: space-around;
-    padding-left: 45px;
+  display: flex;
+  justify-content: space-around;
+  padding-left: 45px;
 }
 
 .skill__title {
-    margin: 0 0 10px;
-    text-align: center;
+  margin: 0 0 10px;
+  text-align: center;
 }
 
 .skill__list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .skill__list-item {
-    margin-top: 3px;
+  margin-top: 3px;
 }
 
 .skill__icon {
-    height: 26px;
+  height: 26px;
 }
 
 .skill__icon--margin {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .experience__title {
-    display: flex;
+  display: flex;
 }
 
 .experience__label {
-    margin: 0 0 0 35px;
+  margin: 0 0 0 35px;
 }
 
 .experience__sub-label {
-    margin: 3px 0 0;
-    flex-grow: 2;
-    text-align: right;
-    font-weight: normal;
+  margin: 3px 0 0;
+  flex-grow: 2;
+  text-align: right;
+  font-weight: normal;
 }
 
 .experience__content {
-    margin: 10px 0 10px 70px;
-    text-indent: 25px;
-    text-align: justify;
+  margin: 10px 0 10px 70px;
+  text-indent: 25px;
+  text-align: justify;
 }
 
 .education__title {
-    display: flex;
-    margin-bottom: 10px;
+  display: flex;
+  margin-bottom: 10px;
 }
 
 .education__label {
-    margin: 0 0 0 30px;
-    font-size: 0.97em;
+  margin: 0 0 0 30px;
+  font-size: 0.97em;
 }
 
 .footer {
-    min-height: 20px;
-    background-color: #417378;
+  min-height: 20px;
+  background-color: #417378;
 }
-
 
 /* ==========================================================================
    Helper classes
@@ -296,7 +294,7 @@ body {
  */
 
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
 /*
@@ -309,15 +307,15 @@ body {
  */
 
 .visuallyhidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-    white-space: nowrap; /* 1 */
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap; /* 1 */
 }
 
 /*
@@ -328,13 +326,13 @@ body {
 
 .visuallyhidden.focusable:active,
 .visuallyhidden.focusable:focus {
-    clip: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    position: static;
-    width: auto;
-    white-space: inherit;
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+  white-space: inherit;
 }
 
 /*
@@ -342,7 +340,7 @@ body {
  */
 
 .invisible {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 /*
@@ -359,12 +357,12 @@ body {
 
 .clearfix:before,
 .clearfix:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+  content: " "; /* 1 */
+  display: table; /* 2 */
 }
 
 .clearfix:after {
-    clear: both;
+  clear: both;
 }
 
 /* ==========================================================================
@@ -374,14 +372,14 @@ body {
    ========================================================================== */
 
 @media only screen and (min-width: 35em) {
-    /* Style adjustments for viewports that meet the condition */
+  /* Style adjustments for viewports that meet the condition */
 }
 
 @media print,
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 1.25dppx),
-       (min-resolution: 120dpi) {
-    /* Style adjustments for high resolution devices */
+  (-webkit-min-device-pixel-ratio: 1.25),
+  (min-resolution: 1.25dppx),
+  (min-resolution: 120dpi) {
+  /* Style adjustments for high resolution devices */
 }
 
 /* ==========================================================================
