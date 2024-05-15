@@ -1,113 +1,272 @@
+"use client";
+
 import Image from "next/image";
+import avatar from "../../public/avatar.jpg";
+import dayjs from "dayjs";
+import Section from "./Section";
+import Skill from "./Skill";
+import Job from "./Job";
+import schoolsData from "@/data/schools";
 
-export default function Home() {
+
+import {  IconAerialLift,
+  IconArrowBack,
+  IconArrowsVertical,
+  IconColorSwatch,
+  IconDeviceMobile,
+  IconDownload,
+  IconFilter,
+  IconMail,
+  IconPrinter,
+  IconSchool,
+  IconShare,
+  IconWorld,} from "@tabler/icons-react"
+
+import useStore from "@/store";
+import cx from "classnames";
+import { useState } from "react";
+
+export default function Page() {
+  const yearsOld = dayjs().diff(dayjs("1987-05-23"), "years");
+
+  const skills = useStore((state) => state.data.skills);
+  const jobs = useStore((state) => state.data.jobs);
+  const skillsActions = useStore((state) => state.skillsActions);
+  const jobsActions = useStore((state) => state.jobsActions);
+
+  const reset = useStore((state) => state.reset);
+  const showAll = useStore((state) => state.showAll);
+  const hasHistory = useStore((state) => state.history.length);
+
+  const undo = useStore((state) => state.undo);
+
+  const [isForPrint, setIsForPrint] = useState(false);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+    <div
+      className={cx("relative mb-6", {
+        ["print:grayscale"]: isForPrint,
+      })}
+    >
+      <div className="fixed top-0 flex flex-col m-4 ml-[calc(calc(calc(100vw-21cm)/2)+21cm)] ">
+        <IconArrowsVertical
+          className="rounded-full cursor-pointer hover:bg-stone-200 p-2"
+          onClick={showAll}
+          size={48}
+        />
+        <IconFilter
+          className="rounded-full cursor-pointer hover:bg-stone-200 p-2"
+          onClick={reset}
+          size={48}
+        />
+        <IconArrowBack
+          className={cx("rounded-full cursor-pointer hover:bg-stone-200 p-2", {
+            ["text-stone-300"]: !hasHistory,
+            ["hover:bg-inherit"]: !hasHistory,
+            ["cursor-auto"]: !hasHistory,
+          })}
+          onClick={undo}
+          size={48}
         />
       </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div
+        className={cx("md:w-[21cm] m-auto bg-stone-100 min-h-[29.7cm]", {
+          ["print:bg-white"]: isForPrint,
+        })}
+      >
+        <header className="animate-enter1 bg-primary/90 text-white">
+          <div className="flex flex-col bg-primary py-4  justify-center items-center px-6 text-center">
+            <h1 className="text-white text-xl font-bold">
+            Full stack développeur & UI / UX designer{" "}
+            </h1>
+            <h2 className="hidden md:inline print:inline text-gray-200 text-lg font-medium">
+              Ingénieur de recherche en informatique
+            </h2>
+          </div>
+          <div className="flex md:relative print:relative py-4 md:py-0 print:py-0">
+            <div className="mt-4 md:mt-0 ml-4">
+              <Image
+                alt="Photo du profil"
+                src={avatar}
+                className="md:absolute print:absolute -top-5 rounded-full min-w-24 min-h-24 max-w-28 max-h-28 object-cover"
+              />
+            </div>
+            <div className="hidden pl-4 md:pl-28 print:pl-32 py-6 px-4 md:flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-6">
+              <div className="flex flex-col justify-start mt-6 md:mt-0 md:ml-4">
+                <div className="font-bold text-2xl">Julien Faucher</div>
+                <div className="text-lg -mt-1">{yearsOld} ans</div>
+              </div>
+              <div className="text-lg leading-tight">
+                <div className="flex items-center justify-end gap-2">
+                  <a href="tel:+330601994602">06 47 19 75 47 </a>
+                  <IconDeviceMobile className="ml-1 text-secondary" />
+                </div>
+                <div className="flex items-center justify-end gap-2">
+                  <a href="mailto:julien.faucher@mintset.io">
+                    julien.faucher@mintset.io
+                  </a>
+                  <IconMail className="ml-1 text-secondary" />
+                </div>
+                <div className="flex items-center justify-end gap-2">
+                  <a
+                    href="https://julien-faucher.me"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    julien-faucher.me
+                  </a>
+                  <IconWorld className="ml-1 text-secondary" />
+                </div>
+              </div>
+            </div>
+            <div className="md:hidden pl-4 md:pl-28 print:pl-32 py-6 px-4 flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-10">
+              <div className="flex flex-col justify-start mt-6 md:mt-0">
+                <div className="font-bold text-2xl">Julien Faucher</div>
+                <div className="text-lg -mt-1">{yearsOld} ans</div>
+              </div>
+              <div className="flex flex-col text-lg leading-tight gap-2 -ml-2">
+                <div className="flex items-center justify-start gap-2">
+                  <IconDeviceMobile className="ml-1 text-secondary" />
+                  <a href="tel:+330601994602">06 47 19 75 47 </a>
+                </div>
+                <div className="flex items-center justify-start gap-2">
+                  <IconMail className="ml-1 text-secondary" />
+                  <a href="mailto:julien.faucher@mintset.io">
+                    julien.faucher@mintset.io
+                  </a>
+                </div>
+                <div className="flex items-center justify-start gap-2">
+                  <IconWorld className="ml-1 text-secondary" />
+                  <a
+                    href="https://julien-faucher.me"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    julien-faucher.me
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+                    
+          <div className="hidden md:block ml-36 mr-4 text-md py-6">
+            Fugiat est adipisicing esse pariatur velit veniam ad proident officia.Lorem eiusmod consequat culpa culpa duis est excepteur labore occaecat sint. Veniam excepteur reprehenderit sit voluptate.
+          </div>
+        </header>
+        {/* <main className={cx("pt-2 bg-stone-100 h-full print:bg-white")}>
+          <Section
+            Icon={IconColorSwatch}
+            title="Compétences"
+            className={cx("animate-enter1  print:bg-white")}
+            showAll={skillsActions.showAll}
+            reset={skillsActions.reset}
+            removeAll={skillsActions.removeAll}
+          >
+            <div className="grid grid-cols-2 md:grid-cols-4 print:grid-cols-4 gap-[1px] pt-6">
+              <Skill
+                title="Frontend"
+                data={skills.frontend}
+                removeSkill={skillsActions.remove("frontend")}
+              />
+              <Skill
+                title="Backend"
+                data={skills.backend}
+                removeSkill={skillsActions.remove("backend")}
+              />
+              <Skill
+                title="DevOps"
+                data={skills.infra}
+                removeSkill={skillsActions.remove("infra")}
+              />
+              <Skill
+                title="Transverse"
+                data={skills.tools}
+                removeSkill={skillsActions.remove("tools")}
+              />
+            </div>
+          </Section>
+          <Section
+            Icon={IconAerialLift}
+            title="Éxperiences professionnelles"
+            className="animate-enter1"
+            showAll={jobsActions.showAll}
+            reset={jobsActions.reset}
+          >
+            {jobs.map((job, index) => (
+              <Job
+                key={index}
+                data={job}
+                remove={() => jobsActions.remove(index)}
+                addSkills={jobsActions.addSkills(job.tools)}
+              />
+            ))}
+          </Section>
+          <Section
+            Icon={IconSchool}
+            title="Formations"
+            className="animate-enter1"
+          >
+            <div className="pt-6">
+              {schoolsData.map((school, index) => (
+                <div key={index} className="mb-2 last-of-type:mb-0">
+                  <div className="float-left flex flex-col items-center -ml-14 ">
+                    <div>{dayjs(school.year).format("YYYY")}</div>
+                  </div>
+                  <h3 className="text-[0.88rem] font-bold">{school.title}</h3>
+                </div>
+              ))}
+            </div>
+          </Section>
+        </main> */}
       </div>
-    </main>
+      <div className="print:hidden">
+        <div className="absolute -z-10 top-[29.7cm] w-full border border-dashed border-1"></div>
+        <div className="fixed bottom-0 flex flex-col m-4 ml-[calc(calc(calc(100vw-21cm)/2)+21cm)]">
+          <IconShare
+            className="rounded-full cursor-pointer hover:bg-stone-200 p-2"
+            onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+            }}
+            size={48}
+          />
+          <IconPrinter
+            className="rounded-full cursor-pointer hover:bg-stone-200 p-2"
+            onClick={() => {
+              setIsForPrint(true);
+              setTimeout(() => {
+                window.print();
+              }, 0);
+            }}
+            size={48}
+          />
+          <IconDownload
+            className="rounded-full cursor-pointer hover:bg-stone-200 p-2"
+            onClick={() => {
+              setIsForPrint(false);
+              setTimeout(() => {
+                window.print();
+              }, 0);
+            }}
+            size={48}
+          />
+        </div>
+      </div>
+    </div>
   );
 }
+
+
+
+// import Image from "next/image";
+
+// export default function Home() {
+//   return (
+//     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+//       test
+//       <div className="mt-16">
+//         salut
+//       </div>
+//     </main>
+//   );
+// }
