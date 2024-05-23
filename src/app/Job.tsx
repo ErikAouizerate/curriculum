@@ -15,10 +15,10 @@ export default function Skill({ data, remove, addSkills }) {
         <div className="text-vertical tracking-tight ">·····</div>
         <div>{data.end && dayjs(data.end).format("MM/YY")}</div>
       </div>
-      <h3 className="text-lg font-bold">
+      <h3 className="text-lg font-bold print:md">
         {data.title}
         {duration}
-        <div className="flex float-right group/icon invisible group-hover/job:visible ">
+        <div className="flex float-right group/icon invisible group-hover/job:visible">
           <IconTextPlus
             className="rounded-full hover:bg-stone-200 cursor-pointer p-1"
             onClick={() => addSkills(true)}
@@ -36,13 +36,13 @@ export default function Skill({ data, remove, addSkills }) {
           />
         </div>
       </h3>
-      <p className="indent-6">{data.description}</p>
-      <ul className="list-disc ml-6 my-2">
+      <p className="indent-6 print:text-sm">{data.description}</p>
+      <ul className="list-disc ml-6 my-2 print:text-sm">
         {data.tasks?.map((task, index) => (
           <li key={index}>{task}</li>
         ))}
       </ul>
-      <p>Outils : {data.tools.join(", ")}</p>
+      <p className="print:text-sm">Outils : {data.tools.join(", ")}</p>
     </div>
   );
 }

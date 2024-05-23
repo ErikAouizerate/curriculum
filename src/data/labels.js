@@ -15,6 +15,8 @@ const labels = {
   css3: "CSS3",
   cordova: "Cordova",
   d3: "D3",
+  javaSE: "Java SE",
+
 
   node: "Node",
   python: "Python",
@@ -33,13 +35,14 @@ const labels = {
   nw: "NW JS",
   webrtc: "WebRTC",
   db: "SQL / NoSQL",
+  SQLite: "SQLite",
 
   docker: "Docker",
   webpack: "Webpack",
   vite: "Vite",
   circleci: "CircleCI",
   gitlabci: "GitlabCI",
-  aws: "Aws",
+  aws: "AWS",
   vercel: "Vercel",
   netlify: "Netlify",
   clevercloud: "CleverCloud",
@@ -48,6 +51,8 @@ const labels = {
   cypress: "Cypress",
   gcp: "GCP",
   capacitor: "Capacitor",
+  codemagic: "CodeMagic",
+  azure: "Azure",
 
   git: "Git",
   github: "Github",
@@ -60,6 +65,10 @@ const labels = {
   linux: "Linux",
   mac: "MacOs",
   windows: "Windows",
+  androidStudio: "androidStudio",
+  adobeXD: "Adobe XD",
+  figma: "Figma",
+  SVN: "SVN",
 };
 
 export default labels;

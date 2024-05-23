@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Skill({ title, data, removeSkill }) {
   return (
     <div className="flex flex-col items-center">
-      <h3 className="text-lg font-bold m-1 mt-0">{title}</h3>
+      <h3 className="text-lg font-bold m-1 mt-0 print:text-md">{title}</h3>
       <div>
         {data.map((skill, index) => (
           <div className="group/skill flex justify-between mb-2" key={index}>
@@ -23,7 +23,7 @@ export default function Skill({ title, data, removeSkill }) {
                 width="25"
                 height="auto"
               />
-              <div className="ml-2 text-sm self-center">
+              <div className="ml-2 text-sm self-center print:text-xs">
                 {skill.link ? (
                   <a href={skill.link} target="_blank" rel="noreferrer">
                     {skill.label}

@@ -13,8 +13,8 @@ export default function Section({
     <section className={"items-center p-4 pb-0 " + className}>
       <div className="flex ml-2 break-after-avoid">
         <Icon size={40} className="text-secondary" />
-        <div className="group/title flex items-center justify-between pl-4 border-b-2 border-primary w-full ml-4 mr-6">
-          <h2 className="text-2xl font-bold">{title}</h2>
+        <div className="group/title flex items-center justify-between pl-4 border-b-2 border-black w-full ml-4 mr-6">
+          <h2 className="text-2xl font-bold print:text-lg">{title}</h2>
           <div className="group/icon invisible group-hover/title:visible flex gap-1">
             {showAll && (
               <IconArrowsVertical

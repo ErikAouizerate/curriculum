@@ -20,7 +20,8 @@ import {  IconAerialLift,
   IconPrinter,
   IconSchool,
   IconShare,
-  IconWorld,} from "@tabler/icons-react"
+  IconWorld,
+  IconQuote,} from "@tabler/icons-react"
 
 import useStore from "@/store";
 import cx from "classnames";
@@ -74,12 +75,12 @@ export default function Page() {
           ["print:bg-white"]: isForPrint,
         })}
       >
-        <header className="animate-enter1 bg-primary/90 text-white">
-          <div className="flex flex-col bg-primary py-4  justify-center items-center px-6 text-center">
-            <h1 className="text-white text-xl font-bold">
+        <header className="animate-enter1 bg-primary/90 text-white print:bg-white print:text-black">
+          <div className="flex flex-col bg-primary py-4  justify-center items-center px-6 text-center print:bg-white print:text-black print:border-b-2 print:border-r-stone-600">
+            <h1 className="text-white text-xl font-bold print:text-black">
             Full stack développeur & UI / UX designer{" "}
             </h1>
-            <h2 className="hidden md:inline print:inline text-gray-200 text-lg font-medium">
+            <h2 className="hidden md:inline print:inline text-gray-200 text-lg font-medium print:text-black/50">
               Ingénieur de recherche en informatique
             </h2>
           </div>
@@ -91,21 +92,21 @@ export default function Page() {
                 className="md:absolute print:absolute -top-5 rounded-full min-w-24 min-h-24 max-w-28 max-h-28 object-cover"
               />
             </div>
-            <div className="hidden pl-4 md:pl-28 print:pl-32 py-6 px-4 md:flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-6">
-              <div className="flex flex-col justify-start mt-6 md:mt-0 md:ml-4">
+            <div className="hidden print:flex pl-4 md:pl-28 print:pl-32 py-6 px-4 md:flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-6">
+              <div className="flex flex-col justify-start mt-6 md:mt-0 md:ml-4 print:mt-0">
                 <div className="font-bold text-2xl">Julien Faucher</div>
-                <div className="text-lg -mt-1">{yearsOld} ans</div>
+                <div className="text-lg text-white/50">{yearsOld} ans</div>
               </div>
-              <div className="text-lg leading-tight">
+              <div className="flex flex-col text-lg leading-tight gap-1 mt-2">
                 <div className="flex items-center justify-end gap-2">
                   <a href="tel:+330601994602">06 47 19 75 47 </a>
-                  <IconDeviceMobile className="ml-1 text-secondary" />
+                  <IconDeviceMobile className=" text-secondary" />
                 </div>
                 <div className="flex items-center justify-end gap-2">
                   <a href="mailto:julien.faucher@mintset.io">
                     julien.faucher@mintset.io
                   </a>
-                  <IconMail className="ml-1 text-secondary" />
+                  <IconMail className=" text-secondary" />
                 </div>
                 <div className="flex items-center justify-end gap-2">
                   <a
@@ -115,28 +116,28 @@ export default function Page() {
                   >
                     julien-faucher.me
                   </a>
-                  <IconWorld className="ml-1 text-secondary" />
+                  <IconWorld className=" text-secondary" />
                 </div>
               </div>
             </div>
-            <div className="md:hidden pl-4 md:pl-28 print:pl-32 py-6 px-4 flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-10">
+            <div className="md:hidden print:hidden pl-4 md:pl-28 print:pl-32 py-6 px-4 flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-10">
               <div className="flex flex-col justify-start mt-6 md:mt-0">
                 <div className="font-bold text-2xl">Julien Faucher</div>
-                <div className="text-lg -mt-1">{yearsOld} ans</div>
+                <div className="text-lg -mt-1 text-white/50">{yearsOld} ans</div>
               </div>
               <div className="flex flex-col text-lg leading-tight gap-2 -ml-2">
                 <div className="flex items-center justify-start gap-2">
-                  <IconDeviceMobile className="ml-1 text-secondary" />
+                  <IconDeviceMobile className="text-secondary" />
                   <a href="tel:+330601994602">06 47 19 75 47 </a>
                 </div>
                 <div className="flex items-center justify-start gap-2">
-                  <IconMail className="ml-1 text-secondary" />
+                  <IconMail className="text-secondary" />
                   <a href="mailto:julien.faucher@mintset.io">
                     julien.faucher@mintset.io
                   </a>
                 </div>
                 <div className="flex items-center justify-start gap-2">
-                  <IconWorld className="ml-1 text-secondary" />
+                  <IconWorld className="text-secondary" />
                   <a
                     href="https://julien-faucher.me"
                     target="_blank"
@@ -150,11 +151,12 @@ export default function Page() {
             
           </div>
                     
-          <div className="hidden md:block ml-36 mr-4 text-md py-6">
-            Fugiat est adipisicing esse pariatur velit veniam ad proident officia.Lorem eiusmod consequat culpa culpa duis est excepteur labore occaecat sint. Veniam excepteur reprehenderit sit voluptate.
+          <div className="relative hidden ml-24 mr-10 pb-6 text-white/50 md:block print:flex print:text-black/50 ">
+            <IconQuote size="5rem" className="absolute -top-8 -left-14 text-secondary/20 rotate-180" />
+            <p>{`Je suis développeur fullstack passionné par la création de produits. J'aime designer et développer des produits numériques simples qui répondent à des problématiques complexes. En dehors, je fais du badminton, joue aux jeux de plateau et à la guitare. `}</p>
           </div>
         </header>
-        {/* <main className={cx("pt-2 bg-stone-100 h-full print:bg-white")}>
+        <main className={cx("pt-2 bg-stone-100 h-full print:bg-white")}>
           <Section
             Icon={IconColorSwatch}
             title="Compétences"
@@ -207,18 +209,19 @@ export default function Page() {
             title="Formations"
             className="animate-enter1"
           >
-            <div className="pt-6">
+            <div className="pt-6 pb-6">
               {schoolsData.map((school, index) => (
                 <div key={index} className="mb-2 last-of-type:mb-0">
                   <div className="float-left flex flex-col items-center -ml-14 ">
                     <div>{dayjs(school.year).format("YYYY")}</div>
                   </div>
                   <h3 className="text-[0.88rem] font-bold">{school.title}</h3>
+                  <h4 className="text-[0.88rem] text-gray-700">{school.subtitle}</h4>
                 </div>
               ))}
             </div>
           </Section>
-        </main> */}
+        </main>
       </div>
       <div className="print:hidden">
         <div className="absolute -z-10 top-[29.7cm] w-full border border-dashed border-1"></div>
@@ -255,18 +258,3 @@ export default function Page() {
     </div>
   );
 }
-
-
-
-// import Image from "next/image";
-
-// export default function Home() {
-//   return (
-//     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-//       test
-//       <div className="mt-16">
-//         salut
-//       </div>
-//     </main>
-//   );
-// }
