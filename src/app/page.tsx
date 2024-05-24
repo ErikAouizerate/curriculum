@@ -99,7 +99,7 @@ export default function Page() {
               </div>
               <div className="flex flex-col text-lg leading-tight gap-1 mt-2">
                 <div className="flex items-center justify-end gap-2">
-                  <a href="tel:+330601994602">06 47 19 75 47 </a>
+                  <a href="tel:+330647197547">06 47 19 75 47 </a>
                   <IconDeviceMobile className=" text-secondary" />
                 </div>
                 <div className="flex items-center justify-end gap-2">

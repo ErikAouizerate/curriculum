@@ -37,7 +37,7 @@ const data = [
     default: true,
     start: "10/01/2021",
     end: "10/01/2023",
-    title: "Fullstack developper freelance à Linkeys – Grenoble – ",
+    title: "Fullstack developer freelance à Linkeys – Grenoble – ",
     description: `Dans le cadre de la refonte de la plateforme de cooptation BtoB / BtoC app.linkeys.com, je suis intervenue sur de l'ensemble des solutions web et mobile.`,
     tasks: [
       "Développement d'un micro service interopérable pour intégrer les différentes solutions des systèmes de suivi des candidats du marché",
