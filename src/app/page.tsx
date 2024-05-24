@@ -128,7 +128,7 @@ export default function Page() {
               <div className="flex flex-col text-lg leading-tight gap-2 -ml-2">
                 <div className="flex items-center justify-start gap-2">
                   <IconDeviceMobile className="text-secondary" />
-                  <a href="tel:+330601994602">06 47 19 75 47 </a>
+                  <a href="tel:+330647197547">06 47 19 75 47 </a>
                 </div>
                 <div className="flex items-center justify-start gap-2">
                   <IconMail className="text-secondary" />
