@@ -111,7 +111,7 @@ const data = [
       "Management de l'équipe et gestion agile",
       "Réunion et recettage avec le client",
       "Rédaction de spécification et documentation.",
-   
+
     ],
     tools: [
       labels.javascript,
