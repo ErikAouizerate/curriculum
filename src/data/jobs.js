@@ -6,13 +6,12 @@ const data = [
     start: "01/01/2024",
     end: "05/01/2024",
     title: "Software craftsmanship à Mintset – Valence – ",
-    description: `Dans le but d'être commercialisé, j'ai désigné l'UX / UI, développé et mis en production 
-    l'application web et le site vitrine de GodOfGames. GodOfGames est une application
-    dans le domaine du jeu qui permet aux utilisateurs de créer des événements sous 
-    forme d'olympiade - godofgames.io / godofgames.fr.`,
+    description: `J'ai désigné l'UX / UI, développé et mis en production l'application web et le site
+    vitrine de GodOfGames. C'est une application dans le domaine du jeu de plateau qui permet aux 
+    utilisateurs de créer des événements sous forme d'olympiade - godofgames.io / godofgames.fr.`,
     tasks: [
       `Définition des règles métiers et du périmetre fonctionnel de l'application`,
-      `Mise en place d'une nouvelle stack technique (fullstack)`,
+      `Mise en place de la stack technique frontend, backend, devOps`,
       `Création du design et de l'expérience utilisateur`,
       `Déploiement et gestion de la solution en production`,
       `Développement de l'application, du back office et du site vitrine`,
@@ -39,16 +38,15 @@ const data = [
     start: "10/01/2021",
     end: "10/01/2023",
     title: "Fullstack developper freelance à Linkeys – Grenoble – ",
-    description: `Dans le cadre de la refonte du site app.linkeys.com afin d'améliorer l'expérience utilisateur et la maintenabilité du site.`,
+    description: `Dans le cadre de la refonte de la plateforme de cooptation BtoB / BtoC app.linkeys.com, je suis intervenue sur de l'ensemble des solutions web et mobile.`,
     tasks: [
-      "Participation au développement frontend et backend de la plateforme client",
-      "Participation au développement frontend et backend de la plateforme professionnelle",
-      "Participation au développement frontend et backend du back office",
-      "Participation au développement frontend et backend des applications mobiles",
-      "Développement d'un micro service interconnecté pour gérer les différents l'ATS",
-      "Redesign graphique et expérience utilisateur de toutes les solutions",
-      "Correction de bug et support pour le SAV",
-      "Rédaction de documentations",
+      "Développement d'un micro service interopérable pour intégrer les différentes solutions des systèmes de suivi des candidats du marché",
+      "Mise en place d'un back office générique pour les professionnels pouvant être personnalisé en fonction des besoins des entreprises clientes",
+      "Réalisation d'un back office spécifique pour analyser les données et optimiser le temps des équipes en interne",
+      "Développement et optimisation de l'expérience utilisateurs et design graphique de l'ensemble des front office",
+      "Participation au développement des applications mobiles à destination des stores.",
+      "Correction de bugs et support de l'application en production.",
+      "Formation de équipe support et rédaction documentation.",
     ],
     tools: [
       labels.javascript,
@@ -74,12 +72,13 @@ const data = [
     default: true,
     start: "12/01/2019",
     end: "09/01/2021",
-    title: "Software craftsmanship à Mintset – Valence – ",
-    description: `Dans le but d'être commercialisé, j'ai désigné l'UX / UI et participé au
+    title: "Full stack développeur à Mintset – Valence – ",
+    description: `J'ai désigné l'UX / UI et participé au
     développement d'une application de résolution de planning par contrainte.`,
     tasks: [
-      "Définition des règles métiers et du périmètre fonctionnel de l'application",
-      "Participation au développement frontend et backend de l'application",
+      "Définition des règles métiers et du périmètre fonctionnel de l'application web",
+      "Développement de la solution front et back du produit",
+      "Mise en place d'un micro service de résolution de planning par contrainte",
       "Design graphique et expérience utilisateur de l'application web",
       "Rencontre avec les utilisateurs et analyse de leurs besoins",
       "Annimation des sessions de test avec les utilisateurs",
@@ -108,11 +107,11 @@ const data = [
     développement et la mise en production du produit VeryShop (site vitrine, application mobile, backoffice)`,
     tasks: [
       "Définition des règles métiers et du périmètre fonctionnel du produit",
-      "Participation au développement frontend de l'application web",
-      "Participation au développement du backoffice",
+      "Développement du back office et optimisation de la modération des utilisateurs",
+      "Management de l'équipe et gestion agile",
       "Réunion et recettage avec le client",
-      "Rédaction de la documentation",
-      "Gestion de projet agile",
+      "Rédaction de spécification et documentation.",
+   
     ],
     tools: [
       labels.javascript,
@@ -124,28 +123,28 @@ const data = [
       labels.scrum,
     ],
   },
-  {
-    start: "07/01/2017",
-    end: "07/01/2018",
-    title: "Software craftsmanship – Grenoble – ",
-    description: `J'ai conçu, maquetté et développé une application Android dans le domaine de l'organisation. Sur cette période, je me suis formé sur le design graphique d'interface, l'expérience utilisateur et les problématiques business.`,
-    tasks: [
-      "Définition des règles métiers et du périmètre fonctionnel du produit",
-      "Design et maquetage de l'application",
-      "Développement de l'application Android",
-      "Réalisation de l'état de l'art des différentes technologies",
-      "Formation aux problématiques business et design graphique",
-    ],
-    tools: [
-      labels.javaSE,
-      labels.firebase,
-      labels.SQLite,
-      labels.windows,
-      labels.androidStudio,
-      labels.adobeXD,
-      labels.git
-    ],
-  },
+  // {
+  //   start: "07/01/2017",
+  //   end: "07/01/2018",
+  //   title: "Software craftsmanship – Grenoble – ",
+  //   description: `J'ai conçu, maquetté et développé une application Android dans le domaine de l'organisation. Sur cette période, je me suis formé sur le design graphique d'interface, l'expérience utilisateur et les problématiques business.`,
+  //   tasks: [
+  //     "Définition des règles métiers et du périmètre fonctionnel du produit",
+  //     "Design et maquetage de l'application",
+  //     "Développement de l'application Android",
+  //     "Réalisation de l'état de l'art des différentes technologies",
+  //     "Formation aux problématiques business et design graphique",
+  //   ],
+  //   tools: [
+  //     labels.javaSE,
+  //     labels.firebase,
+  //     labels.SQLite,
+  //     labels.windows,
+  //     labels.androidStudio,
+  //     labels.adobeXD,
+  //     labels.git
+  //   ],
+  // },
   {
     start: "09/01/2013",
     end: "01/01/2017",

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import avatar from "../../public/avatar.jpg";
+import avatar from "../../public/avatar.png";
 import dayjs from "dayjs";
 import Section from "./Section";
 import Skill from "./Skill";
@@ -153,7 +153,7 @@ export default function Page() {
                     
           <div className="relative hidden ml-24 mr-10 pb-6 text-white/50 md:block print:flex print:text-black/50 ">
             <IconQuote size="5rem" className="absolute -top-8 -left-14 text-secondary/20 rotate-180" />
-            <p>{`Je suis développeur fullstack passionné par la création de produits. J'aime designer et développer des produits numériques simples qui répondent à des problématiques complexes. En dehors, je fais du badminton, joue aux jeux de plateau et à la guitare. `}</p>
+            <p className="text-md">{`Je suis développeur fullstack passionné par l'élaboration de nouvelle solution. J'aime designer et développer des produits numériques simples qui répondent à des problématiques complexes.`}</p>
           </div>
         </header>
         <main className={cx("pt-2 bg-stone-100 h-full print:bg-white")}>

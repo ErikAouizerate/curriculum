@@ -35,17 +35,9 @@ const data = [
     default: true,
   },
   {
-    label: labels.vue,
-    icon: vue,
-  },
-  {
     label: labels.nextjs,
     icon: nextjs,
     default: true,
-  },
-  {
-    label: labels.remix,
-    icon: remix,
   },
   {
     label: labels.redux,
