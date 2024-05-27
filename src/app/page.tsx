@@ -75,13 +75,13 @@ export default function Page() {
           ["print:bg-white"]: isForPrint,
         })}
       >
-        <header className="animate-enter1 bg-primary/90 text-white print:bg-white print:text-black">
-          <div className="flex flex-col bg-primary py-4  justify-center items-center px-6 text-center print:bg-white print:text-black print:border-b-2 print:border-r-stone-600">
-            <h1 className="text-white text-xl font-bold print:text-black">
-            Full stack développeur & UI / UX designer{" "}
+        <header className="animate-enter1 bg-primary/90 text-white  ">
+          <div className="flex flex-col bg-primary py-4  justify-center items-center px-6 text-center ">
+            <h1 className="text-white text-xl font-bold ">
+            Full Stack Developer & UI / UX designer{" "}
             </h1>
-            <h2 className="hidden md:inline print:inline text-gray-200 text-lg font-medium print:text-black/50">
-              Ingénieur de recherche en informatique
+            <h2 className="hidden md:inline print:inline text-gray-200 text-lg font-medium">
+              Ingénieur en informatique
             </h2>
           </div>
           <div className="flex md:relative print:relative py-4 md:py-0 print:py-0">
@@ -151,7 +151,7 @@ export default function Page() {
             
           </div>
                     
-          <div className="relative hidden ml-24 mr-10 pb-6 text-white/50 md:block print:flex print:text-black/50 ">
+          <div className="relative hidden ml-24 mr-10 pb-6 text-white/50 md:block print:flex ">
             <IconQuote size="5rem" className="absolute -top-8 -left-14 text-secondary/20 rotate-180" />
             <p className="text-md">{`Je suis développeur fullstack passionné par l'élaboration de nouvelle solution. J'aime designer et développer des produits numériques simples qui répondent à des problématiques complexes.`}</p>
           </div>

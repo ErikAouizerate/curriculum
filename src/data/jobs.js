@@ -5,7 +5,7 @@ const data = [
     default: true,
     start: "01/01/2024",
     end: "05/01/2024",
-    title: "Software craftsmanship à Mintset – Valence – ",
+    title: "Project Manager / Full Stack Developper – Valence – ",
     description: `J'ai désigné l'UX / UI, développé et mis en production l'application web et le site
     vitrine de GodOfGames. C'est une application dans le domaine du jeu de plateau qui permet aux 
     utilisateurs de créer des événements sous forme d'olympiade - godofgames.io / godofgames.fr.`,
@@ -37,7 +37,7 @@ const data = [
     default: true,
     start: "10/01/2021",
     end: "10/01/2023",
-    title: "Fullstack developer freelance à Linkeys – Grenoble – ",
+    title: "Full Stack Developer freelance à Linkeys – Grenoble – ",
     description: `Dans le cadre de la refonte de la plateforme de cooptation BtoB / BtoC app.linkeys.com, je suis intervenue sur de l'ensemble des solutions web et mobile.`,
     tasks: [
       "Développement d'un micro service interopérable pour intégrer les différentes solutions des systèmes de suivi des candidats du marché",
@@ -72,14 +72,14 @@ const data = [
     default: true,
     start: "12/01/2019",
     end: "09/01/2021",
-    title: "Full stack développeur à Mintset – Valence – ",
+    title: "Project Manager / Full Stack Developper à Mintset – Valence – ",
     description: `J'ai désigné l'UX / UI et participé au
-    développement d'une application de résolution de planning par contrainte.`,
+    développement d'une application de résolution de planning par contraintes.`,
     tasks: [
       "Définition des règles métiers et du périmètre fonctionnel de l'application web",
       "Développement de la solution front et back du produit",
-      "Mise en place d'un micro service de résolution de planning par contrainte",
-      "Design graphique et expérience utilisateur de l'application web",
+      "Mise en place d'un micro service de résolution de planning par contraintes",
+      "Réalisation du design graphique et de l'expérience utilisateur de l'application web",
       "Rencontre avec les utilisateurs et analyse de leurs besoins",
       "Annimation des sessions de test avec les utilisateurs",
     ],
@@ -102,7 +102,7 @@ const data = [
     default: true,
     start: "07/01/2018",
     end: "12/01/2019",
-    title: "Chef de projet et developpeur freelance à Veryshop - Grenoble - ",
+    title: "Project Manager / Full Stack Developper à Veryshop - Grenoble - ",
     description: `Au sein d'une équipe de 4 personnes, en tant que chef de projet et developpeur, j’ai coordonné et participé au 
     développement et la mise en production du produit VeryShop (site vitrine, application mobile, backoffice)`,
     tasks: [
@@ -110,7 +110,7 @@ const data = [
       "Développement du back office et optimisation de la modération des utilisateurs",
       "Management de l'équipe et gestion agile",
       "Réunion et recettage avec le client",
-      "Rédaction de spécification et documentation.",
+      "Rédaction de spécifications et documentations.",
 
     ],
     tools: [
