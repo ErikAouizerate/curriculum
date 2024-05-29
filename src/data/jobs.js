@@ -5,7 +5,7 @@ const data = [
     default: true,
     start: "01/01/2024",
     end: "05/01/2024",
-    title: "Project Manager / Full Stack Developper – Valence – ",
+    title: "Full Stack Developper / Product Designer – Valence – ",
     description: `J'ai désigné l'UX / UI, développé et mis en production l'application web et le site
     vitrine de GodOfGames. C'est une application dans le domaine du jeu de plateau qui permet aux 
     utilisateurs de créer des événements sous forme d'olympiade - godofgames.io / godofgames.fr.`,
@@ -72,7 +72,7 @@ const data = [
     default: true,
     start: "12/01/2019",
     end: "09/01/2021",
-    title: "Project Manager / Full Stack Developper à Mintset – Valence – ",
+    title: "Full Stack Developper / Product Designer à Mintset – Valence – ",
     description: `J'ai désigné l'UX / UI et participé au
     développement d'une application de résolution de planning par contraintes.`,
     tasks: [
@@ -102,7 +102,7 @@ const data = [
     default: true,
     start: "07/01/2018",
     end: "12/01/2019",
-    title: "Project Manager / Full Stack Developper à Veryshop - Grenoble - ",
+    title: "Project Manager / Frontend Developper à Veryshop - Grenoble - ",
     description: `Au sein d'une équipe de 4 personnes, en tant que chef de projet et developpeur, j’ai coordonné et participé au 
     développement et la mise en production du produit VeryShop (site vitrine, application mobile, backoffice)`,
     tasks: [

@@ -28,15 +28,6 @@ const data = [
     default: true,
   },
   {
-    label: labels.webpack,
-    icon: webpack,
-    link: "https://webpack.js.org/",
-  },
-  {
-    label: labels.vite,
-    icon: vite,
-  },
-  {
     label: labels.gitlabci,
     icon: gitlab,
     default: true,
@@ -49,10 +40,6 @@ const data = [
     label: labels.vercel,
     icon: vercel,
     default:true,
-  },
-  {
-    label: labels.netlify,
-    icon: netlify,
   },
   {
     label: labels.clevercloud,
