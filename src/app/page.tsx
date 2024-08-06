@@ -46,7 +46,7 @@ export default function Page() {
   return (
     <div
       className={cx("relative mb-6", {
-        ["print:grayscale"]: isForPrint,
+        // ["print:grayscale"]: isForPrint,
       })}
     >
       <div className="fixed top-0 flex flex-col m-4 ml-[calc(calc(calc(100vw-21cm)/2)+21cm)] ">

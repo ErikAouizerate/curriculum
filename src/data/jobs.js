@@ -4,7 +4,7 @@ const data = [
   {
     default: true,
     start: "01/01/2024",
-    end: "05/01/2024",
+    end: "07/01/2024",
     title: "Full Stack Developper / Product Designer – Valence – ",
     description: `J'ai désigné l'UX / UI, développé et mis en production l'application web et le site
     vitrine de GodOfGames. C'est une application dans le domaine du jeu de plateau qui permet aux 
