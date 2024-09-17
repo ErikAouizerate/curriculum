@@ -36,6 +36,7 @@ const data = [
   {
     label: labels.aws,
     icon: aws,
+    default: true,
   },
   {
     label: labels.vercel,

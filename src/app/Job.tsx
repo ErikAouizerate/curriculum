@@ -43,11 +43,11 @@ export default function Skill({ data, remove, addSkills }) {
         ))}
       </ul>
       {/* <p className="print:text-sm "><span className="font-bold">Outils</span> : {data.tools.join(", ")}</p> */}
-      <p className="print:text-xs flex flex-wrap items-center"><span className="font-bold">Outils</span> : {data.tools.map((label, index) => {
+      <div className="print:text-xs flex flex-wrap items-center"><span className="font-bold">Outils</span> : {data.tools.map((label, index) => {
         return (
           <div key={`${label}_${index}`} className="m-1 px-2 py-1 bg-secondary/20 rounded-md">{`${label}`}</div>
         )
-      }) }</p>
+      }) }</div>
     </div>
   );
 }
