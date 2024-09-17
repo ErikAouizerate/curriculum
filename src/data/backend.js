@@ -55,6 +55,7 @@ const data = [
   {
     label: labels.typeorm,
     icon: typeorm,
+    default: true
   },
   {
     label: labels.express,

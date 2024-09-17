@@ -76,11 +76,11 @@ export default function Page() {
         })}
       >
         <header className="animate-enter1 bg-primary/90 text-white  ">
-          <div className="flex flex-col bg-primary py-4  justify-center items-center px-6 text-center ">
+          <div className="flex flex-col bg-primary py-6  justify-center items-center px-6 text-center ">
             <h1 className="text-white text-xl font-bold ">
-            Full Stack Developer & Product designer{" "}
+            FULL STACK DEVELOPPEUR{" "}
             </h1>
-            <h2 className="hidden md:inline print:inline text-gray-200 text-lg font-medium">
+            <h2 className="hidden md:inline print:inline text-white/50 text-md font-medium">
               Ingénieur en informatique
             </h2>
           </div>
@@ -153,7 +153,7 @@ export default function Page() {
                     
           <div className="relative hidden ml-24 mr-10 pb-6 text-white/50 md:block print:flex ">
             <IconQuote size="5rem" className="absolute -top-8 -left-14 text-secondary/20 rotate-180" />
-            <p className="text-md">{`Je suis Full Stack Developer & Product designer passionné par l'élaboration de nouvelles solutions. J'aime designer et développer des produits numériques simples qui répondent à des problématiques complexes.`}</p>
+            <p className="text-md">{`Je suis full stack développeur passionné par les solutions de type SaaS. J'aime développer des produits numériques simples qui répondent à des problématiques complexes.`}</p>
           </div>
         </header>
         <main className={cx("pt-2 bg-stone-100 h-full print:bg-white")}>
@@ -190,7 +190,7 @@ export default function Page() {
           </Section>
           <Section
             Icon={IconAerialLift}
-            title="Éxperiences professionnelles"
+            title="Expériences professionnelles"
             className="animate-enter1"
             showAll={jobsActions.showAll}
             reset={jobsActions.reset}
@@ -209,7 +209,7 @@ export default function Page() {
             title="Formations"
             className="animate-enter1"
           >
-            <div className="pt-6 pb-6">
+            <div className="print:pt-2 print:pb-2 pt-6 pb-6">
               {schoolsData.map((school, index) => (
                 <div key={index} className="mb-2 last-of-type:mb-0">
                   <div className="float-left flex flex-col items-center -ml-14 ">

@@ -1,6 +1,7 @@
 // import jest from "../../public/icons/jest.webp";
 // import cypress from "../../public/icons/cypress.png";
 import docker from "../../public/icons/docker.png";
+import dockerCompose from "../../public/icons/docker-compose.png";
 import webpack from "../../public/icons/webpack.jpg";
 import vite from "../../public/icons/vite.webp";
 // import circleci from "../../public/icons/circleci.png";

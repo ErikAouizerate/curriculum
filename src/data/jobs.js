@@ -10,7 +10,7 @@ const data = [
     vitrine de GodOfGames. C'est une application dans le domaine du jeu de plateau qui permet aux 
     utilisateurs de créer des événements sous forme d'olympiade - godofgames.io / godofgames.fr.`,
     tasks: [
-      `Définition des règles métiers et du périmetre fonctionnel de l'application`,
+      `Définition des règles métiers et du périmètre fonctionnel de l'application`,
       `Mise en place de la stack technique frontend, backend, devOps`,
       `Création du design et de l'expérience utilisateur`,
       `Déploiement et gestion de la solution en production`,
@@ -23,14 +23,15 @@ const data = [
       labels.tailwind,
       labels.postgresql,
       labels.prisma,
-      labels.clevercloud,
+      labels.vercel,
       labels.docker,
-      labels.git,
       labels.vscode,
       labels.windows,
       labels.figma,
       labels.react,
       labels.git,
+      labels.gitlab,
+      labels.gitlabci
     ],
   },
   {
@@ -66,6 +67,7 @@ const data = [
       labels.figma,
       labels.azure,
       labels.scrum,
+      labels.git,
     ],
   },
   {
@@ -81,7 +83,7 @@ const data = [
       "Mise en place d'un micro service de résolution de planning par contraintes",
       "Réalisation du design graphique et de l'expérience utilisateur de l'application web",
       "Rencontre avec les utilisateurs et analyse de leurs besoins",
-      "Annimation des sessions de test avec les utilisateurs",
+      "Animation des sessions de test avec les utilisateurs",
     ],
     tools: [
       labels.javascript,
@@ -96,6 +98,9 @@ const data = [
       labels.python,
       labels.windows,
       labels.figma,
+      labels.git,
+      labels.gitlab,
+      labels.gitlabci
     ],
   },
   {
@@ -121,6 +126,8 @@ const data = [
       labels.vscode,
       labels.windows,
       labels.scrum,
+      labels.git,
+      labels.gitlab,
     ],
   },
   // {

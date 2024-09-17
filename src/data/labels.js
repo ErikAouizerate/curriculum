@@ -38,6 +38,7 @@ const labels = {
   SQLite: "SQLite",
 
   docker: "Docker",
+  dockerCompose: "Docker compose",
   webpack: "Webpack",
   vite: "Vite",
   circleci: "CircleCI",

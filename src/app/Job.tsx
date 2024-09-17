@@ -9,13 +9,13 @@ export default function Skill({ data, remove, addSkills }) {
     duration += " mois";
   }
   return (
-    <div className="group/job pt-6 last-of-type:mb-0 break-inside-avoid-page">
+    <div className="group/job pt-5 last-of-type:mb-0 break-inside-avoid-page">
       <div className="float-left flex flex-col items-center -ml-14 mt-1">
         <div>{dayjs(data.start).format("MM/YY")}</div>
         <div className="text-vertical tracking-tight ">·····</div>
         <div>{data.end && dayjs(data.end).format("MM/YY")}</div>
       </div>
-      <h3 className="text-lg font-bold print:md">
+      <h3 className="print:text-md text-lg font-bold print:md">
         {data.title}
         {duration}
         <div className="flex float-right group/icon invisible group-hover/job:visible">
@@ -36,13 +36,18 @@ export default function Skill({ data, remove, addSkills }) {
           />
         </div>
       </h3>
-      <p className="indent-6 print:text-sm">{data.description}</p>
+      <p className="indent-6 print:text-sm font-semibold">{data.description}</p>
       <ul className="list-disc ml-6 my-2 print:text-sm">
         {data.tasks?.map((task, index) => (
           <li key={index}>{task}</li>
         ))}
       </ul>
-      <p className="print:text-sm">Outils : {data.tools.join(", ")}</p>
+      {/* <p className="print:text-sm "><span className="font-bold">Outils</span> : {data.tools.join(", ")}</p> */}
+      <p className="print:text-xs flex flex-wrap items-center"><span className="font-bold">Outils</span> : {data.tools.map((label, index) => {
+        return (
+          <div key={`${label}_${index}`} className="m-1 px-2 py-1 bg-secondary/20 rounded-md">{`${label}`}</div>
+        )
+      }) }</p>
     </div>
   );
 }
