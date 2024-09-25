@@ -193,7 +193,6 @@ const data = [
       labels.androidStudio,
       labels.SQLite,
       labels.windows,
-      labels.SQLite,
       labels.SVN,
 
     ],
