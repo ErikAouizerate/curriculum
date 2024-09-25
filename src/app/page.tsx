@@ -78,7 +78,7 @@ export default function Page() {
         <header className="animate-enter1 bg-primary/90 text-white  ">
           <div className="flex flex-col bg-primary py-6  justify-center items-center px-6 text-center ">
             <h1 className="text-white text-xl font-bold ">
-            FULL STACK DEVELOPPEUR{" "}
+             DEVELOPPEUR FULL STACK SENIOR{" "}
             </h1>
             <h2 className="hidden md:inline print:inline text-white/50 text-md font-medium">
               Ingénieur en informatique
