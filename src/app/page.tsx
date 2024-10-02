@@ -49,6 +49,15 @@ export default function Page() {
         // ["print:grayscale"]: isForPrint,
       })}
     >
+      <div className="fixed top-32 w-[calc(calc(calc(100vw-21cm)/2)-7px)] ">
+        <div className="hidden lg:flex flex-col items-center">
+          <div className="flex flex-col gap-2">
+            <h3 className="text-2xl font-medium text-secondary/70">Portfolio</h3>
+            <a className="block underline text-primary/50" target="_blank" href='/godofgames_pres.png'>Projet GodOfGames</a>
+            <a className="block underline text-primary/50" target="_blank" href='/linkeys_pres.png'>Projet Linkeys</a>
+          </div>
+        </div>
+      </div>
       <div className="fixed top-0 flex flex-col m-4 ml-[calc(calc(calc(100vw-21cm)/2)+21cm)] ">
         <IconArrowsVertical
           className="rounded-full cursor-pointer hover:bg-stone-200 p-2"
@@ -243,16 +252,18 @@ export default function Page() {
             }}
             size={48}
           />
-          <IconDownload
-            className="rounded-full cursor-pointer hover:bg-stone-200 p-2"
-            onClick={() => {
-              setIsForPrint(false);
-              setTimeout(() => {
-                window.print();
-              }, 0);
-            }}
-            size={48}
-          />
+          <a href='/Julien_Faucher_CV.pdf' download="Julien_Faucher_CV.pdf">
+            <IconDownload
+              className="rounded-full cursor-pointer hover:bg-stone-200 p-2"
+              // onClick={() => {
+              //   setIsForPrint(false);
+              //   setTimeout(() => {
+              //     window.print();
+              //   }, 0);
+              // }}
+              size={48}
+            />
+          </a>
         </div>
       </div>
     </div>
