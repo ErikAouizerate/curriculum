@@ -43,6 +43,38 @@ export default function Page() {
 
   const [isForPrint, setIsForPrint] = useState(false);
 
+  const openImage = (imagePath) => {
+
+    // Ouvre l'image dans un nouvel onglet
+    const imageWindow = window.open('', '_blank');
+
+    // Applique le style pour afficher l'image en pleine largeur avec défilement vertical
+    imageWindow.document.write(`
+      <style>
+        body, html {
+          margin: 0;
+          padding: 0;
+          width: 100vw;
+          height: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow-y: auto; /* Permet le défilement vertical */
+          overflow-x: hidden;
+          background-color: #f3f4f6;
+          box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        }
+        img {
+          width: 80vw;
+          height: auto;
+          display: block;
+        }
+      </style>
+      <img src="${imagePath}" alt="Image en pleine largeur" />
+    `);
+  };// Remplacez par le nom de votre fichier PNG
+
+
   return (
     <div
       className={cx("relative mb-6", {
@@ -53,8 +85,8 @@ export default function Page() {
         <div className="hidden lg:flex flex-col items-center">
           <div className="flex flex-col gap-2">
             <h3 className="text-2xl font-medium text-secondary/70">Portfolio</h3>
-            <a className="block underline text-primary/50" target="_blank" href='/godofgames_pres.png'>Projet GodOfGames</a>
-            <a className="block underline text-primary/50" target="_blank" href='/linkeys_pres.png'>Projet Linkeys</a>
+            <a className="block underline text-primary/50" target="_blank" href='#' onClick={() => openImage('/godofgames_pres.png')}>Projet GodOfGames</a>
+            <a className="block underline text-primary/50" target="_blank" href='#' onClick={() => openImage('/linkeys_pres.png')}>Projet Linkeys</a>
           </div>
         </div>
       </div>
@@ -80,7 +112,7 @@ export default function Page() {
         />
       </div>
       <div
-        className={cx("md:w-[21cm] m-auto bg-stone-100 min-h-[29.7cm]", {
+        className={cx("md:w-[21cm] m-auto bg-stone-200 min-h-[29.7cm]", {
           ["print:bg-white"]: isForPrint,
         })}
       >
@@ -162,10 +194,11 @@ export default function Page() {
                     
           <div className="relative hidden ml-24 mr-10 pb-6 text-white/50 md:block print:flex ">
             <IconQuote size="5rem" className="absolute -top-8 -left-14 text-secondary/20 rotate-180" />
-            <p className="text-md">{`Je suis full stack développeur passionné par les solutions de type SaaS. J'aime développer des produits numériques simples qui répondent à des problématiques complexes.`}</p>
+            <p className="text-md">{`Je suis développeur full stack à dominante front-end. Mon objectif : concevoir avec vous des produits numériques efficaces et intuitifs, alignés sur les besoins de vos utilisateurs.`}</p>
+            {/* <p className="text-md">{`Je suis full stack développeur à dominante front-end focalisé sur les solutions de type SaaS. J'aide à concevoir et développer des produits numériques simples qui répondent à des problématiques complexes.`}</p> */}
           </div>
         </header>
-        <main className={cx("pt-2 bg-stone-100 h-full print:bg-white")}>
+        <main className={cx("pt-2 bg-white h-full print:bg-white")}>
           <Section
             Icon={IconColorSwatch}
             title="Compétences"
