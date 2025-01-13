@@ -5,8 +5,9 @@ import "../styles/globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Julien Faucher",
-  description: "Site personel de Julien Faucher. CV intératif. contact pour mission freelance",
+  title: "CV Érik Aouizerate",
+  description:
+    "Site personnel de Erik Aouizerate. curriculum intéractif. Contact pour mission freelance",
 };
 
 export default function RootLayout({

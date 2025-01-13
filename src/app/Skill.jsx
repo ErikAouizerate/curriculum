@@ -4,7 +4,9 @@ import Image from "next/image";
 export default function Skill({ title, data, removeSkill }) {
   return (
     <div className="flex flex-col items-center">
-      <h3 className="text-lg font-bold m-1 mt-0 print:text-md">{title}</h3>
+      <h3 className="text-lg font-bold self-start md:self-center m-1 mt-0 print:text-md">
+        {title}
+      </h3>
       <div>
         {data.map((skill, index) => (
           <div className="group/skill flex justify-between mb-2" key={index}>

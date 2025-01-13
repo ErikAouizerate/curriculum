@@ -1,15 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import avatar from "../../public/avatar.png";
+import avatar from "../../public/avatar.jpg";
 import dayjs from "dayjs";
 import Section from "./Section";
 import Skill from "./Skill";
 import Job from "./Job";
 import schoolsData from "@/data/schools";
 
-
-import {  IconAerialLift,
+import {
+  IconAerialLift,
   IconArrowBack,
   IconArrowsVertical,
   IconColorSwatch,
@@ -21,14 +21,15 @@ import {  IconAerialLift,
   IconSchool,
   IconShare,
   IconWorld,
-  IconQuote,} from "@tabler/icons-react"
+  IconQuote,
+} from "@tabler/icons-react";
 
 import useStore from "@/store";
 import cx from "classnames";
 import { useState } from "react";
 
 export default function Page() {
-  const yearsOld = dayjs().diff(dayjs("1987-05-23"), "years");
+  const yearsOld = dayjs().diff(dayjs("1986-04-07"), "years");
 
   const skills = useStore((state) => state.data.skills);
   const jobs = useStore((state) => state.data.jobs);
@@ -44,9 +45,8 @@ export default function Page() {
   const [isForPrint, setIsForPrint] = useState(false);
 
   const openImage = (imagePath) => {
-
     // Ouvre l'image dans un nouvel onglet
-    const imageWindow = window.open('', '_blank');
+    const imageWindow = window.open("", "_blank");
 
     // Applique le style pour afficher l'image en pleine largeur avec défilement vertical
     imageWindow.document.write(`
@@ -72,8 +72,7 @@ export default function Page() {
       </style>
       <img src="${imagePath}" alt="Image en pleine largeur" />
     `);
-  };// Remplacez par le nom de votre fichier PNG
-
+  }; // Remplacez par le nom de votre fichier PNG
 
   return (
     <div
@@ -84,9 +83,25 @@ export default function Page() {
       <div className="fixed top-32 w-[calc(calc(calc(100vw-21cm)/2)-7px)] ">
         <div className="hidden lg:flex flex-col items-center">
           <div className="flex flex-col gap-2">
-            <h3 className="text-2xl font-medium text-secondary/70">Portfolio</h3>
-            <a className="block underline text-primary/50" target="_blank" href='#' onClick={() => openImage('/godofgames_pres.png')}>Projet GodOfGames</a>
-            <a className="block underline text-primary/50" target="_blank" href='#' onClick={() => openImage('/linkeys_pres.png')}>Projet Linkeys</a>
+            <h3 className="text-2xl font-medium text-secondary/70">
+              Portfolio
+            </h3>
+            <a
+              className="block underline text-primary/50"
+              target="_blank"
+              href="#"
+              onClick={() => openImage("/godofgames_pres.png")}
+            >
+              Projet GodOfGames
+            </a>
+            <a
+              className="block underline text-primary/50"
+              target="_blank"
+              href="#"
+              onClick={() => openImage("/linkeys_pres.png")}
+            >
+              Projet Linkeys
+            </a>
           </div>
         </div>
       </div>
@@ -112,50 +127,56 @@ export default function Page() {
         />
       </div>
       <div
-        className={cx("md:w-[21cm] m-auto bg-stone-200 min-h-[29.7cm]", {
-          ["print:bg-white"]: isForPrint,
-        })}
+        className={cx(
+          "md:w-[21cm] m-auto bg-stone-200 min-h-[29.7cm] print:bg-white",
+          {
+            // ["print:bg-white"]: isForPrint,
+          }
+        )}
       >
-        <header className="animate-enter1 bg-primary/90 text-white  ">
+        <header className="animate-enter1 bg-primary/90 text-white print:text-black">
           <div className="flex flex-col bg-primary py-6  justify-center items-center px-6 text-center ">
-            <h1 className="text-white text-xl font-bold ">
-             DEVELOPPEUR FULL STACK SENIOR{" "}
+            <h1 className="text-white print:text-black text-xl font-bold ">
+              DEVELOPPEUR FULLSTACK DEVOPS SENIOR{" "}
             </h1>
-            <h2 className="hidden md:inline print:inline text-white/50 text-md font-medium">
-              Ingénieur en informatique
+            <h2 className="hidden md:inline print:inline text-white/50 print:text-black text-md font-medium">
+              React | Node | Docker | Ansible
             </h2>
           </div>
-          <div className="flex md:relative print:relative py-4 md:py-0 print:py-0">
-            <div className="mt-4 md:mt-0 ml-4">
+
+          <div className="relative md:flex md:flex-row py-4 md:py-0  md:relative print:relative print:py-0">
+            <div className="absolute right-4 md:-left-2 md:block print:-left-2 print:block mt-4 md:mt-0 ml-4">
               <Image
                 alt="Photo du profil"
                 src={avatar}
-                className="md:absolute print:absolute -top-5 rounded-full min-w-24 min-h-24 max-w-28 max-h-28 object-cover"
+                className="float md:absolute print:absolute -top-5 rounded-full min-w-24 min-h-24 max-w-28 max-h-28 object-cover"
               />
             </div>
             <div className="hidden print:flex pl-4 md:pl-28 print:pl-32 py-6 px-4 md:flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-6">
               <div className="flex flex-col justify-start mt-6 md:mt-0 md:ml-4 print:mt-0">
-                <div className="font-bold text-2xl">Julien Faucher</div>
-                <div className="text-lg text-white/50">{yearsOld} ans</div>
+                <div className="font-bold text-2xl">Erik Aouizerate</div>
+                <div className="text-lg text-white/50 print:text-black">
+                  {yearsOld} ans
+                </div>
               </div>
               <div className="flex flex-col text-lg leading-tight gap-1 mt-2">
                 <div className="flex items-center justify-end gap-2">
-                  <a href="tel:+330647197547">06 47 19 75 47 </a>
+                  <a href="tel:+330647197547">06 01 99 46 02 </a>
                   <IconDeviceMobile className=" text-secondary" />
                 </div>
                 <div className="flex items-center justify-end gap-2">
-                  <a href="mailto:julien.faucher@mintset.io">
-                    julien.faucher@mintset.io
+                  <a href="mailto:erik.aouizerate@mintset.io">
+                    erik.aouizerate@mintset.io
                   </a>
                   <IconMail className=" text-secondary" />
                 </div>
                 <div className="flex items-center justify-end gap-2">
                   <a
-                    href="https://julien-faucher.me"
+                    href="https://erik-aouizerate.me"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    julien-faucher.me
+                    erik-aouizerate.me
                   </a>
                   <IconWorld className=" text-secondary" />
                 </div>
@@ -163,38 +184,42 @@ export default function Page() {
             </div>
             <div className="md:hidden print:hidden pl-4 md:pl-28 print:pl-32 py-6 px-4 flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-10">
               <div className="flex flex-col justify-start mt-6 md:mt-0">
-                <div className="font-bold text-2xl">Julien Faucher</div>
-                <div className="text-lg -mt-1 text-white/50">{yearsOld} ans</div>
+                <div className="font-bold text-2xl">Erik Aouizerate</div>
+                <div className="text-lg -mt-1 text-white/50 print:text-black">
+                  {yearsOld} ans
+                </div>
               </div>
               <div className="flex flex-col text-lg leading-tight gap-2 -ml-2">
                 <div className="flex items-center justify-start gap-2">
                   <IconDeviceMobile className="text-secondary" />
-                  <a href="tel:+330647197547">06 47 19 75 47 </a>
+                  <a href="tel:+330647197547">06 01 99 46 02 </a>
                 </div>
                 <div className="flex items-center justify-start gap-2">
                   <IconMail className="text-secondary" />
-                  <a href="mailto:julien.faucher@mintset.io">
-                    julien.faucher@mintset.io
+                  <a href="mailto:erik.aouizerate@mintset.io">
+                    erik.aouizerate@mintset.io
                   </a>
                 </div>
                 <div className="flex items-center justify-start gap-2">
                   <IconWorld className="text-secondary" />
                   <a
-                    href="https://julien-faucher.me"
+                    href="https://erik-aouizerate.me"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    julien-faucher.me
+                    erik-aouizerate.me
                   </a>
                 </div>
               </div>
             </div>
-            
           </div>
-                    
-          <div className="relative hidden ml-24 mr-10 pb-6 text-white/50 md:block print:flex ">
-            <IconQuote size="5rem" className="absolute -top-8 -left-14 text-secondary/20 rotate-180" />
-            <p className="text-md">{`Je suis développeur full stack à dominante front-end. Mon objectif : concevoir avec vous des produits numériques efficaces et intuitifs, alignés sur les besoins de vos utilisateurs.`}</p>
+
+          <div className="relative hidden ml-24 mr-10 pb-6 text-white/50 print:text-black md:block print:flex ">
+            <IconQuote
+              size="5rem"
+              className="absolute -top-8 -left-14 text-secondary/20 rotate-180"
+            />
+            <p className="text-md">{`Je suis développeur fullstack devOps. J'interviens et collabore aux différentes étapes d'un projet informatique; de la conception à la mise en production.`}</p>
             {/* <p className="text-md">{`Je suis full stack développeur à dominante front-end focalisé sur les solutions de type SaaS. J'aide à concevoir et développer des produits numériques simples qui répondent à des problématiques complexes.`}</p> */}
           </div>
         </header>
@@ -207,7 +232,7 @@ export default function Page() {
             reset={skillsActions.reset}
             removeAll={skillsActions.removeAll}
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 print:grid-cols-4 gap-[1px] pt-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 print:grid-cols-4 gap-4 md:gap-[1px] pt-6">
               <Skill
                 title="Frontend"
                 data={skills.frontend}
@@ -258,7 +283,9 @@ export default function Page() {
                     <div>{dayjs(school.year).format("YYYY")}</div>
                   </div>
                   <h3 className="text-[0.88rem] font-bold">{school.title}</h3>
-                  <h4 className="text-[0.88rem] text-gray-700">{school.subtitle}</h4>
+                  <h4 className="text-[0.88rem] text-gray-700">
+                    {school.subtitle}
+                  </h4>
                 </div>
               ))}
             </div>
@@ -285,7 +312,7 @@ export default function Page() {
             }}
             size={48}
           />
-          <a href='/Julien_Faucher_CV.pdf' download="Julien_Faucher_CV.pdf">
+          <a href="/Erik_Aouizerate_CV.pdf" download="Erik_Aouizerate_CV.pdf">
             <IconDownload
               className="rounded-full cursor-pointer hover:bg-stone-200 p-2"
               // onClick={() => {
