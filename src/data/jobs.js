@@ -166,7 +166,7 @@ const data = [
       "Animation de workshop technique et formation des autres developpeurs juniors",
       "Spécification, réalisation, et maintien de l'application IOS et Android",
       "Déploiement de l'application sur les stores Apple et google",
-      "Coordination des developpements avec les autres prestataires du projet (Accenture et orion health)",
+      "Coordination des developpements avec les autres prestataires du projet (Accenture et Orion Health)",
       "Fonctionnement en Agilité, sprint de 2 semaines",
     ],
     tools: [
