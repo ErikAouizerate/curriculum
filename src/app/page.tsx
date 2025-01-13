@@ -27,8 +27,13 @@ import {
 import useStore from "@/store";
 import cx from "classnames";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function Page() {
+  const searchParams = useSearchParams();
+
+  const isEdit = !!searchParams.get("edit");
+
   const yearsOld = dayjs().diff(dayjs("1986-04-07"), "years");
 
   const skills = useStore((state) => state.data.skills);
@@ -44,35 +49,35 @@ export default function Page() {
 
   const [isForPrint, setIsForPrint] = useState(false);
 
-  const openImage = (imagePath) => {
-    // Ouvre l'image dans un nouvel onglet
-    const imageWindow = window.open("", "_blank");
+  // const openImage = (imagePath) => {
+  //   // Ouvre l'image dans un nouvel onglet
+  //   const imageWindow = window.open("", "_blank");
 
-    // Applique le style pour afficher l'image en pleine largeur avec défilement vertical
-    imageWindow.document.write(`
-      <style>
-        body, html {
-          margin: 0;
-          padding: 0;
-          width: 100vw;
-          height: auto;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow-y: auto; /* Permet le défilement vertical */
-          overflow-x: hidden;
-          background-color: #f3f4f6;
-          box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-        }
-        img {
-          width: 80vw;
-          height: auto;
-          display: block;
-        }
-      </style>
-      <img src="${imagePath}" alt="Image en pleine largeur" />
-    `);
-  };
+  //   // Applique le style pour afficher l'image en pleine largeur avec défilement vertical
+  //   imageWindow.document.write(`
+  //     <style>
+  //       body, html {
+  //         margin: 0;
+  //         padding: 0;
+  //         width: 100vw;
+  //         height: auto;
+  //         display: flex;
+  //         align-items: center;
+  //         justify-content: center;
+  //         overflow-y: auto; /* Permet le défilement vertical */
+  //         overflow-x: hidden;
+  //         background-color: #f3f4f6;
+  //         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  //       }
+  //       img {
+  //         width: 80vw;
+  //         height: auto;
+  //         display: block;
+  //       }
+  //     </style>
+  //     <img src="${imagePath}" alt="Image en pleine largeur" />
+  //   `);
+  // };
 
   return (
     <div
@@ -80,6 +85,57 @@ export default function Page() {
         // ["print:grayscale"]: isForPrint,
       })}
     >
+      {/* <div className="fixed top-32 w-[calc(calc(calc(100vw-21cm)/2)-7px)] ">
+        <div className="hidden lg:flex flex-col items-center">
+          <div className="flex flex-col gap-2">
+            <h3 className="text-2xl font-medium text-secondary/70">
+              Portfolio
+            </h3>
+            <a
+              className="block underline text-primary/50"
+              target="_blank"
+              href="#"
+              onClick={() => openImage("/godofgames_pres.png")}
+            >
+              Projet GodOfGames
+            </a>
+            <a
+              className="block underline text-primary/50"
+              target="_blank"
+              href="#"
+              onClick={() => openImage("/linkeys_pres.png")}
+            >
+              Projet Linkeys
+            </a>
+          </div>
+        </div>
+      </div> */}
+      {isEdit && (
+        <div className="fixed top-0 flex flex-col m-4 ml-[calc(calc(calc(100vw-21cm)/2)+21cm)] ">
+          <IconArrowsVertical
+            className="rounded-full cursor-pointer hover:bg-stone-200 p-2"
+            onClick={showAll}
+            size={48}
+          />
+          <IconFilter
+            className="rounded-full cursor-pointer hover:bg-stone-200 p-2"
+            onClick={reset}
+            size={48}
+          />
+          <IconArrowBack
+            className={cx(
+              "rounded-full cursor-pointer hover:bg-stone-200 p-2",
+              {
+                ["text-stone-300"]: !hasHistory,
+                ["hover:bg-inherit"]: !hasHistory,
+                ["cursor-auto"]: !hasHistory,
+              }
+            )}
+            onClick={undo}
+            size={48}
+          />
+        </div>
+      )}
       <div
         className={cx(
           "md:w-[21cm] m-auto bg-stone-200 min-h-[29.7cm] print:bg-white",
@@ -246,7 +302,6 @@ export default function Page() {
         </main>
       </div>
       <div className="print:hidden">
-        <div className="absolute -z-10 top-[29.7cm] w-full border border-dashed border-1"></div>
         <div className="fixed bottom-0 flex flex-col m-4 ml-[calc(calc(calc(100vw-21cm)/2)+21cm)]">
           <IconShare
             className="rounded-full cursor-pointer hover:bg-stone-200 p-2"
