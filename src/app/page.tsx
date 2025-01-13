@@ -72,7 +72,7 @@ export default function Page() {
       </style>
       <img src="${imagePath}" alt="Image en pleine largeur" />
     `);
-  }; // Remplacez par le nom de votre fichier PNG
+  };
 
   return (
     <div
@@ -80,52 +80,6 @@ export default function Page() {
         // ["print:grayscale"]: isForPrint,
       })}
     >
-      <div className="fixed top-32 w-[calc(calc(calc(100vw-21cm)/2)-7px)] ">
-        <div className="hidden lg:flex flex-col items-center">
-          <div className="flex flex-col gap-2">
-            <h3 className="text-2xl font-medium text-secondary/70">
-              Portfolio
-            </h3>
-            <a
-              className="block underline text-primary/50"
-              target="_blank"
-              href="#"
-              onClick={() => openImage("/godofgames_pres.png")}
-            >
-              Projet GodOfGames
-            </a>
-            <a
-              className="block underline text-primary/50"
-              target="_blank"
-              href="#"
-              onClick={() => openImage("/linkeys_pres.png")}
-            >
-              Projet Linkeys
-            </a>
-          </div>
-        </div>
-      </div>
-      <div className="fixed top-0 flex flex-col m-4 ml-[calc(calc(calc(100vw-21cm)/2)+21cm)] ">
-        <IconArrowsVertical
-          className="rounded-full cursor-pointer hover:bg-stone-200 p-2"
-          onClick={showAll}
-          size={48}
-        />
-        <IconFilter
-          className="rounded-full cursor-pointer hover:bg-stone-200 p-2"
-          onClick={reset}
-          size={48}
-        />
-        <IconArrowBack
-          className={cx("rounded-full cursor-pointer hover:bg-stone-200 p-2", {
-            ["text-stone-300"]: !hasHistory,
-            ["hover:bg-inherit"]: !hasHistory,
-            ["cursor-auto"]: !hasHistory,
-          })}
-          onClick={undo}
-          size={48}
-        />
-      </div>
       <div
         className={cx(
           "md:w-[21cm] m-auto bg-stone-200 min-h-[29.7cm] print:bg-white",
@@ -137,7 +91,7 @@ export default function Page() {
         <header className="animate-enter1 bg-primary/90 text-white print:text-black">
           <div className="flex flex-col bg-primary py-6  justify-center items-center px-6 print:pb-0 text-center">
             <h1 className="text-white print:text-black text-xl font-bold ">
-              DEVELOPPEUR FULLSTACK DEVOPS SENIOR{" "}
+              DÉVELOPPEUR FULLSTACK DEVOPS SENIOR
             </h1>
             <h2 className="hidden md:inline print:inline text-white/50 print:text-black text-md font-medium">
               React | Node | Docker | Ansible
@@ -219,8 +173,7 @@ export default function Page() {
               size="5rem"
               className="print:hidden absolute -top-8 -left-14 text-secondary/20 rotate-180"
             />
-            <p className="text-md">{`Je suis développeur fullstack devOps. J'interviens et collabore aux différentes étapes d'un projet informatique; de la conception à la mise en production.`}</p>
-            {/* <p className="text-md">{`Je suis full stack développeur à dominante front-end focalisé sur les solutions de type SaaS. J'aide à concevoir et développer des produits numériques simples qui répondent à des problématiques complexes.`}</p> */}
+            <p className="text-md">{`Je suis développeur fullstack DevOps. J'interviens et collabore aux différentes étapes d'un projet informatique, de la conception à la mise en production.`}</p>
           </div>
         </header>
         <main className={cx("pt-2 bg-white h-full print:bg-white print:pt-0")}>
