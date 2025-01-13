@@ -38,9 +38,7 @@ export default function Skill({ data, remove, addSkills }) {
           />
         </div>
       </h3>
-      <p className="mt-2 md:mt-0 indent-6 print:text-sm font-semibold">
-        {data.description}
-      </p>
+      <p className="mt-2 indent-6 print:text-md">{data.description}</p>
       <ul className="list-disc ml-6 my-2 print:text-sm">
         {data.tasks?.map((task, index) => (
           <li key={index}>{task}</li>
@@ -53,7 +51,7 @@ export default function Skill({ data, remove, addSkills }) {
           return (
             <div
               key={`${label}_${index}`}
-              className="m-1 px-2 py-1 print:m-0 bg-secondary/20 rounded-md"
+              className="m-1 px-2 py-1 print:m-0 bg-secondary/20 rounded-md text-xs"
             >{`${label}`}</div>
           );
         })}

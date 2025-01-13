@@ -135,7 +135,7 @@ export default function Page() {
         )}
       >
         <header className="animate-enter1 bg-primary/90 text-white print:text-black">
-          <div className="flex flex-col bg-primary py-6  justify-center items-center px-6 text-center ">
+          <div className="flex flex-col bg-primary py-6  justify-center items-center px-6 print:pb-0 text-center">
             <h1 className="text-white print:text-black text-xl font-bold ">
               DEVELOPPEUR FULLSTACK DEVOPS SENIOR{" "}
             </h1>
@@ -152,7 +152,7 @@ export default function Page() {
                 className="float md:absolute print:absolute -top-5 rounded-full min-w-24 min-h-24 max-w-28 max-h-28 object-cover"
               />
             </div>
-            <div className="hidden print:flex pl-4 md:pl-28 print:pl-32 py-6 px-4 md:flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-6">
+            <div className="hidden print:flex pl-4 md:pl-28 print:pl-32 print:py-2 py-6 px-4 md:flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-6">
               <div className="flex flex-col justify-start mt-6 md:mt-0 md:ml-4 print:mt-0">
                 <div className="font-bold text-2xl">Erik Aouizerate</div>
                 <div className="text-lg text-white/50 print:text-black">
@@ -214,16 +214,16 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="relative hidden ml-24 mr-10 pb-6 text-white/50 print:text-black md:block print:flex ">
+          <div className="relative hidden ml-24 mr-10 pb-6 print:pb-0 text-white/50 print:text-black md:block print:flex ">
             <IconQuote
               size="5rem"
-              className="absolute -top-8 -left-14 text-secondary/20 rotate-180"
+              className="print:hidden absolute -top-8 -left-14 text-secondary/20 rotate-180"
             />
             <p className="text-md">{`Je suis développeur fullstack devOps. J'interviens et collabore aux différentes étapes d'un projet informatique; de la conception à la mise en production.`}</p>
             {/* <p className="text-md">{`Je suis full stack développeur à dominante front-end focalisé sur les solutions de type SaaS. J'aide à concevoir et développer des produits numériques simples qui répondent à des problématiques complexes.`}</p> */}
           </div>
         </header>
-        <main className={cx("pt-2 bg-white h-full print:bg-white")}>
+        <main className={cx("pt-2 bg-white h-full print:bg-white print:pt-0")}>
           <Section
             Icon={IconColorSwatch}
             title="Compétences"
