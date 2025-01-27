@@ -83,7 +83,7 @@ const data = [
       labels.typescript,
       labels.nextjs,
       labels.graphql,
-      labels.appolo,
+      labels.apollo,
       labels.materialui,
       labels.php,
       labels.symphony,

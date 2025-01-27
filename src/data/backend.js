@@ -16,6 +16,8 @@ import nw from "@/../public/icons/nw.webp";
 import plsql from "@/../public/icons/plsql.webp";
 import webrtc from "@/../public/icons/webrtc.webp";
 import firebase from "@/../public/icons/firebase.webp";
+import graphql from "@/../public/icons/graphql.png";
+import apollo from "@/../public/icons/apollo.png";
 import labels from "./labels";
 
 const data = [
@@ -49,6 +51,14 @@ const data = [
   {
     label: labels.mongodb,
     icon: mongo,
+  },
+  {
+    label: labels.graphql,
+    icon: graphql,
+  },
+  {
+    label: labels.apollo,
+    icon: apollo,
   },
   {
     label: labels.mariadb,

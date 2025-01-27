@@ -22,6 +22,8 @@ const labels = {
   django: "Django",
   php: "Php",
   java: "Java",
+  graphql: "GraphQL",
+  apollo: "Apollo",
   plsql: "PL/SQL",
   postgresql: "Postgresql",
   mongodb: "MongoDB",
