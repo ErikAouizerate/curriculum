@@ -4,7 +4,7 @@ const data = [
   {
     default: true,
     start: "01/03/2023",
-    end: "01/01/2025",
+    end: "01/12/2024",
     title: "Lead développeur frontend et devops à Météo France – Toulouse – ",
     description: `L'objectif de ma mission a été d'améliorer le système météo présent en termes de performance, de résilience et de qualité de code. J'ai aussi modernisé et amélioré les déploiements de l'application.`,
     tasks: [
@@ -69,9 +69,9 @@ const data = [
     ],
   },
   {
-    default: false,
+    default: true,
     start: "08/01/2022",
-    title: "Développeur fullstack à La Chouette Coop – Toulouse – ",
+    title: "Développeur bénévole fullstack à La Chouette Coop – Toulouse – ",
     description: `Au sein d'un supermarché coopératif, je participe à la gestion des outils informatiques et au développement des nouveaux besoins.`,
     tasks: [
       "Prise en main et développement des outils existants",
@@ -187,7 +187,6 @@ const data = [
     ],
   },
   {
-    default: true,
     start: "09/01/2016",
     end: "10/01/2018",
     title: "Développeur frontend à JobTeaser – Paris – ",
