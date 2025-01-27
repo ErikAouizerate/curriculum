@@ -3,8 +3,8 @@ import labels from "./labels";
 const data = [
   {
     default: true,
-    start: "01/03/2023",
-    end: "01/12/2024",
+    start: "03/01/2023",
+    end: "12/01/2024",
     title: "Lead développeur frontend et devops à Météo France – Toulouse – ",
     description: `L'objectif de ma mission a été d'améliorer le système météo présent en termes de performance, de résilience et de qualité de code. J'ai aussi modernisé et amélioré les déploiements de l'application.`,
     tasks: [
@@ -41,7 +41,7 @@ const data = [
   {
     default: false,
     start: "09/01/2022",
-    end: "01/02/2023",
+    end: "02/01/2023",
     title: "Software craftsmanship à Mintset – Toulouse – ",
     description: `Dans le but d'explorer de nouveaux outils et frameworks,
     j'ai développé un CMS offrant une UX épurée et de grande
@@ -187,6 +187,7 @@ const data = [
     ],
   },
   {
+    small: true,
     start: "09/01/2016",
     end: "10/01/2018",
     title: "Développeur frontend à JobTeaser – Paris – ",
@@ -204,6 +205,7 @@ const data = [
     ],
   },
   {
+    small: true,
     start: "10/01/2014",
     end: "05/01/2015",
     title: "Ingénieur de recherche à Middleware Factory – Paris – ",
@@ -211,6 +213,7 @@ const data = [
     tools: [labels.java],
   },
   {
+    small: true,
     start: "06/01/2013",
     end: "09/01/2014",
     title: "Analyste développeur à CGI – Grenoble – ",

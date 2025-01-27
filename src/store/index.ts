@@ -31,6 +31,7 @@ interface skillsI {
     showAll: () => any;
     reset: () => any;
     addSkills: (clear) => (tools) => any;
+    toggleSmall: (key) => any;
   };
 
   reset: () => any;
@@ -45,7 +46,7 @@ const initialSkills = {
   tools: toolsData.filter((skill) => skill.default),
 };
 
-const initialJobs = jobsData.filter((skill) => skill.default);
+const initialJobs = jobsData.filter((skill) => skill.default || skill.small);
 
 const useSkillsStore = create<skillsI>((set) => ({
   data: {
@@ -69,6 +70,19 @@ const useSkillsStore = create<skillsI>((set) => ({
         produce((state) => {
           state.history.push(current(state.data));
           state.data.jobs = jobsData;
+        })
+      ),
+    toggleSmall: (key) =>
+      set(
+        produce((state) => {
+          state.history.push(current(state.data));
+          state.data.jobs = state.data.jobs.map((job, i) => {
+            if (i === key) {
+              return { ...job, small: !job.small };
+            } else {
+              return job;
+            }
+          });
         })
       ),
     reset: () =>
