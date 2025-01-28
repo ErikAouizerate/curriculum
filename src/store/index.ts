@@ -191,7 +191,9 @@ const useSkillsStore = create<skillsI>((set) => ({
         state.data.skills.backend = backendData;
         state.data.skills.infra = infraData;
         state.data.skills.tools = toolsData;
-        state.data.jobs = jobsData;
+        state.data.jobs = jobsData.map((job) => {
+          return { ...job, small: false };
+        });
       })
     ),
   undo: () =>
