@@ -57,6 +57,8 @@ const labels = {
   capacitor: "Capacitor",
   keycloak: "Keycloak",
   wso2: "Wso2",
+  traefik: "Traefik",
+  codemagic: "Codemagic",
 
   git: "Git",
   github: "Github",

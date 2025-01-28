@@ -19,6 +19,8 @@ import clevercloud from "@/../public/icons/clevercloud.webp";
 import heroku from "@/../public/icons/heroku.webp";
 import gcp from "@/../public/icons/gcp.webp";
 import capacitorjs from "@/../public/icons/capacitorjs.webp";
+import traefik from "@/../public/icons/traefik.svg";
+import codemagic from "@/../public/icons/codemagic.svg";
 
 import labels from "./labels";
 
@@ -66,6 +68,10 @@ const data = [
     default: true,
   },
   {
+    label: labels.traefik,
+    icon: traefik,
+  },
+  {
     label: labels.vercel,
     icon: vercel,
   },
@@ -93,6 +99,11 @@ const data = [
     label: labels.gcp,
     icon: gcp,
   },
+  {
+    label: labels.codemagic,
+    icon: codemagic,
+  },
+
   {
     label: labels.capacitor,
     icon: capacitorjs,
