@@ -35,7 +35,6 @@ const data = [
     label: labels.swarm,
     icon: dockerSwarm,
   },
-
   {
     label: labels.webpack,
     icon: webpack,

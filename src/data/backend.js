@@ -22,13 +22,18 @@ import labels from "./labels";
 
 const data = [
   {
-    label: labels.node,
-    icon: node,
+    label: labels.python,
+    icon: python,
     default: true,
   },
   {
-    label: labels.python,
-    icon: python,
+    label: labels.django,
+    icon: django,
+    default: true,
+  },
+  {
+    label: labels.node,
+    icon: node,
     default: true,
   },
   {
@@ -75,7 +80,6 @@ const data = [
   {
     label: labels.prisma,
     icon: prisma,
-    default: true,
   },
   {
     label: labels.typeorm,
@@ -84,10 +88,6 @@ const data = [
   {
     label: labels.express,
     icon: expressjs,
-  },
-  {
-    label: labels.django,
-    icon: django,
   },
   {
     label: labels.symphony,

@@ -150,7 +150,7 @@ export default function Page() {
               DÉVELOPPEUR FULLSTACK DEVOPS SENIOR
             </h1>
             <h2 className="hidden md:inline print:inline text-white/50 print:text-black text-md font-medium">
-              React | Node | Docker | Ansible
+              React | Python | Docker | Ansible
             </h2>
           </div>
 
@@ -227,9 +227,9 @@ export default function Page() {
           <div className="relative hidden ml-16 mr-10 pb-6 print:pb-0 text-white/50 print:text-black md:block print:flex ">
             <IconQuote
               size="5rem"
-              className="print:hidden absolute -top-8 -left-14 text-secondary/20 rotate-180"
+              className="print:hidden absolute -top-12 -left-12 text-secondary/20 rotate-180"
             />
-            <p className="text-sm">
+            <p className="text-sm text-center">
               Je suis développeur fullstack DevOps. J&apos;interviens et
               collabore aux différentes étapes d&apos;un projet informatique, de
               la conception à la mise en production. J&apos;aime valoriser la

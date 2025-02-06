@@ -5,14 +5,14 @@ const data = [
     default: true,
     start: "03/01/2023",
     end: "12/01/2024",
-    title: "Lead développeur frontend et devops à Météo France – Toulouse – ",
+    title: "Lead développeur fullstack et devops à Météo France – Toulouse – ",
     description: `L'objectif de ma mission a été d'améliorer le système météo présent en termes de performance, de résilience et de qualité de code. J'ai aussi modernisé et amélioré les déploiements de l'application.`,
     tasks: [
       "Mise en place des bonnes pratiques de code et de build dans un environnement react",
       "Développement de cartes interactives permettant la visualisation de données météo",
-      "Collaboration avec les autres équipes afin de garantir le respect des standards météo (norme OGC)",
-      "Mise en place du déploiement continu et de la dockerisation de la solution",
       "Interventions dans le backend python de l'application pour optimiser les points d'API",
+      "Mise en place du déploiement continu et de la dockerisation de la solution",
+      "Collaboration avec les autres équipes afin de garantir le respect des standards météo (norme OGC)",
     ],
     tools: [
       labels.typescript,
