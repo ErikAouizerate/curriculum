@@ -1,0 +1,18 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - traefik-network # Connect to the Traefik network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cv.rule=Host(`cv.mintset.best`)"
+      - "traefik.http.routers.cv.entrypoints=websecure"
+      - "traefik.http.routers.cv.tls.certresolver=letsencrypt"
+      - "traefik.http.services.cv.loadbalancer.server.port=3000" # The internal port your app listens on
+
+networks:
+  traefik-network:
+    external: true # This tells Docker to use the existing Traefik network
