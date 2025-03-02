@@ -2,14 +2,14 @@ FROM node:23-alpine3.20
 
 WORKDIR /app
 
-COPY package.json yarn.lock /app/
+COPY package.json package-lock.json /app/
 
-RUN yarn
+RUN npm i
 
 COPY . /app/
 
-RUN yarn build
+RUN npm run build
 
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD ["npm","run", "start"]
