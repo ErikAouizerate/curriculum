@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package.json yarn.lock /app/
 
-RUN yarn
+RUN yarn config set network-timeout 180000 && yarn config delete proxy && yarn config delete https-proxy && yarn
 
 COPY . /app/
 
