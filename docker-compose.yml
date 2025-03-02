@@ -1,7 +1,9 @@
 version: "3"
 services:
   web:
-    image: mejjjor/cv:2.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
     platform: linux/amd64 # or linux/arm64 depending on your image
 
     networks:
