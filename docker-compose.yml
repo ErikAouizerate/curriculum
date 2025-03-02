@@ -13,4 +13,4 @@ services:
 
 networks:
   traefik-network:
-    external: true # This tells Docker to use the existing Traefik network
+    driver: bridge
