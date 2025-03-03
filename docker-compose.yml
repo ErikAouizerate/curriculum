@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    platform: linux/amd64 # or linux/arm64 depending on your image
+    platform: linux/arm64 # or linux/arm64 depending on your image
 
     networks:
       - traefik-network # Connect to the Traefik network
