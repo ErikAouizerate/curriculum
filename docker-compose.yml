@@ -13,6 +13,7 @@ services:
       - "traefik.http.routers.cv.entrypoints=websecure"
       - "traefik.http.routers.cv.tls.certresolver=letsencrypt"
       - "traefik.http.services.cv.loadbalancer.server.port=3000" # The internal port your app listens on
+      - "traefik.http.services.cv.loadbalancer.server.scheme=http"
 
 networks:
   traefik-network:
