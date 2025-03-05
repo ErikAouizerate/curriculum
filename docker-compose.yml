@@ -6,10 +6,10 @@ services:
       dockerfile: Dockerfile
 
     networks:
-      - traefik-network # Connect to the Traefik network
+      - traefik-web # Connect to the Traefik network
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=traefik-network"
+      - "traefik.docker.network=traefik-web"
       - "traefik.http.routers.cv.rule=Host(`cv.mintset.net`)"
       - "traefik.http.routers.cv.entrypoints=websecure"
       - "traefik.http.routers.cv.tls.certresolver=letsencrypt"
@@ -17,5 +17,5 @@ services:
       - "traefik.http.services.cv.loadbalancer.server.scheme=http"
 
 networks:
-  traefik-network:
+  traefik-web:
     external: true # This tells Docker to use the existing Traefik network
