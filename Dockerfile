@@ -12,4 +12,4 @@ RUN yarn build
 
 EXPOSE 3000
 
-CMD ["node", ".next/standalone/server.js"]
+CMD ["yarn", "start"]
