@@ -6,7 +6,7 @@ const data = [
     start: "03/01/2023",
     end: "12/01/2024",
     title: "Lead développeur fullstack et devops à Météo France – Toulouse – ",
-    description: `Dans le cadre d'un contrat avec l'Indonésie, l'objectif de ma mission a été  d'améliorer le système météo en gérant les aspects techniques et l'interfacage avec les autres équipes.`,
+    description: `Dans le cadre d'un contrat avec l'Indonésie, l'objectif de ma mission a été  d'améliorer le système météo en gérant les aspects techniques et l'interfaçage avec les autres équipes.`,
     tasks: [
       "Réduction des bundles JavaScript de 20 Mo à 4 Mo (80%)",
       "automatisation du déploiement sur GitlabCI avec Ansible et Docker Swarm, réduisant le temps de 15 min à 4 min (70%)",
