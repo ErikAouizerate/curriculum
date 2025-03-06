@@ -22,6 +22,7 @@ const data = [
   {
     label: labels.javascript,
     icon: js,
+    default: true,
   },
   {
     label: labels.typescript,
@@ -90,6 +91,7 @@ const data = [
   {
     label: labels.ol,
     icon: ol,
+    default: true,
   },
 ];
 

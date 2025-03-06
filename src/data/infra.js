@@ -21,6 +21,7 @@ import gcp from "@/../public/icons/gcp.webp";
 import capacitorjs from "@/../public/icons/capacitorjs.webp";
 import traefik from "@/../public/icons/traefik.svg";
 import codemagic from "@/../public/icons/codemagic.svg";
+import artifactory from "@/../public/icons/artifactory.svg";
 
 import labels from "./labels";
 
@@ -34,6 +35,7 @@ const data = [
   {
     label: labels.swarm,
     icon: dockerSwarm,
+    default: true,
   },
   {
     label: labels.webpack,
@@ -51,6 +53,7 @@ const data = [
   {
     label: labels.gitlabci,
     icon: gitlab,
+    default: true,
   },
   {
     label: labels.ansible,
@@ -101,6 +104,10 @@ const data = [
   {
     label: labels.codemagic,
     icon: codemagic,
+  },
+  {
+    label: labels.artifactory,
+    icon: artifactory,
   },
 
   {

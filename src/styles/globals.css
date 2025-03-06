@@ -13,8 +13,12 @@
   }
 }
 
-body{
-  @apply bg-gray-100
+body {
+  @apply bg-gray-100;
+}
+
+.custom-strong {
+  @apply underline font-semibold decoration-dotted underline-offset-4;
 }
 
 /* :root {

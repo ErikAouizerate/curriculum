@@ -8,6 +8,27 @@ import dayjs from "dayjs";
 import { useSearchParams } from "next/navigation";
 import cx from "classnames";
 
+import objectLabels from "@/data/labels";
+
+const labels = Object.values(objectLabels);
+
+const enhenceString = (value) =>
+  value
+    .split(" ")
+    .map((word) => {
+      const cleanedWord = word.replace(/[.,!?;]$/, "");
+
+      if (labels.includes(cleanedWord)) {
+        return word.replace(
+          cleanedWord,
+          `<strong class="custom-strong">${cleanedWord}</strong>`
+        );
+      } else {
+        return word;
+      }
+    })
+    .join(" ");
+
 export default function Skill({ data, remove, addSkills, toggleSmall }) {
   const searchParams = useSearchParams();
 
@@ -77,14 +98,24 @@ export default function Skill({ data, remove, addSkills, toggleSmall }) {
 
       {!data.small && (
         <>
-          <p className="mt-2 indent-6 print:text-md">{data.description}</p>
+          <p
+            dangerouslySetInnerHTML={{
+              __html: enhenceString(data.description),
+            }}
+            className="mt-2 indent-6 print:text-md"
+          ></p>
           <ul className="list-disc ml-6 my-2 print:text-sm">
-            {data.tasks?.map((task, index) => (
-              <li key={index}>{task}</li>
-            ))}
+            {data.tasks?.map((task, index) => {
+              return (
+                <li
+                  dangerouslySetInnerHTML={{ __html: enhenceString(task) }}
+                  key={index}
+                />
+              );
+            })}
           </ul>
           {/* <p className="print:text-sm "><span className="font-bold">Outils</span> : {data.tools.join(", ")}</p> */}
-          <div className="print:text-xs flex flex-wrap items-center">
+          {/* <div className="print:text-xs flex flex-wrap items-center">
             <span className="font-bold">Outils</span> :{" "}
             {data.tools.map((label, index) => {
               return (
@@ -94,7 +125,7 @@ export default function Skill({ data, remove, addSkills, toggleSmall }) {
                 >{`${label}`}</div>
               );
             })}
-          </div>
+          </div> */}
         </>
       )}
     </div>

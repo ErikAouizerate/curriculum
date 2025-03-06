@@ -144,8 +144,8 @@ export default function Page() {
           }
         )}
       >
-        <header className="animate-enter1 bg-primary/90 text-white print:text-black">
-          <div className="flex flex-col bg-primary py-6  justify-center items-center px-6 print:pb-0 text-center">
+        <header className="animate-enter1 bg-primary/90 text-white print:text-black print:bg-white">
+          <div className="flex flex-col bg-primary py-6  justify-center items-center px-6 print:pb-0 text-center print:bg-white">
             <h1 className="text-white print:text-black text-xl font-bold ">
               DÉVELOPPEUR FULLSTACK DEVOPS SENIOR
             </h1>
@@ -155,15 +155,15 @@ export default function Page() {
           </div>
 
           <div className="relative md:flex md:flex-row py-4 md:py-0  md:relative print:relative print:py-0">
-            <div className="absolute right-4 md:-left-2 md:block print:-left-2 print:block mt-4 md:mt-0 ml-4">
+            <div className="absolute right-4 md:-left-0 md:block print:block print:left-2 mt-4 md:mt-0 ml-4">
               <Image
                 alt="Photo du profil"
                 src={avatar}
                 className="float md:absolute print:absolute -top-5 rounded-full min-w-24 min-h-24 max-w-28 max-h-28 object-cover"
               />
             </div>
-            <div className="hidden print:flex pl-4 md:pl-28 print:pl-32 print:py-2 py-6 px-4 md:flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-6">
-              <div className="flex flex-col justify-start mt-6 md:mt-0 md:ml-4 print:mt-0">
+            <div className="hidden print:flex pl-4 md:pl-32 print:pl-32 print:py-2 py-6 px-4 md:flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-6">
+              <div className="flex flex-col justify-start mt-6 md:mt-0 md:ml-4 print:mt-0 print:ml-6">
                 <div className="font-bold text-2xl">Erik Aouizerate</div>
                 <div className="text-lg text-white/50 print:text-black">
                   {yearsOld} ans
@@ -175,8 +175,8 @@ export default function Page() {
                   <IconDeviceMobile className=" text-secondary" />
                 </div>
                 <div className="flex items-center justify-end gap-2">
-                  <a href="mailto:erik.aouizerate@mintset.io">
-                    erik.aouizerate@mintset.io
+                  <a href="mailto:erik.aouizerate.pro@gmail.com">
+                    erik.aouizerate.pro@gmail.com
                   </a>
                   <IconMail className=" text-secondary" />
                 </div>
@@ -206,8 +206,8 @@ export default function Page() {
                 </div>
                 <div className="flex items-center justify-start gap-2">
                   <IconMail className="text-secondary" />
-                  <a href="mailto:erik.aouizerate@mintset.io">
-                    erik.aouizerate@mintset.io
+                  <a href="mailto:erik.aouizerate.pro@gmail.com">
+                    erik.aouizerate.pro@gmail.com
                   </a>
                 </div>
                 <div className="flex items-center justify-start gap-2">
@@ -224,16 +224,19 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="relative hidden ml-16 mr-10 pb-6 print:pb-0 text-white/50 print:text-black md:block print:flex ">
+          <div className="relative hidden ml-16 mr-10 pb-8 text-white/70 print:text-black md:block print:flex  print:mt-4 print:pb-4">
             <IconQuote
               size="5rem"
               className="print:hidden absolute -top-12 -left-12 text-secondary/20 rotate-180"
             />
-            <p className="text-sm text-center">
-              Je suis développeur fullstack DevOps. J&apos;interviens et
-              collabore aux différentes étapes d&apos;un projet informatique, de
-              la conception à la mise en production. J&apos;aime valoriser la
-              communication et la curiosité.
+            <p className="text-sm">
+              Développeur Fullstack DevOps passionné, j&apos;interviens à toutes
+              les étapes d&apos;un projet, de la conception à la mise en
+              production, en alliant expertise technique et vision produit.
+              J&apos;aime relever des défis, optimiser les performances et
+              fluidifier les processus de développement. La communication est au
+              cœur de mon approche garantissant collaboration efficace,
+              innovation et qualité durable.
             </p>
           </div>
         </header>

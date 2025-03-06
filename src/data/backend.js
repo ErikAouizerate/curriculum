@@ -56,6 +56,7 @@ const data = [
   {
     label: labels.mongodb,
     icon: mongo,
+    default: true,
   },
   {
     label: labels.graphql,
@@ -100,6 +101,7 @@ const data = [
   {
     label: labels.webrtc,
     icon: webrtc,
+    default: true,
   },
   {
     label: labels.db,

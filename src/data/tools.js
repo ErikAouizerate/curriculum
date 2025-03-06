@@ -22,6 +22,7 @@ const data = [
   {
     label: labels.github,
     icon: github,
+    default: true,
   },
   {
     label: labels.gitlab,
@@ -44,6 +45,7 @@ const data = [
   {
     label: labels.rgpd,
     icon: rgpd,
+    default: true,
   },
   {
     label: labels.vscode,

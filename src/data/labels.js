@@ -34,7 +34,7 @@ const labels = {
   typeorm: "TypeORM",
   express: "Express",
   symphony: "Symphony",
-  nw: "NW JS",
+  nw: "NW.js",
   webrtc: "WebRTC",
   db: "SQL / NoSQL",
 
@@ -59,6 +59,12 @@ const labels = {
   wso2: "Wso2",
   traefik: "Traefik",
   codemagic: "Codemagic",
+  artifactory: "Artifactory",
+  azure: "Azure",
+  devops: "DevOps",
+  cicd: "CI/CD",
+  ec2: "EC2",
+  JWT: "JWT",
 
   git: "Git",
   github: "Github",
