@@ -96,38 +96,42 @@ export default function Skill({ data, remove, addSkills, toggleSmall }) {
         )}
       </h3>
 
-      {!data.small && (
-        <>
-          <p
-            dangerouslySetInnerHTML={{
-              __html: enhenceString(data.description),
-            }}
-            className="mt-2 indent-6 print:text-md"
-          ></p>
-          <ul className="list-disc ml-6 my-2 print:text-sm">
-            {data.tasks?.map((task, index) => {
-              return (
-                <li
-                  dangerouslySetInnerHTML={{ __html: enhenceString(task) }}
-                  key={index}
-                />
-              );
-            })}
-          </ul>
-          {/* <p className="print:text-sm "><span className="font-bold">Outils</span> : {data.tools.join(", ")}</p> */}
-          {/* <div className="print:text-xs flex flex-wrap items-center">
-            <span className="font-bold">Outils</span> :{" "}
-            {data.tools.map((label, index) => {
-              return (
-                <div
-                  key={`${label}_${index}`}
-                  className="m-1 px-2 py-1 print:m-0 bg-secondary/20 rounded-md text-xs"
-                >{`${label}`}</div>
-              );
-            })}
-          </div> */}
-        </>
-      )}
+      {!data.small && <Content data={data} />}
+      <div className="print:text-xs flex flex-wrap items-center">
+        <span className="font-bold">Outils</span> :{" "}
+        {data.tools.map((label, index) => {
+          return (
+            <div
+              key={`${label}_${index}`}
+              className="m-1 px-2 py-1 print:m-0 bg-secondary/20 rounded-md text-xs"
+            >{`${label}`}</div>
+          );
+        })}
+      </div>
     </div>
   );
 }
+
+const Content = ({ data }) => {
+  return (
+    <>
+      <p
+        dangerouslySetInnerHTML={{
+          __html: enhenceString(data.description),
+        }}
+        className="mt-2 indent-6 print:text-md"
+      ></p>
+      <ul className="list-disc ml-6 my-2 print:text-sm">
+        {data.tasks?.map((task, index) => {
+          return (
+            <li
+              dangerouslySetInnerHTML={{ __html: enhenceString(task) }}
+              key={index}
+            />
+          );
+        })}
+      </ul>
+      {/* <p className="print:text-sm "><span className="font-bold">Outils</span> : {data.tools.join(", ")}</p> */}
+    </>
+  );
+};

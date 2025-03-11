@@ -37,6 +37,11 @@ const data = [
     default: true,
   },
   {
+    label: labels.express,
+    icon: expressjs,
+    default: true,
+  },
+  {
     label: labels.php,
     icon: php,
   },
@@ -86,10 +91,7 @@ const data = [
     label: labels.typeorm,
     icon: typeorm,
   },
-  {
-    label: labels.express,
-    icon: expressjs,
-  },
+
   {
     label: labels.symphony,
     icon: symfony,
@@ -101,7 +103,6 @@ const data = [
   {
     label: labels.webrtc,
     icon: webrtc,
-    default: true,
   },
   {
     label: labels.db,
