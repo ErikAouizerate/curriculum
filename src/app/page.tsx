@@ -300,7 +300,10 @@ export default function Page() {
                   <div className="float-left flex flex-col items-center -ml-14 ">
                     <div>{dayjs(school.year).format("YYYY")}</div>
                   </div>
-                  <h3 className="text-[0.88rem] font-bold">{school.title}</h3>
+                  <h3 className="text-[0.88rem] font-bold">
+                    {`${school.title}`}{" "}
+                    <span className="font-normal">{`– ${school.school}`}</span>
+                  </h3>
                   <h4 className="text-[0.88rem] text-gray-700">
                     {school.subtitle}
                   </h4>

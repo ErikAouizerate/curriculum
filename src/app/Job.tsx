@@ -9,6 +9,17 @@ import { useSearchParams } from "next/navigation";
 import cx from "classnames";
 
 import objectLabels from "@/data/labels";
+import backend from "@/data/backend";
+import frontend from "@/data/frontend";
+import infra from "@/data/infra";
+import tools from "@/data/tools";
+
+const BACKEND = "BACKEND";
+const FRONTEND = "FRONTEND";
+const INFRA = "INFRA";
+const TOOL = "TOOL";
+
+const customOrder = { [FRONTEND]: 0, [BACKEND]: 1, [INFRA]: 2, [TOOL]: 3 };
 
 const labels = Object.values(objectLabels);
 
@@ -43,8 +54,8 @@ export default function Skill({ data, remove, addSkills, toggleSmall }) {
   return (
     <div className="group/job pt-5 last-of-type:mb-0 break-inside-avoid-page">
       <div
-        className={cx(" flex  gap-1  items-center mt-1", {
-          "print:float-left md:float-left md:flex-col print:flex-col print:gap-0 md:gap-0 print:-ml-14 md:-ml-14":
+        className={cx(" flex  gap-1 items-center mt-1", {
+          "print:float-left md:float-left md:flex-col print:flex-col print:gap-0 md:gap-0 print:-ml-14 md:-ml-[4.2rem]":
             true,
         })}
       >
@@ -98,15 +109,51 @@ export default function Skill({ data, remove, addSkills, toggleSmall }) {
 
       {!data.small && <Content data={data} />}
       <div className="print:text-xs flex flex-wrap items-center">
-        <span className="font-bold">Outils</span> :{" "}
-        {data.tools.map((label, index) => {
-          return (
-            <div
-              key={`${label}_${index}`}
-              className="m-1 px-2 py-1 print:m-0 bg-secondary/20 rounded-md text-xs"
-            >{`${label}`}</div>
-          );
-        })}
+        {data.tools
+          .reduce(
+            (acc, tool) => {
+              if (frontend.map((item) => item.label).includes(tool)) {
+                acc[0].push({ label: tool, type: FRONTEND });
+              }
+              if (backend.map((item) => item.label).includes(tool)) {
+                acc[1].push({ label: tool, type: BACKEND });
+              }
+              if (infra.map((item) => item.label).includes(tool)) {
+                acc[2].push({ label: tool, type: INFRA });
+              }
+              if (tools.map((item) => item.label).includes(tool)) {
+                acc[3].push({ label: tool, type: TOOL });
+              }
+
+              return acc;
+            },
+            [[], [], [], []]
+          )
+          .map((toolPerType, index) => {
+            return (
+              <div className="flex flex-wrap" key={`${index}`}>
+                {toolPerType.map((tool, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={cx(
+                        " flex flex-wrap sm:flex-nowrap m-1 px-2 py-1 rounded-md text-xs b border border-secondary",
+                        {
+                          "border-secondary": tool.type === FRONTEND,
+                          "border-[#2a9d8f]": tool.type === BACKEND,
+                          "border-[#d64550]": tool.type === INFRA,
+                          "border-[#1a1a1a]": tool.type === TOOL,
+
+                          // "bg-secondary/40": ,
+                          // "bg-primary/40": ,
+                        }
+                      )}
+                    >{`${tool.label}`}</div>
+                  );
+                })}
+              </div>
+            );
+          })}
       </div>
     </div>
   );
@@ -117,15 +164,16 @@ const Content = ({ data }) => {
     <>
       <p
         dangerouslySetInnerHTML={{
-          __html: enhenceString(data.description),
+          __html: data.description,
         }}
-        className="mt-2 indent-6 print:text-md"
+        className=" font-medium print:text-md"
       ></p>
-      <ul className="list-disc ml-6 my-2 print:text-sm">
+      <ul className="list-disc ml-6 my-3 print:text-sm">
         {data.tasks?.map((task, index) => {
           return (
             <li
-              dangerouslySetInnerHTML={{ __html: enhenceString(task) }}
+              className="font-light"
+              dangerouslySetInnerHTML={{ __html: task }}
               key={index}
             />
           );

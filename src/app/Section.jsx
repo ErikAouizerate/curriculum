@@ -47,7 +47,7 @@ export default function Section({
           )}
         </div>
       </div>
-      <div className="pl-6 print:pl-16 md:pl-16 pr-6">{children}</div>
+      <div className="pl-6 print:pl-16 md:pl-[4.8rem] pr-6">{children}</div>
     </section>
   );
 }
