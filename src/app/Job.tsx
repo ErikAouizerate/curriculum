@@ -19,6 +19,15 @@ const FRONTEND = "FRONTEND";
 const INFRA = "INFRA";
 const TOOL = "TOOL";
 
+const toolsOrder = frontend
+  .concat(...backend)
+  .concat(...infra)
+  .concat(...tools)
+  .reduce((acc, item, index) => {
+    acc[item.label] = index;
+    return acc;
+  }, {});
+
 const labels = Object.values(objectLabels);
 
 const enhenceString = (value) =>
@@ -108,6 +117,9 @@ export default function Skill({ data, remove, addSkills, toggleSmall }) {
       {!data.small && <Content data={data} />}
       <div className="print:text-xs flex flex-wrap items-center">
         {data.tools
+          .sort((a, b) => {
+            return toolsOrder[a] - toolsOrder[b];
+          })
           .reduce(
             (acc, tool) => {
               if (frontend.map((item) => item.label).includes(tool)) {

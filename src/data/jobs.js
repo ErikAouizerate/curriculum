@@ -55,6 +55,7 @@ const data = [
     tools: [
       labels.typescript,
       labels.nextjs,
+      labels.react,
       labels.tailwind,
       labels.mantine,
       labels.postgresql,
