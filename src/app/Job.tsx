@@ -19,8 +19,6 @@ const FRONTEND = "FRONTEND";
 const INFRA = "INFRA";
 const TOOL = "TOOL";
 
-const customOrder = { [FRONTEND]: 0, [BACKEND]: 1, [INFRA]: 2, [TOOL]: 3 };
-
 const labels = Object.values(objectLabels);
 
 const enhenceString = (value) =>
@@ -137,15 +135,12 @@ export default function Skill({ data, remove, addSkills, toggleSmall }) {
                     <div
                       key={index}
                       className={cx(
-                        " flex flex-wrap sm:flex-nowrap m-1 px-2 py-1 rounded-md text-xs b border border-secondary",
+                        " flex flex-wrap sm:flex-nowrap m-1 px-2 py-1 rounded-md text-xs b border",
                         {
                           "border-secondary": tool.type === FRONTEND,
                           "border-[#2a9d8f]": tool.type === BACKEND,
                           "border-[#d64550]": tool.type === INFRA,
                           "border-[#1a1a1a]": tool.type === TOOL,
-
-                          // "bg-secondary/40": ,
-                          // "bg-primary/40": ,
                         }
                       )}
                     >{`${tool.label}`}</div>
