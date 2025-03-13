@@ -10,7 +10,7 @@ const data = [
     tasks: [
       "Réduction des bundles JavaScript de 20 Mo à 4 Mo (80%)",
       "Automatisation du déploiement sur GitlabCI avec Ansible et Docker Swarm, réduisant le temps de 15 min à 4 min (70%)",
-      "Mise en place d'une politique de tests d'intégration avec React Testing Library",
+      "Mise en place d'une politique de tests d'intégration avec React testing library",
       "Optimisation des API en Python, diminuant le temps de réponse de 12s à 2s",
       "Refactorisation du code React / Redux, augmentant la capacité de développement par sprint de 35%",
       "Création d'un serveur Node d'authentification auprès de Keycloak et Wso2",

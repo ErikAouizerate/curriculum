@@ -116,7 +116,7 @@ export default function Skill({ data, remove, addSkills, toggleSmall }) {
 
       {!data.small && <Content data={data} />}
       <div className="print:text-xs flex flex-wrap items-center">
-        {data.tools
+        {[...data.tools]
           .sort((a, b) => {
             return toolsOrder[a] - toolsOrder[b];
           })

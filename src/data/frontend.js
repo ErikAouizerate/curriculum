@@ -15,6 +15,7 @@ import angular from "@/../public/icons/angular.jpg";
 import primereact from "@/../public/icons/primereact.png";
 import cordova from "@/../public/icons/cordova.webp";
 import ol from "@/../public/icons/ol.svg";
+import reactTestingLibrary from "@/../public/icons/reactTestingLibrary.png";
 
 import labels from "./labels";
 
@@ -91,6 +92,10 @@ const data = [
     label: labels.ol,
     icon: ol,
     default: true,
+  },
+  {
+    label: labels.reactTestingLibrary,
+    icon: reactTestingLibrary,
   },
 ];
 

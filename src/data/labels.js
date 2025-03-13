@@ -15,6 +15,7 @@ const labels = {
   css3: "CSS3",
   cordova: "Cordova",
   d3: "D3",
+  reactTestingLibrary: "React testing library",
   ol: "OpenLayers",
 
   node: "Node",
