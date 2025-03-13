@@ -9,7 +9,8 @@ const data = [
     description: `Dans le cadre d'un contrat avec l'Indonésie, l'objectif de ma mission a été  d'améliorer le système météo en gérant les aspects techniques et l'interfaçage avec les autres équipes.`,
     tasks: [
       "Réduction des bundles JavaScript de 20 Mo à 4 Mo (80%)",
-      "automatisation du déploiement sur GitlabCI avec Ansible et Docker Swarm, réduisant le temps de 15 min à 4 min (70%)",
+      "Automatisation du déploiement sur GitlabCI avec Ansible et Docker Swarm, réduisant le temps de 15 min à 4 min (70%)",
+      "Mise en place d'une politique de tests d'intégration avec React Testing Library",
       "Optimisation des API en Python, diminuant le temps de réponse de 12s à 2s",
       "Refactorisation du code React / Redux, augmentant la capacité de développement par sprint de 35%",
       "Création d'un serveur Node d'authentification auprès de Keycloak et Wso2",
@@ -49,8 +50,8 @@ const data = [
     description: `Conception, développement et déploiement de la plateforme GodOfGames.io dédiée aux jeux de plateau, permettant aux utilisateurs d'organiser des tournois en ligne.`,
     tasks: [
       "Création et mise en place d'une nouvelle stack technique fullstack DevOps avec NextJS, Prisma, Vercel",
-      "Développement d’un système de génération de QR codes, réduisant le temps de connexion aux événements de 95 %.",
-      "Mise en place d’un système de gamification pour améliorer l’engagement et la rétention.",
+      "Développement d’un système de génération de QR codes, réduisant le temps de connexion aux événements de 95 %",
+      "Mise en place d’un système de gamification pour améliorer l’engagement et la rétention",
     ],
     tools: [
       labels.typescript,
