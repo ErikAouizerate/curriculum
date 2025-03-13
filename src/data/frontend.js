@@ -58,7 +58,6 @@ const data = [
   {
     label: labels.tailwind,
     icon: tailwind,
-    default: true,
   },
   {
     label: labels.mantine,

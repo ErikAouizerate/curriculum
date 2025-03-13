@@ -61,7 +61,6 @@ const data = [
   {
     label: labels.mongodb,
     icon: mongo,
-    default: true,
   },
   {
     label: labels.graphql,

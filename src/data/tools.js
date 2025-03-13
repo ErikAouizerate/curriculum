@@ -22,7 +22,6 @@ const data = [
   {
     label: labels.github,
     icon: github,
-    default: true,
   },
   {
     label: labels.gitlab,
