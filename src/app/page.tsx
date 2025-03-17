@@ -182,11 +182,11 @@ export default function Page() {
                 </div>
                 <div className="flex items-center justify-end gap-2">
                   <a
-                    href="https://erik-aouizerate.me"
+                    href="https://portfolio.erik-aouizerate.me"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    erik-aouizerate.me
+                    portfolio.erik-aouizerate.me
                   </a>
                   <IconWorld className=" text-secondary" />
                 </div>
