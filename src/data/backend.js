@@ -18,6 +18,7 @@ import webrtc from "@/../public/icons/webrtc.webp";
 import firebase from "@/../public/icons/firebase.webp";
 import graphql from "@/../public/icons/graphql.png";
 import apollo from "@/../public/icons/apollo.png";
+import rust from "@/../public/icons/rust.svg";
 import labels from "./labels";
 
 const data = [
@@ -40,6 +41,10 @@ const data = [
     label: labels.express,
     icon: expressjs,
     default: true,
+  },
+  {
+    label: labels.rust,
+    icon: rust,
   },
   {
     label: labels.php,

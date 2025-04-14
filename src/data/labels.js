@@ -20,6 +20,7 @@ const labels = {
 
   node: "Node",
   python: "Python",
+  rust: "Rust",
   django: "Django",
   php: "Php",
   java: "Java",
