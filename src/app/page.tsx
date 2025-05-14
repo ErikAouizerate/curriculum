@@ -147,10 +147,10 @@ export default function Page() {
         <header className="animate-enter1 bg-primary/90 text-white print:text-black print:bg-white">
           <div className="flex flex-col bg-primary py-6  justify-center items-center px-6 print:pb-0 text-center print:bg-white">
             <h1 className="text-white print:text-black text-xl font-bold ">
-              DÉVELOPPEUR FULLSTACK DEVOPS SENIOR
+              ARCHITECTE FULLSTACK DEVOPS SENIOR
             </h1>
             <h2 className="hidden md:inline print:inline text-white/50 print:text-black text-md font-medium">
-              React | Python | Docker | Ansible
+              React&nbsp;&nbsp;|&nbsp;&nbsp;Node&nbsp;&nbsp;|&nbsp;&nbsp;Python&nbsp;&nbsp;|&nbsp;&nbsp;Docker&nbsp;&nbsp;|&nbsp;&nbsp;Cloud
             </h2>
           </div>
 
@@ -167,6 +167,9 @@ export default function Page() {
                 <div className="font-bold text-2xl">Erik Aouizerate</div>
                 <div className="text-lg text-white/50 print:text-black">
                   {yearsOld} ans
+                </div>
+                <div className="text-lg text-white/50 print:text-black">
+                  Expérience : {yearsOld - 28} années
                 </div>
               </div>
               <div className="flex flex-col text-lg leading-tight gap-1 mt-2">

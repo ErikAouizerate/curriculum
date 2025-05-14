@@ -10,10 +10,10 @@ export default function Skill({ title, data, removeSkill }) {
 
   return (
     <div className="flex flex-col items-center">
-      <h3 className="text-lg font-bold self-start md:self-center print:self-center m-1 mt-0 print:text-md">
+      <h3 className="text-lg font-bold self-start md:self-center print:self-center m-2 mt-0 print:text-md">
         {title}
       </h3>
-      <div>
+      <div className="flex flex-col h-full justify-between">
         {data.map((skill, index) => (
           <div className="group/skill flex justify-between mb-2" key={index}>
             <div className="flex">

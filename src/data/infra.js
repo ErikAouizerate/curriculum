@@ -38,6 +38,11 @@ const data = [
     default: true,
   },
   {
+    label: labels.aws,
+    icon: aws,
+    default: true,
+  },
+  {
     label: labels.webpack,
     icon: webpack,
     link: "https://webpack.js.org/",
@@ -63,10 +68,6 @@ const data = [
   {
     label: labels.awx,
     icon: awx,
-  },
-  {
-    label: labels.aws,
-    icon: aws,
   },
   {
     label: labels.traefik,
@@ -116,7 +117,6 @@ const data = [
   {
     label: labels.keycloak,
     icon: keycloak,
-    default: true,
   },
   {
     label: labels.wso2,

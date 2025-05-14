@@ -5,6 +5,8 @@ import redux from "@/../public/icons/redux.png";
 import html5 from "@/../public/icons/html5.png";
 import css3 from "@/../public/icons/css3.png";
 import vue from "@/../public/icons/vuejs.svg";
+import svelte from "@/../public/icons/svelte.webp";
+
 import d3 from "@/../public/icons/d3.png";
 import remix from "@/../public/icons/remix.png";
 import nextjs from "@/../public/icons/nextjs.svg";
@@ -21,18 +23,27 @@ import labels from "./labels";
 
 const data = [
   {
-    label: labels.javascript,
-    icon: js,
-    default: true,
-  },
-  {
     label: labels.typescript,
     icon: ts,
     default: true,
   },
   {
+    label: labels.javascript,
+    icon: js,
+  },
+  {
     label: labels.react,
     icon: react,
+    default: true,
+  },
+  {
+    label: labels.nextjs,
+    icon: nextjs,
+    default: true,
+  },
+  {
+    label: labels.svelte,
+    icon: svelte,
     default: true,
   },
   {
@@ -42,11 +53,6 @@ const data = [
   {
     label: labels.angular,
     icon: angular,
-  },
-  {
-    label: labels.nextjs,
-    icon: nextjs,
-    default: true,
   },
   {
     label: labels.remix,
