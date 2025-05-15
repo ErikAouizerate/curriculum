@@ -201,6 +201,9 @@ export default function Page() {
                 <div className="text-lg -mt-1 text-white/50 print:text-black">
                   {yearsOld} ans
                 </div>
+                <div className="text-lg text-white/50 print:text-black">
+                  Expérience : {yearsOld - 28} années
+                </div>
               </div>
               <div className="flex flex-col text-lg leading-tight gap-2 -ml-2">
                 <div className="flex items-center justify-start gap-2">
