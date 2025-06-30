@@ -5,6 +5,7 @@ import redux from "@/../public/icons/redux.png";
 import html5 from "@/../public/icons/html5.png";
 import css3 from "@/../public/icons/css3.png";
 import vue from "@/../public/icons/vuejs.svg";
+import nuxt from "@/../public/icons/nuxtjs.svg";
 import svelte from "@/../public/icons/svelte.webp";
 
 import d3 from "@/../public/icons/d3.png";
@@ -49,6 +50,10 @@ const data = [
   {
     label: labels.vue,
     icon: vue,
+  },
+  {
+    label: labels.nuxt,
+    icon: nuxt,
   },
   {
     label: labels.angular,

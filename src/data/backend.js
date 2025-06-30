@@ -6,6 +6,8 @@ import java from "@/../public/icons/java.png";
 import db from "@/../public/icons/db.png";
 import prisma from "@/../public/icons/prisma.jpg";
 import typeorm from "@/../public/icons/typeorm.png";
+import nestjs from "@/../public/icons/nestjs.svg";
+import fastify from "@/../public/icons/fastify.svg";
 import postgresql from "@/../public/icons/postgresql.webp";
 import mysql from "@/../public/icons/mysql.png";
 import oracle from "@/../public/icons/oracle.png";
@@ -38,9 +40,14 @@ const data = [
     default: true,
   },
   {
+    label: labels.nestjs,
+    icon: nestjs,
+    default: true,
+  },
+  {
     label: labels.express,
     icon: expressjs,
-    default: true,
+    default: false,
   },
   {
     label: labels.rust,
@@ -49,6 +56,10 @@ const data = [
   {
     label: labels.php,
     icon: php,
+  },
+  {
+    label: labels.fastify,
+    icon: fastify,
   },
   {
     label: labels.java,
