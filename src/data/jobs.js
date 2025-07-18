@@ -2,7 +2,7 @@ import labels from "./labels";
 
 const data = [
   {
-    default: true,
+    default: false,
     start: "06/20/2025",
     end: "07/01/2025",
     title: "Développeur fullstack à Aroma Zone – Paris – ",
@@ -36,7 +36,7 @@ const data = [
     tasks: [
       "Implémentation de l'authentification OAuth 2.0 avec Google Calendar API et configuration des webhooks pour les notifications push",
       "Migration vers une architecture scalable supportant jusqu'à 100 calendriers simultanés (vs 10 précédemment)",
-      "réduction du temps de réponse API de 20s à 300ms via le stockage des évenements et l'amélioration de l'algorithme",
+      "Réduction du temps de réponse API de 20s à 300ms via le stockage des évenements et l'amélioration de l'algorithme",
       "Atteinte d'une couverture de tests de 100% sur les couches Controller et Service avec Jest",
     ],
     tools: [
@@ -53,11 +53,31 @@ const data = [
     ],
   },
   {
+    default: false,
+    start: "03/01/2025",
+    end: "05/01/2025",
+    title: "Développeur backend à Mintset – Toulouse –  ",
+    description:
+      "Autoformation en Golang, conception et développement d'un serveur de données fictives et d'un algorithme de gestion de ressources pour la plateforme Codingame",
+    tasks: [
+      "Maîtrise de Golang et de ses paradigmes, incluant les goroutines, les channels et les pointers",
+      "Conception et mise en œuvre d'un serveur de données fictives utilisant le framework Gin pour simuler des données utilisateurs",
+      "Développement d'un algorithme optimisé pour la plateforme Codingame, spécialisé dans la gestion de ressources limitées en environnement compétitif.",
+    ],
+    tools: [
+      labels.golang,
+      labels.gin,
+      labels.git,
+      labels.gitlab,
+      labels.vscode,
+    ],
+  },
+  {
     default: true,
     start: "03/01/2023",
     end: "12/01/2024",
     title: "Lead développeur fullstack et devops à Météo France – Toulouse – ",
-    description: `Dans le cadre d'un contrat avec l'Indonésie, l'objectif de ma mission a été  d'améliorer le système météo en gérant les aspects techniques et l'interfaçage avec les autres équipes.`,
+    description: `Dans le cadre d'un contrat avec l'Indonésie, l'objectif de ma mission a été  d'améliorer le système météo en gérant les aspects techniques et l'interfaçage avec les autres équipes`,
     tasks: [
       "Réduction des bundles JavaScript de 20 Mo à 4 Mo (80%)",
       "Automatisation du déploiement sur GitlabCI avec Ansible et Docker Swarm, réduisant le temps de 15 min à 4 min (70%)",

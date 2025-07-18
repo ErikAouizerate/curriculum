@@ -26,6 +26,8 @@ const labels = {
   python: "Python",
   rust: "Rust",
   django: "Django",
+  golang: "Golang",
+  gin: "Gin",
   php: "Php",
   java: "Java",
   graphql: "GraphQL",

@@ -11,6 +11,8 @@ import fastify from "@/../public/icons/fastify.svg";
 import postgresql from "@/../public/icons/postgresql.webp";
 import mysql from "@/../public/icons/mysql.png";
 import oracle from "@/../public/icons/oracle.png";
+import golang from "@/../public/icons/golang.svg";
+import gin from "@/../public/icons/gin.webp";
 import expressjs from "@/../public/icons/express.webp";
 import mongo from "@/../public/icons/mongo.png";
 import symfony from "@/../public/icons/symfony.svg";
@@ -52,6 +54,14 @@ const data = [
   {
     label: labels.rust,
     icon: rust,
+  },
+  {
+    label: labels.golang,
+    icon: golang,
+  },
+  {
+    label: labels.gin,
+    icon: gin,
   },
   {
     label: labels.php,
