@@ -54,9 +54,17 @@ export default function Skill({ data, remove, addSkills, toggleSmall }) {
 
   let duration: any = dayjs(data.end).diff(dayjs(data.start), "month") + 1;
   if (duration > 16) {
-    duration = Math.round(duration / 12) + " ans";
+    const y = Math.round(duration / 12);
+    if (y > 1) {
+      // duration = y + " ans";
+      duration = y + " years";
+    } else {
+      // duration = y + " an";
+      duration = y + " year";
+    }
   } else {
-    duration += " mois";
+    // duration += " mois";
+    duration += " months";
   }
   return (
     <div className="group/job pt-5 last-of-type:mb-0 break-inside-avoid-page">

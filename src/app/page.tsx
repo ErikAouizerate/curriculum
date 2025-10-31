@@ -6,7 +6,8 @@ import dayjs from "dayjs";
 import Section from "./Section";
 import Skill from "./Skill";
 import Job from "./Job";
-import schoolsData from "@/data/schools";
+// import schoolsData from "@/data/schools";
+import schoolsData from "@/data/schools_en";
 
 import {
   IconAerialLift,
@@ -147,7 +148,8 @@ export default function Page() {
         <header className="animate-enter1 bg-primary/90 text-white print:text-black print:bg-white">
           <div className="flex flex-col bg-primary py-6  justify-center items-center px-6 print:pb-0 text-center print:bg-white">
             <h1 className="text-white print:text-black text-xl font-bold ">
-              ARCHITECTE FULLSTACK DEVOPS SENIOR
+              {/* ARCHITECTE FULLSTACK DEVOPS SENIOR */}
+              SENIOR FULLSTACK DEVOPS ARCHITECT
             </h1>
             <h2 className="hidden md:inline print:inline text-white/50 print:text-black text-md font-medium">
               React&nbsp;&nbsp;|&nbsp;&nbsp;Node&nbsp;&nbsp;|&nbsp;&nbsp;Python&nbsp;&nbsp;|&nbsp;&nbsp;Docker&nbsp;&nbsp;|&nbsp;&nbsp;Cloud
@@ -166,10 +168,12 @@ export default function Page() {
               <div className="flex flex-col justify-start mt-6 md:mt-0 md:ml-4 print:mt-0 print:ml-6">
                 <div className="font-bold text-2xl">Erik Aouizerate</div>
                 <div className="text-lg text-white/50 print:text-black">
-                  {yearsOld} ans
+                  {/* {yearsOld} ans */}
+                  {yearsOld} years old
                 </div>
                 <div className="text-lg text-white/50 print:text-black">
-                  Expérience : {yearsOld - 28} années
+                  {/* Expérience : {yearsOld - 28} années */}
+                  Experience: {yearsOld - 28} years
                 </div>
               </div>
               <div className="flex flex-col text-lg leading-tight gap-1 mt-2">
@@ -236,13 +240,19 @@ export default function Page() {
               className="print:hidden absolute -top-12 -left-12 text-secondary/20 rotate-180"
             />
             <p className="text-sm">
-              Développeur Fullstack DevOps passionné, j&apos;interviens à toutes
+              {/* Développeur Fullstack DevOps passionné, j&apos;interviens à toutes
               les étapes d&apos;un projet, de la conception à la mise en
               production, en alliant expertise technique et vision produit.
               J&apos;aime relever des défis, optimiser les performances et
               fluidifier les processus de développement. La communication est au
               cœur de mon approche garantissant collaboration efficace,
-              innovation et qualité durable.
+              innovation et qualité durable. */}
+              Passionate Fullstack DevOps Developer, I am involved in all stages
+              of a project, from design to production, combining technical
+              expertise with product vision. I enjoy taking on challenges,
+              optimizing performance, and improve development processes.
+              Communication is at the heart of my approach, ensuring effective
+              collaboration, innovation, and long term quality.
             </p>
           </div>
         </header>

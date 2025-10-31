@@ -4,7 +4,8 @@ import frontendData from "@/data/frontend";
 import backendData from "@/data/backend";
 import infraData from "@/data/infra";
 import toolsData from "@/data/tools";
-import jobsData from "@/data/jobs";
+// import jobsData from "@/data/jobs";
+import jobsData from "@/data/jobs_en";
 import { current, produce } from "immer";
 
 interface skillsI {
