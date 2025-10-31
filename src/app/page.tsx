@@ -150,7 +150,7 @@ export default function Page() {
               ARCHITECTE FULLSTACK DEVOPS SENIOR
             </h1>
             <h2 className="hidden md:inline print:inline text-white/50 print:text-black text-md font-medium">
-              React&nbsp;&nbsp;|&nbsp;&nbsp;Node&nbsp;&nbsp;|&nbsp;&nbsp;Python&nbsp;&nbsp;|&nbsp;&nbsp;Docker&nbsp;&nbsp;|&nbsp;&nbsp;Cloud
+              React&nbsp;&nbsp;|&nbsp;&nbsp;Node.js&nbsp;&nbsp;|&nbsp;&nbsp;Python&nbsp;&nbsp;|&nbsp;&nbsp;Kubernetes&nbsp;&nbsp;|&nbsp;&nbsp;Cloud
             </h2>
           </div>
 

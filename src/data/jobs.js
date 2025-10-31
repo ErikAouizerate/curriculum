@@ -2,6 +2,39 @@ import labels from "./labels";
 
 const data = [
   {
+    default: true,
+    start: "10/01/2025",
+    title: "Tech Lead Fullstack & DevOps à Airbus – Toulouse – ",
+    description: `Gestion d'une application permettant la recherche d'aménagements de cabine d'avion par similitude des équipements et de leurs emplacements`,
+    tasks: [
+      "Mise en place de Helm afin de sécuriser et améliorer les déploiements sur le cluster Openshift / Kubernetes",
+      "Amélioration de la qualité du code en automatisant le lint dans la pipeline Jenkins",
+      "Migration de React Script vers ViteJS permettant un gain de 35% lors du build de l'application (8min à 5min)",
+      "Parallélisation de la lecture de fichiers en Node.js offrant un gain de 95% (4 min à 10 secondes)",
+      "Optimisation de l'extraction de données d'un ETL permettant de réduire la durée de 47% (28min à 16min)",
+      "Formation et management d'un alternant",
+    ],
+    tools: [
+      labels.typescript,
+      labels.fastApi,
+      labels.vite,
+      labels.react,
+      labels.python,
+      labels.postgresql,
+      labels.docker,
+      labels.hapi,
+      labels.git,
+      labels.github,
+      labels.openshift,
+      labels.kubernetes,
+      labels.helm,
+      labels.artifactory,
+      labels.jenkins,
+      labels.vscode,
+      labels.node,
+    ],
+  },
+  {
     default: false,
     start: "06/20/2025",
     end: "07/01/2025",
@@ -76,7 +109,7 @@ const data = [
     default: true,
     start: "03/01/2023",
     end: "12/01/2024",
-    title: "Lead développeur fullstack et devops à Météo France – Toulouse – ",
+    title: "Tech Lead Fullstack & DevOps à Météo France – Toulouse – ",
     description: `Dans le cadre d'un contrat avec l'Indonésie, l'objectif de ma mission a été  d'améliorer le système météo en gérant les aspects techniques et l'interfaçage avec les autres équipes`,
     tasks: [
       "Réduction des bundles JavaScript de 20 Mo à 4 Mo (80%)",
@@ -180,7 +213,7 @@ const data = [
     tasks: [
       "Optimisation du processus de cooptation, réduisant de 80 % leur temps de traitement",
       "Mise en place de la stack technique frontend avec React et Redux et PrimeFaces pour les interfaces utilisateurs",
-      "Mise en place de la stack technique backend Node avec Express, Typescript et TypeORM",
+      "Mise en place de la stack technique backend Node.js avec Express, Typescript et TypeORM",
       "Mise en place de l'authentification à l'aide d'un cookie JWT",
       "Gestion des droits utilisateurs grâce à un système de rôles et de permissions RBAC",
       "Développement d'un microservice interopérable pour intégrer les systèmes ATS du marché",
@@ -291,7 +324,7 @@ const data = [
     small: true,
     start: "04/01/2013",
     end: "09/01/2014",
-    title: "Analyste développeur à CGI – Grenoble – ",
+    title: "Analyste développeur à STMicroelectronics – Grenoble – ",
     description: `Au sein du département R&D, j'ai participé à la conception et à la réalisation d'une application de test AngularJS appliquée à un moteur générique de workflow en PL/SQL. J'ai aussi préparé et animé les comités de pilotage ainsi qu'assuré le support utilisateur en anglais.`,
     tools: [
       labels.javascript,

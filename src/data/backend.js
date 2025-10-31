@@ -23,6 +23,8 @@ import firebase from "@/../public/icons/firebase.webp";
 import graphql from "@/../public/icons/graphql.png";
 import apollo from "@/../public/icons/apollo.png";
 import rust from "@/../public/icons/rust.svg";
+import fastapi from "@/../public/icons/FastAPI.svg";
+import hapi from "@/../public/icons/hapi.png";
 import labels from "./labels";
 
 const data = [
@@ -37,9 +39,17 @@ const data = [
     default: true,
   },
   {
+    label: labels.fastApi,
+    icon: fastapi,
+  },
+  {
     label: labels.node,
     icon: node,
     default: true,
+  },
+  {
+    label: labels.hapi,
+    icon: hapi,
   },
   {
     label: labels.nestjs,

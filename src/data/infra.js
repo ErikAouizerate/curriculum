@@ -23,6 +23,11 @@ import traefik from "@/../public/icons/traefik.svg";
 import codemagic from "@/../public/icons/codemagic.svg";
 import artifactory from "@/../public/icons/artifactory.svg";
 
+import openshift from "@/../public/icons/openshift.webp";
+import kubernetes from "@/../public/icons/kubernetes.jpg";
+import helm from "@/../public/icons/helm.jpeg";
+import jenkins from "@/../public/icons/jenkins.jpg";
+
 import labels from "./labels";
 
 const data = [
@@ -30,16 +35,32 @@ const data = [
     label: labels.docker,
     icon: docker,
     link: "https://www.docker.com/",
-    default: true,
   },
   {
     label: labels.swarm,
     icon: dockerSwarm,
+  },
+  {
+    label: labels.openshift,
+    icon: openshift,
+  },
+  {
+    label: labels.kubernetes,
+    icon: kubernetes,
     default: true,
+  },
+  {
+    label: labels.helm,
+    icon: helm,
   },
   {
     label: labels.aws,
     icon: aws,
+    default: true,
+  },
+  {
+    label: labels.jenkins,
+    icon: jenkins,
     default: true,
   },
   {
@@ -123,5 +144,4 @@ const data = [
     icon: wso2,
   },
 ];
-
 export default data;
