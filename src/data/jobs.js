@@ -10,7 +10,7 @@ const data = [
       "Mise en place de Helm afin de sécuriser et améliorer les déploiements sur le cluster Openshift / Kubernetes",
       "Amélioration de la qualité du code en automatisant le lint dans la pipeline Jenkins",
       "Migration de React Script vers ViteJS permettant un gain de 35% lors du build de l'application (8min à 5min)",
-      "Parallélisation de la lecture de fichiers en Node.js offrant un gain de 95% (4 min à 10 secondes)",
+      "Parallélisation de la lecture de fichiers en Node.js offrant un gain de 80% (4 min à 50 secondes)",
       "Optimisation de l'extraction de données d'un ETL permettant de réduire la durée de 47% (28min à 16min)",
       "Formation et management d'un alternant",
     ],
