@@ -8,11 +8,12 @@ const data = [
     description: `Gestion d'une application permettant la recherche d'aménagements de cabine d'avion par similitude des équipements et de leurs emplacements`,
     tasks: [
       "Mise en place de Helm afin de sécuriser et améliorer les déploiements sur le cluster Openshift / Kubernetes",
-      "Amélioration de la qualité du code en automatisant le lint dans la pipeline Jenkins",
+      "Amélioration de la qualité du code en automatisant et en résolvant les audits de sonarQube et Checkmarx One dans la pipeline Jenkins",
       "Migration de React Script vers ViteJS permettant un gain de 35% lors du build de l'application (8min à 5min)",
       "Parallélisation de la lecture de fichiers en Node.js offrant un gain de 80% (4 min à 50 secondes)",
-      "Optimisation de l'extraction de données d'un ETL permettant de réduire la durée de 47% (28min à 16min)",
-      "Formation et management d'un alternant",
+      "Optimisation de l'extraction de données d'un ETL Node.js permettant de réduire la durée de traitement de 47% (28min à 16min)",
+      "Prise en compte de nouveaux cas métier et enrichissement des relations entre les données au sein d'un ETL Python (SQLAlchemy, FastAPI) agrégeant des sources hétérogènes",
+      "Audit du code existant de l'ETL afin d'en améliorer la qualité et la maintenabilité",
     ],
     tools: [
       labels.typescript,

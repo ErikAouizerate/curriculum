@@ -129,7 +129,7 @@ export default function Page() {
                 ["text-stone-300"]: !hasHistory,
                 ["hover:bg-inherit"]: !hasHistory,
                 ["cursor-auto"]: !hasHistory,
-              }
+              },
             )}
             onClick={undo}
             size={48}
@@ -141,13 +141,13 @@ export default function Page() {
           "md:w-[21cm] m-auto bg-stone-200 min-h-[29.7cm] print:bg-white",
           {
             // ["print:bg-white"]: isForPrint,
-          }
+          },
         )}
       >
         <header className="animate-enter1 bg-primary/90 text-white print:text-black print:bg-white">
           <div className="flex flex-col bg-primary py-6  justify-center items-center px-6 print:pb-0 text-center print:bg-white">
             <h1 className="text-white print:text-black text-xl font-bold ">
-              ARCHITECTE FULLSTACK DEVOPS SENIOR
+              INGÉNIEUR FULLSTACK DEVOPS SENIOR — PERFORMANCE & SCALABILITÉ
             </h1>
             <h2 className="hidden md:inline print:inline text-white/50 print:text-black text-md font-medium">
               React&nbsp;&nbsp;|&nbsp;&nbsp;Node.js&nbsp;&nbsp;|&nbsp;&nbsp;Python&nbsp;&nbsp;|&nbsp;&nbsp;Kubernetes&nbsp;&nbsp;|&nbsp;&nbsp;Cloud
@@ -236,13 +236,13 @@ export default function Page() {
               className="print:hidden absolute -top-12 -left-12 text-secondary/20 rotate-180"
             />
             <p className="text-sm">
-              Développeur Fullstack DevOps passionné, j&apos;interviens à toutes
-              les étapes d&apos;un projet, de la conception à la mise en
-              production, en alliant expertise technique et vision produit.
-              J&apos;aime relever des défis, optimiser les performances et
-              fluidifier les processus de développement. La communication est au
-              cœur de mon approche garantissant collaboration efficace,
-              innovation et qualité durable.
+              Ingénieur passionné, j'interviens à toutes les étapes d'un projet
+              — de la conception à la mise en production — en alliant excellence
+              technique et vision produit. J'aime résoudre des problèmes
+              complexes, tout en gardant à l'esprit l'impact business et
+              l'expérience utilisateur. La communication est au cœur de mon
+              approche, garantissant collaboration efficace, innovation et
+              qualité durable.
             </p>
           </div>
         </header>
