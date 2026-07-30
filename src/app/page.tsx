@@ -236,13 +236,13 @@ export default function Page() {
               className="print:hidden absolute -top-12 -left-12 text-secondary/20 rotate-180"
             />
             <p className="text-sm">
-              Ingénieur passionné, j'interviens à toutes les étapes d'un projet
-              — de la conception à la mise en production — en alliant excellence
-              technique et vision produit. J'aime résoudre des problèmes
-              complexes, tout en gardant à l'esprit l'impact business et
-              l'expérience utilisateur. La communication est au cœur de mon
-              approche, garantissant collaboration efficace, innovation et
-              qualité durable.
+              Ingénieur passionné, j&apos;interviens à toutes les étapes
+              d&apos;un projet — de la conception à la mise en production — en
+              alliant excellence technique et vision produit. J&apos;aime
+              résoudre des problèmes complexes, tout en gardant à l&apos;esprit
+              l&apos;impact business et l&apos;expérience utilisateur. La
+              communication est au cœur de mon approche, garantissant
+              collaboration efficace, innovation et qualité durable.
             </p>
           </div>
         </header>
