@@ -1,15 +1,27 @@
-FROM node:23-alpine3.20
+FROM node:23-alpine3.20 AS base
 
 WORKDIR /app
 
-COPY package.json yarn.lock /app/
+RUN corepack enable
 
-RUN yarn
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /app/
+
+RUN pnpm install --frozen-lockfile
+
+FROM base AS dev
 
 COPY . /app/
 
-RUN yarn build
+EXPOSE 3000
+
+CMD ["pnpm", "dev"]
+
+FROM base AS production
+
+COPY . /app/
+
+RUN pnpm build
 
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD ["pnpm", "start"]

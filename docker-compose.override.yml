@@ -1,0 +1,14 @@
+# Dev-only additions, auto-merged by `docker compose up` (never deployed by Dokploy).
+# See memory://main/guidelines/devcontainer-docker-compose-pattern-for-dokploy-deployments
+services:
+  web:
+    build:
+      target: dev
+    volumes:
+      - .:/app
+      - /app/node_modules # keep the container's pnpm store links, don't shadow with host's
+    ports:
+      - "3000:3000" # safe here — this file only runs on a developer machine
+    environment:
+      NODE_ENV: development
+    command: pnpm dev
