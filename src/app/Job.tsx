@@ -9,24 +9,33 @@ import { useSearchParams } from "next/navigation";
 import cx from "classnames";
 
 import objectLabels from "@/data/labels";
-import backend from "@/data/backend";
-import frontend from "@/data/frontend";
-import infra from "@/data/infra";
+import dev from "@/data/dev";
+import ia from "@/data/ia";
+import cloud from "@/data/cloud";
+import devops from "@/data/devops";
 import tools from "@/data/tools";
 
-const BACKEND = "BACKEND";
 const FRONTEND = "FRONTEND";
-const INFRA = "INFRA";
+const BACKEND = "BACKEND";
+const DEVOPS = "DEVOPS";
 const TOOL = "TOOL";
+const IA = "IA";
+const CLOUD = "CLOUD";
 
-const toolsOrder = frontend
-  .concat(...backend)
-  .concat(...infra)
-  .concat(...tools)
-  .reduce((acc, item, index) => {
-    acc[item.label] = index;
+const labelsOf = (item) =>
+  item.match && item.match.length ? item.match : [item.label];
+const inCategory = (data, tool) =>
+  data.some((item) => labelsOf(item).includes(tool));
+
+const toolsOrder = [...dev, ...ia, ...cloud, ...devops, ...tools].reduce(
+  (acc, item, index) => {
+    labelsOf(item).forEach((label) => {
+      if (!(label in acc)) acc[label] = index;
+    });
     return acc;
-  }, {});
+  },
+  {},
+);
 
 const labels = Object.values(objectLabels);
 
@@ -39,7 +48,7 @@ const enhenceString = (value) =>
       if (labels.includes(cleanedWord)) {
         return word.replace(
           cleanedWord,
-          `<strong class="custom-strong">${cleanedWord}</strong>`
+          `<strong class="custom-strong">${cleanedWord}</strong>`,
         );
       } else {
         return word;
@@ -62,8 +71,7 @@ export default function Skill({ data, remove, addSkills, toggleSmall }) {
     <div className="group/job pt-5 last-of-type:mb-0 break-inside-avoid-page">
       <div
         className={cx(" flex  gap-1 items-center mt-1", {
-          "print:float-left md:float-left md:flex-col print:flex-col print:gap-0 md:gap-0 print:-ml-14 md:-ml-[4.2rem]":
-            true,
+          "print:float-left md:float-left md:flex-col print:flex-col print:gap-0 md:gap-0 print:-ml-14 md:-ml-[4.2rem]": true,
         })}
       >
         {!data.small && (
@@ -118,26 +126,51 @@ export default function Skill({ data, remove, addSkills, toggleSmall }) {
       <div className="print:text-xs flex flex-wrap items-center">
         {[...data.tools]
           .sort((a, b) => {
-            return toolsOrder[a] - toolsOrder[b];
+            return (
+              (toolsOrder[a] ?? Number.MAX_SAFE_INTEGER) -
+              (toolsOrder[b] ?? Number.MAX_SAFE_INTEGER)
+            );
           })
           .reduce(
             (acc, tool) => {
-              if (frontend.map((item) => item.label).includes(tool)) {
+              if (
+                dev
+                  .filter((item) => item.type === "frontend")
+                  .map((item) => item.label)
+                  .includes(tool)
+              ) {
                 acc[0].push({ label: tool, type: FRONTEND });
+                return acc;
               }
-              if (backend.map((item) => item.label).includes(tool)) {
+              if (
+                dev
+                  .filter((item) => item.type === "backend")
+                  .map((item) => item.label)
+                  .includes(tool)
+              ) {
                 acc[1].push({ label: tool, type: BACKEND });
+                return acc;
               }
-              if (infra.map((item) => item.label).includes(tool)) {
-                acc[2].push({ label: tool, type: INFRA });
+              if (inCategory(ia, tool)) {
+                acc[2].push({ label: tool, type: IA });
+                return acc;
+              }
+              if (cloud.map((item) => item.label).includes(tool)) {
+                acc[3].push({ label: tool, type: CLOUD });
+                return acc;
+              }
+              if (inCategory(devops, tool)) {
+                acc[4].push({ label: tool, type: DEVOPS });
+                return acc;
               }
               if (tools.map((item) => item.label).includes(tool)) {
-                acc[3].push({ label: tool, type: TOOL });
+                acc[5].push({ label: tool, type: TOOL });
+                return acc;
               }
 
               return acc;
             },
-            [[], [], [], []]
+            [[], [], [], [], [], []],
           )
           .map((toolPerType, index) => {
             return (
@@ -149,11 +182,13 @@ export default function Skill({ data, remove, addSkills, toggleSmall }) {
                       className={cx(
                         " flex flex-wrap sm:flex-nowrap m-1 px-2 py-1 rounded-md text-xs b border",
                         {
-                          "border-secondary": tool.type === FRONTEND,
+                          "border-[#fca311]": tool.type === FRONTEND,
                           "border-[#2a9d8f]": tool.type === BACKEND,
-                          "border-[#d64550]": tool.type === INFRA,
+                          "border-[#d64550]": tool.type === IA,
+                          "border-[#6C5CE7]":
+                            tool.type === CLOUD || tool.type === DEVOPS,
                           "border-[#1a1a1a]": tool.type === TOOL,
-                        }
+                        },
                       )}
                     >{`${tool.label}`}</div>
                   );

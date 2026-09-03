@@ -13,9 +13,9 @@ export default function Skill({ title, data, removeSkill }) {
       <h3 className="text-lg font-bold self-start md:self-center print:self-center m-2 mt-0 print:text-md">
         {title}
       </h3>
-      <div className="flex flex-col h-full justify-between">
+      <div className="flex flex-col gap-2">
         {data.map((skill, index) => (
-          <div className="group/skill flex justify-between mb-2" key={index}>
+          <div className="group/skill flex justify-between" key={index}>
             <div className="flex">
               {isEdit && (
                 <div className="relative">
@@ -30,10 +30,11 @@ export default function Skill({ title, data, removeSkill }) {
                 className={cx("group/icon visible", {
                   ["group-hover/skill:invisible"]: isEdit,
                 })}
+                style={{ width: "25px", height: "auto" }}
                 alt={skill.label}
                 src={skill.icon}
-                width="25"
-                height="auto"
+                width={25}
+                height={25}
               />
               <div className="ml-2 text-sm self-center print:text-xs">
                 {skill.link ? (

@@ -22,12 +22,19 @@ import {
   IconShare,
   IconWorld,
   IconQuote,
+  IconMessageCircle,
+  IconBrandLinkedin,
+  IconBrandGithub,
 } from "@tabler/icons-react";
 
 import useStore from "@/store";
 import cx from "classnames";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
+
+// Icon before the text on mobile, after it on desktop/print (right-aligned column).
+const contactLine =
+  "flex items-center gap-2 md:flex-row-reverse print:flex-row-reverse";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -147,10 +154,10 @@ export default function Page() {
         <header className="animate-enter1 bg-primary/90 text-white print:text-black print:bg-white">
           <div className="flex flex-col bg-primary py-6  justify-center items-center px-6 print:pb-0 text-center print:bg-white">
             <h1 className="text-white print:text-black text-xl font-bold ">
-              INGÉNIEUR FULLSTACK DEVOPS SENIOR — PERFORMANCE & SCALABILITÉ
+              INGÉNIEUR LOGICIEL SENIOR — AI, Fullstack & DevOps
             </h1>
             <h2 className="hidden md:inline print:inline text-white/50 print:text-black text-md font-medium">
-              React&nbsp;&nbsp;|&nbsp;&nbsp;Node.js&nbsp;&nbsp;|&nbsp;&nbsp;Python&nbsp;&nbsp;|&nbsp;&nbsp;Kubernetes&nbsp;&nbsp;|&nbsp;&nbsp;Cloud
+              Typescript&nbsp;&nbsp;|&nbsp;&nbsp;Python&nbsp;&nbsp;|&nbsp;&nbsp;Cloud&nbsp;&nbsp;|&nbsp;&nbsp;Agentic
             </h2>
           </div>
 
@@ -162,62 +169,56 @@ export default function Page() {
                 className="float md:absolute print:absolute -top-5 rounded-full min-w-24 min-h-24 max-w-28 max-h-28 object-cover"
               />
             </div>
-            <div className="hidden print:flex pl-4 md:pl-32 print:pl-32 print:py-2 py-6 px-4 md:flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-6">
+            <div className="pl-4 md:pl-32 print:pl-32 print:py-2 py-6 px-4 flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-6">
               <div className="flex flex-col justify-start mt-6 md:mt-0 md:ml-4 print:mt-0 print:ml-6">
-                <div className="font-bold text-2xl">Erik Aouizerate</div>
+                <div className="font-bold text-2xl pb-4">Erik Aouizerate</div>
                 <div className="text-lg text-white/50 print:text-black">
                   {yearsOld} ans
                 </div>
                 <div className="text-lg text-white/50 print:text-black">
-                  Expérience : {yearsOld - 28} années
+                  Expérience : {yearsOld - 27} années
+                </div>
+                <div className="text-lg text-white/50 print:text-black">
+                  Anglais : B2
                 </div>
               </div>
-              <div className="flex flex-col text-lg leading-tight gap-1 mt-2">
-                <div className="flex items-center justify-end gap-2">
-                  <a href="tel:+330601994602">06 01 99 46 02 </a>
-                  <IconDeviceMobile className=" text-secondary" />
+              <div className="flex flex-col text-base leading-tight gap-1 mt-2">
+                {/* <div className={contactLine}>
+                  <IconMessageCircle size={20} className="text-secondary" />
+                  <span>Français, Anglais</span>
+                </div> */}
+                <div className={contactLine}>
+                  <IconDeviceMobile size={20} className="text-secondary" />
+                  <a href="tel:+330601994602">06 01 99 46 02</a>
                 </div>
-                <div className="flex items-center justify-end gap-2">
+                <div className={contactLine}>
+                  <IconMail size={20} className="text-secondary" />
                   <a href="mailto:erik.aouizerate.pro@gmail.com">
                     erik.aouizerate.pro@gmail.com
                   </a>
-                  <IconMail className=" text-secondary" />
                 </div>
-                <div className="flex items-center justify-end gap-2">
+                <div className={contactLine}>
+                  <IconBrandLinkedin size={20} className="text-secondary" />
                   <a
-                    href="https://portfolio.erik-aouizerate.me"
+                    href="https://www.linkedin.com/in/erik-aouizerate-a9985257/"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    portfolio.erik-aouizerate.me
-                  </a>
-                  <IconWorld className=" text-secondary" />
-                </div>
-              </div>
-            </div>
-            <div className="md:hidden print:hidden pl-4 md:pl-28 print:pl-32 py-4 px-4 flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-10">
-              <div className="flex flex-col justify-start mt-6 md:mt-0">
-                <div className="font-bold text-2xl">Erik Aouizerate</div>
-                <div className="text-lg -mt-1 text-white/50 print:text-black">
-                  {yearsOld} ans
-                </div>
-                <div className="text-lg text-white/50 print:text-black">
-                  Expérience : {yearsOld - 28} années
-                </div>
-              </div>
-              <div className="flex flex-col text-lg leading-tight gap-2 -ml-2">
-                <div className="flex items-center justify-start gap-2">
-                  <IconDeviceMobile className="text-secondary" />
-                  <a href="tel:+330601994602">06 01 99 46 02</a>
-                </div>
-                <div className="flex items-center justify-start gap-2">
-                  <IconMail className="text-secondary" />
-                  <a href="mailto:erik.aouizerate.pro@gmail.com">
-                    erik.aouizerate.pro@gmail.com
+                    linkedin.com/in/erik-aouizerate
                   </a>
                 </div>
-                <div className="flex items-center justify-start gap-2">
-                  <IconWorld className="text-secondary" />
+                <div className={contactLine}>
+                  <IconBrandGithub size={20} className="text-secondary" />
+                  <a
+                    href="https://github.com/ErikAouizerate/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    github.com/ErikAouizerate
+                  </a>
+                </div>
+                <div className={contactLine}>
+                  <IconWorld size={20} className="text-secondary" />
                   <a
                     href="https://erik-aouizerate.me"
                     target="_blank"
@@ -226,14 +227,24 @@ export default function Page() {
                     erik-aouizerate.me
                   </a>
                 </div>
+                {/* <div className={contactLine}>
+                  <IconWorld size={20} className="text-secondary" />
+                  <a
+                    href="https://portfolio.erik-aouizerate.me"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    portfolio.erik-aouizerate.me
+                  </a>
+                </div> */}
               </div>
             </div>
           </div>
 
-          <div className="relative hidden ml-16 mr-10 pb-8 text-white/70 print:text-black md:block print:flex  print:mt-4 print:pb-4">
+          <div className="relative block ml-6 mr-6 md:ml-16 md:mr-10 pb-8 text-white/70 print:text-black md:block print:flex  print:mt-4 print:pb-4">
             <IconQuote
               size="5rem"
-              className="print:hidden absolute -top-12 -left-12 text-secondary/20 rotate-180"
+              className="hidden md:block print:hidden absolute -top-12 -left-12 text-secondary/20 rotate-180"
             />
             <p className="text-sm">
               Ingénieur passionné, j&apos;interviens à toutes les étapes
@@ -257,25 +268,30 @@ export default function Page() {
           >
             <div className="grid grid-cols-2 md:grid-cols-4 print:grid-cols-4 gap-4 md:gap-[1px] pt-6">
               <Skill
-                title="Frontend"
-                data={skills.frontend}
-                removeSkill={skillsActions.remove("frontend")}
+                title="Développement"
+                data={skills.dev}
+                removeSkill={skillsActions.remove("dev")}
               />
               <Skill
-                title="Backend"
-                data={skills.backend}
-                removeSkill={skillsActions.remove("backend")}
+                title="Ingénierie IA"
+                data={skills.ia}
+                removeSkill={skillsActions.remove("ia")}
               />
               <Skill
                 title="DevOps"
-                data={skills.infra}
-                removeSkill={skillsActions.remove("infra")}
+                data={skills.devops}
+                removeSkill={skillsActions.remove("devops")}
               />
               <Skill
-                title="Transverse"
-                data={skills.tools}
-                removeSkill={skillsActions.remove("tools")}
+                title="Cloud"
+                data={skills.cloud}
+                removeSkill={skillsActions.remove("cloud")}
               />
+              {/* <Skill
+                title="Transverse"
+                data={skills.transverse}
+                removeSkill={skillsActions.remove("transverse")}
+              /> */}
             </div>
           </Section>
           <Section

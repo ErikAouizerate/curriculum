@@ -15,7 +15,7 @@ export default function Section({
   const isEdit = !!searchParams.get("edit");
 
   return (
-    <section className={"items-center p-4 pb-0 " + className}>
+    <section className={"items-center p-4 " + className}>
       <div className="flex ml-2 break-after-avoid">
         <Icon size={40} className="text-secondary" />
         <div className="group/title flex items-center justify-between pl-4 border-b-2 border-black w-full ml-4 mr-6">

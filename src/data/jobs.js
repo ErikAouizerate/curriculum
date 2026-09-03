@@ -3,12 +3,47 @@ import labels from "./labels";
 const data = [
   {
     default: true,
+    start: "08/01/2026",
+    title: "Projets IA — Agentic Coding – ",
+    description: `Développement et déploiement d'une infrastructure complète. Applications métier, mémoire partagée des agents et pilotage de la consommation des modèles, de la conception à la production.`,
+    tasks: [
+      "Monitoring IA : suivi des coûts et du volume de tokens des sessions d'IA, avec coût par projet et par fonctionnalité (FinOps), pour mesurer le retour sur investissement de l'agentic coding",
+      "Basic Memory : mémoire persistante partagée entre les assistants IA, sécurisée et synchronisée entre machines",
+      "Meteo-IA : pipeline de prédiction météo de bout en bout, de la donnée brute au modèle entraîné et comparé (3 modèles)",
+      "Workflow LLM : production de livrables au quotidien avec des agents IA (code, tests, infra, monitoring, documentation)",
+    ],
+    tools: [
+      labels.terraform,
+      labels.grafana,
+      labels.python,
+      labels.polars,
+      labels.mlflow,
+      labels.claude,
+      labels.opencode,
+      labels.mcp,
+      labels.finops,
+      labels.llm,
+      labels.node,
+      labels.nestjs,
+      labels.react,
+      labels.typescript,
+      labels.postgresql,
+      labels.docker,
+      labels.git,
+      labels.github,
+      labels.vscode,
+      labels.linux,
+    ],
+  },
+  {
+    default: true,
     start: "10/01/2025",
+    end: "07/01/2026",
     title: "Tech Lead Fullstack & DevOps à Airbus – Toulouse – ",
     description: `Gestion d'une application permettant la recherche d'aménagements de cabine d'avion par similitude des équipements et de leurs emplacements`,
     tasks: [
       "Mise en place de Helm afin de sécuriser et améliorer les déploiements sur le cluster Openshift / Kubernetes",
-      "Amélioration de la qualité du code en automatisant et en résolvant les audits de sonarQube et Checkmarx One dans la pipeline Jenkins",
+      "Amélioration de la qualité du code en automatisant et en résolvant les audits de SonarQube et Checkmarx One dans la pipeline Jenkins",
       "Migration de React Script vers ViteJS permettant un gain de 35% lors du build de l'application (8min à 5min)",
       "Parallélisation de la lecture de fichiers en Node.js offrant un gain de 80% (4 min à 50 secondes)",
       "Optimisation de l'extraction de données d'un ETL Node.js permettant de réduire la durée de traitement de 47% (28min à 16min)",
@@ -24,6 +59,7 @@ const data = [
       labels.postgresql,
       labels.docker,
       labels.hapi,
+      labels.gemini,
       labels.git,
       labels.github,
       labels.openshift,
@@ -70,7 +106,7 @@ const data = [
     tasks: [
       "Implémentation de l'authentification OAuth 2.0 avec Google Calendar API et configuration des webhooks pour les notifications push",
       "Migration vers une architecture scalable supportant jusqu'à 100 calendriers simultanés (vs 10 précédemment)",
-      "Réduction du temps de réponse API de 20s à 300ms via le stockage des évenements et l'amélioration de l'algorithme",
+      "Réduction du temps de réponse API de 20s à 300ms via le stockage des événements et l'amélioration de l'algorithme",
       "Atteinte d'une couverture de tests de 100% sur les couches Controller et Service avec Jest",
     ],
     tools: [
@@ -90,7 +126,7 @@ const data = [
     default: false,
     start: "03/01/2025",
     end: "05/01/2025",
-    title: "Développeur backend à Mintset – Toulouse –  ",
+    title: "Développeur backend à Mintset – Toulouse – ",
     description:
       "Autoformation en Golang, conception et développement d'un serveur de données fictives et d'un algorithme de gestion de ressources pour la plateforme Codingame",
     tasks: [
@@ -111,7 +147,7 @@ const data = [
     start: "03/01/2023",
     end: "12/01/2024",
     title: "Tech Lead Fullstack & DevOps à Météo France – Toulouse – ",
-    description: `Dans le cadre d'un contrat avec l'Indonésie, l'objectif de ma mission a été  d'améliorer le système météo en gérant les aspects techniques et l'interfaçage avec les autres équipes`,
+    description: `Dans le cadre d'un contrat avec l'Indonésie, l'objectif de ma mission a été d'améliorer le système météo en gérant les aspects techniques et l'interfaçage avec les autres équipes`,
     tasks: [
       "Réduction des bundles JavaScript de 20 Mo à 4 Mo (80%)",
       "Automatisation du déploiement sur GitlabCI avec Ansible et Docker Swarm, réduisant le temps de 15 min à 4 min (70%)",
@@ -148,7 +184,7 @@ const data = [
     ],
   },
   {
-    default: true,
+    default: false,
     start: "04/01/2022",
     end: "03/01/2023",
     title: "Software craftsmanship à Mintset – Toulouse – ",
@@ -177,8 +213,9 @@ const data = [
     ],
   },
   {
-    default: true,
+    default: false,
     start: "08/01/2022",
+    end: "04/01/2026",
     title: "Développeur bénévole fullstack à La Chouette Coop – Toulouse – ",
     description: `Au sein d'un supermarché coopératif, je participe à la gestion des outils informatiques et au développement des nouveaux besoins.`,
     tasks: [
@@ -213,7 +250,7 @@ const data = [
     description: `Refonte complète du jobboard Linkeys BtoB/BtoC, optimisant la gestion de plus de 200 entreprises et 40k utilisateurs.`,
     tasks: [
       "Optimisation du processus de cooptation, réduisant de 80 % leur temps de traitement",
-      "Mise en place de la stack technique frontend avec React et Redux et PrimeFaces pour les interfaces utilisateurs",
+      "Mise en place de la stack technique frontend avec React et Redux et PrimeReact pour les interfaces utilisateurs",
       "Mise en place de la stack technique backend Node.js avec Express, Typescript et TypeORM",
       "Mise en place de l'authentification à l'aide d'un cookie JWT",
       "Gestion des droits utilisateurs grâce à un système de rôles et de permissions RBAC",
@@ -269,12 +306,12 @@ const data = [
     start: "10/01/2018",
     end: "10/01/2020",
     title: "Lead développeur à Parsys – Vincennes – ",
-    description: `J'ai maintenu et amélioré d'une application client lourd NW.js embarqué pour des stations médicales de télémédecine. J'ai aussi développé dune application mobile en Cordova pour l'ARS Île-de-France afin de permettre le suivi de patients entre différents professionnels de la santé.`,
+    description: `J'ai maintenu et amélioré une application client lourd NW.js embarqué pour des stations médicales de télémédecine. J'ai aussi développé une application mobile en Cordova pour l'ARS Île-de-France afin de permettre le suivi de patients entre différents professionnels de la santé.`,
     tasks: [
       "Correction de bugs et modernisation de la solution technique",
       "Refonte de l'interface de visualisation de l'électrocardiogramme",
       "Animation de workshops techniques et formation des développeurs juniors",
-      "Spécification, réalisation maintien de l'application iOS et Android et déploiement sur les store Apple et Google",
+      "Spécification, réalisation et maintien de l'application iOS et Android et déploiement sur les stores Apple et Google",
       "Coordination des développements avec les autres prestataires du projet (Accenture et Orion Health)",
       "Fonctionnement en Agilité, sprints de 2 semaines",
     ],

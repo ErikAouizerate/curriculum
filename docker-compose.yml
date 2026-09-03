@@ -1,3 +1,4 @@
+# Local development only — production deploys via Vercel (no Dokploy/Traefik).
 services:
   web:
     build:
@@ -6,19 +7,4 @@ services:
       target: production
 
     expose:
-      - "3000" # internal only — Traefik handles public routing, never use `ports:` here
-
-    networks:
-      - traefik-web # Connect to the Traefik network
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=traefik-web"
-      - "traefik.http.routers.cv.rule=Host(`cv.mintset.net`)"
-      - "traefik.http.routers.cv.entrypoints=websecure"
-      - "traefik.http.routers.cv.tls.certresolver=letsencrypt"
-      - "traefik.http.services.cv.loadbalancer.server.port=3000" # The internal port your app listens on
-      - "traefik.http.services.cv.loadbalancer.server.scheme=http"
-
-networks:
-  traefik-web:
-    external: true # This tells Docker to use the existing Traefik network
+      - "3000" # internal only; docker-compose.override.yml maps it to localhost for dev

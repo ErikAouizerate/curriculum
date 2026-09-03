@@ -1,6 +1,6 @@
 # AGENTS.md — curriculum
 
-Personal CV/résumé site, deployed at `cv.mintset.net` via Dokploy.
+Personal CV/résumé site, deployed at https://www.erik-aouizerate.me/ via Vercel.
 
 ## Stack
 
@@ -24,29 +24,30 @@ Communication with the user is in French; all code, documentation, and tests are
 - memory://main/guidelines/pnpm-policy-for-js-ts-projects
 - memory://main/guidelines/type-script-by-default-avoid-plain-js
 
-## Deploy (always applied)
+## Deploy
 
-- memory://main/guidelines/infrastructure-dokploy-traefik-no-caddy-for-tls
-- memory://main/guidelines/devcontainer-docker-compose-pattern-for-dokploy-deployments
+Deployed via **Vercel** (GitHub integration, push to `main`). No Dokploy, no Traefik — the
+`infrastructure`/`deployment` Basic Memory policies do **not** apply to this project
+(decision: `memory://main/guidelines/curriculum-vercel-deployment-no-dokploy-no-traefik`).
 
-GitLab CI policy intentionally not applied: this repo is hosted on GitHub.
+Docker is kept for **optional local development only**:
 
-## Deviations from webapp policies
+- `docker-compose.yml` — base service definition (build only, no reverse-proxy labels, no host ports)
+- `docker-compose.override.yml` — dev-only additions, auto-merged by `docker compose up` (bind mount, port 3000, `pnpm dev`)
+- `.devcontainer/` — VS Code devcontainer matching `docker compose up`
 
-Recorded as a Basic Memory decision: `memory://main/guidelines/curriculum-stack-exceptions-to-webapp-policies`.
+## Deviations from standard policies
 
-- Tailwind CSS v3 (policy targets v4 for the Vite-based webapp stack — not migrated).
-- zustand instead of classic Redux (existing app — not migrated).
-- Some data files/components remain plain JS/JSX; new code must be TypeScript.
+Recorded as Basic Memory decisions:
+
+- `memory://main/guidelines/curriculum-stack-exceptions-to-webapp-policies` — Tailwind CSS v3, zustand instead of classic Redux, some legacy plain JS/JSX files (new code must be TypeScript).
+- `memory://main/guidelines/curriculum-vercel-deployment-no-dokploy-no-traefik` — Vercel hosting; Dokploy/Traefik deployment policies not applied, Docker kept for local dev only.
 
 ## Project structure
 
 - `src/app/` — Next.js App Router pages and components
 - `src/data/` — CV content data (jobs, schools, skills...)
 - `src/store/` — zustand store
-- `docker-compose.yml` — production (Dokploy, Traefik labels, `expose` only, never `ports`)
-- `docker-compose.override.yml` — dev-only (auto-merged by `docker compose up`)
-- `.devcontainer/` — VS Code devcontainer matching `docker compose up`
 
 ## Commands
 
@@ -54,7 +55,8 @@ Recorded as a Basic Memory decision: `memory://main/guidelines/curriculum-stack-
 - `pnpm dev` — dev server
 - `pnpm build` / `pnpm start` — production build / serve
 - `pnpm lint` — ESLint
+- `docker compose up` — optional containerized dev
 
 ## Docs maintenance
 
-`docs/`, `README.md`, and this file are committed alongside the code they document; update them whenever architecture or scope changes.
+`README.md` and this file are committed alongside the code they document; update them whenever architecture or scope changes.

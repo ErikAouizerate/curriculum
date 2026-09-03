@@ -1,19 +1,21 @@
 import { create } from "zustand";
 
-import frontendData from "@/data/frontend";
-import backendData from "@/data/backend";
-import infraData from "@/data/infra";
-import toolsData from "@/data/tools";
+import devData from "@/data/dev";
+import iaData from "@/data/ia";
+import cloudData from "@/data/cloud";
+import devopsData from "@/data/devops";
+import transverseData from "@/data/transverse";
 import jobsData from "@/data/jobs";
 import { current, produce } from "immer";
 
 interface skillsI {
   data: {
     skills: {
-      frontend: Array<any>;
-      backend: Array<any>;
-      infra: Array<any>;
-      tools: Array<any>;
+      dev: Array<any>;
+      ia: Array<any>;
+      cloud: Array<any>;
+      devops: Array<any>;
+      transverse: Array<any>;
     };
     jobs: Array<any>;
     schools: Array<any>;
@@ -40,13 +42,19 @@ interface skillsI {
 }
 
 const initialSkills = {
-  frontend: frontendData.filter((skill) => skill.default),
-  backend: backendData.filter((skill) => skill.default),
-  infra: infraData.filter((skill) => skill.default),
-  tools: toolsData.filter((skill) => skill.default),
+  dev: devData.filter((skill) => skill.default),
+  ia: iaData.filter((skill) => skill.default),
+  cloud: cloudData.filter((skill) => skill.default),
+  devops: devopsData.filter((skill) => skill.default),
+  transverse: transverseData.filter((skill) => skill.default),
 };
 
 const initialJobs = jobsData.filter((skill) => skill.default || skill.small);
+
+const matchSkill = (item, tools) => {
+  const labels = item.match && item.match.length ? item.match : [item.label];
+  return labels.some((label) => tools.includes(label));
+};
 
 const useSkillsStore = create<skillsI>((set) => ({
   data: {
@@ -62,7 +70,7 @@ const useSkillsStore = create<skillsI>((set) => ({
         produce((state) => {
           state.history.push(current(state.data));
           state.data.jobs = state.data.jobs.filter((_, i) => i !== index);
-        })
+        }),
       ),
 
     showAll: () =>
@@ -70,7 +78,7 @@ const useSkillsStore = create<skillsI>((set) => ({
         produce((state) => {
           state.history.push(current(state.data));
           state.data.jobs = jobsData;
-        })
+        }),
       ),
     toggleSmall: (key) =>
       set(
@@ -83,55 +91,59 @@ const useSkillsStore = create<skillsI>((set) => ({
               return job;
             }
           });
-        })
+        }),
       ),
     reset: () =>
       set(
         produce((state) => {
           state.history.push(current(state.data));
           state.data.jobs = initialJobs;
-        })
+        }),
       ),
     addSkills: (tools) => (clear) =>
       set(
         produce((state) => {
           state.history.push(current(state.data));
-          state.data.skills.frontend = frontendData.filter(
+
+          state.data.skills.dev = devData.filter(
             (item) =>
-              tools.includes(item.label) ||
+              matchSkill(item, tools) ||
               (clear &&
-                state.data.skills.frontend
-                  .map((i) => i.label)
-                  .includes(item.label))
+                state.data.skills.dev.map((i) => i.label).includes(item.label)),
           );
 
-          state.data.skills.backend = backendData.filter(
+          state.data.skills.ia = iaData.filter(
             (item) =>
-              tools.includes(item.label) ||
+              matchSkill(item, tools) ||
               (clear &&
-                state.data.skills.backend
-                  .map((i) => i.label)
-                  .includes(item.label))
+                state.data.skills.ia.map((i) => i.label).includes(item.label)),
           );
 
-          state.data.skills.infra = infraData.filter(
+          state.data.skills.cloud = cloudData.filter(
             (item) =>
-              tools.includes(item.label) ||
+              matchSkill(item, tools) ||
               (clear &&
-                state.data.skills.infra
-                  .map((i) => i.label)
-                  .includes(item.label))
+                state.data.skills.cloud.map((i) => i.label).includes(item.label)),
           );
 
-          state.data.skills.tools = toolsData.filter(
+          state.data.skills.devops = devopsData.filter(
             (item) =>
-              tools.includes(item.label) ||
+              matchSkill(item, tools) ||
               (clear &&
-                state.data.skills.tools
+                state.data.skills.devops
                   .map((i) => i.label)
-                  .includes(item.label))
+                  .includes(item.label)),
           );
-        })
+
+          state.data.skills.transverse = transverseData.filter(
+            (item) =>
+              matchSkill(item, tools) ||
+              (clear &&
+                state.data.skills.transverse
+                  .map((i) => i.label)
+                  .includes(item.label)),
+          );
+        }),
       ),
   },
   skillsActions: {
@@ -140,39 +152,41 @@ const useSkillsStore = create<skillsI>((set) => ({
         produce((state) => {
           state.history.push(current(state.data));
           state.data.skills[key] = state.data.skills[key].filter(
-            (_, i) => i !== index
+            (_, i) => i !== index,
           );
-        })
+        }),
       ),
 
     showAll: () =>
       set(
         produce((state) => {
           state.history.push(current(state.data));
-          state.data.skills.frontend = frontendData;
-          state.data.skills.backend = backendData;
-          state.data.skills.infra = infraData;
-          state.data.skills.tools = toolsData;
-        })
+          state.data.skills.dev = devData;
+          state.data.skills.ia = iaData;
+          state.data.skills.cloud = cloudData;
+          state.data.skills.devops = devopsData;
+          state.data.skills.transverse = transverseData;
+        }),
       ),
     removeAll: () =>
       set(
         produce((state) => {
           state.history.push(current(state.data));
           state.data.skills = {
-            frontend: [],
-            backend: [],
-            infra: [],
-            tools: [],
+            dev: [],
+            ia: [],
+            cloud: [],
+            devops: [],
+            transverse: [],
           };
-        })
+        }),
       ),
     reset: () =>
       set(
         produce((state) => {
           state.history.push(current(state.data));
           state.data.skills = initialSkills;
-        })
+        }),
       ),
   },
   reset: () =>
@@ -181,20 +195,21 @@ const useSkillsStore = create<skillsI>((set) => ({
         state.history.push(current(state.data));
         state.data.skills = initialSkills;
         state.data.jobs = initialJobs;
-      })
+      }),
     ),
   showAll: () =>
     set(
       produce((state) => {
         state.history.push(current(state.data));
-        state.data.skills.frontend = frontendData;
-        state.data.skills.backend = backendData;
-        state.data.skills.infra = infraData;
-        state.data.skills.tools = toolsData;
+        state.data.skills.dev = devData;
+        state.data.skills.ia = iaData;
+        state.data.skills.cloud = cloudData;
+        state.data.skills.devops = devopsData;
+        state.data.skills.transverse = transverseData;
         state.data.jobs = jobsData.map((job) => {
           return { ...job, small: false };
         });
-      })
+      }),
     ),
   undo: () =>
     set(
@@ -202,7 +217,7 @@ const useSkillsStore = create<skillsI>((set) => ({
         if (state.history.length > 0) {
           state.data = state.history.pop();
         }
-      })
+      }),
     ),
 }));
 
