@@ -29,10 +29,6 @@ const data = [
       labels.typescript,
       labels.postgresql,
       labels.docker,
-      labels.git,
-      labels.github,
-      labels.vscode,
-      labels.linux,
     ],
   },
   {
