@@ -144,19 +144,16 @@ export default function Page() {
         </div>
       )}
       <div
-        className={cx(
-          "md:w-[21cm] m-auto bg-stone-200 min-h-[29.7cm] print:bg-white",
-          {
-            // ["print:bg-white"]: isForPrint,
-          },
-        )}
+        className={cx("md:w-[21cm] m-auto bg-stone-200 min-h-[29.7cm] ", {
+          // [""]: isForPrint,
+        })}
       >
-        <header className="animate-enter1 bg-primary/90 text-white print:text-black print:bg-white">
-          <div className="flex flex-col bg-primary py-6  justify-center items-center px-6 print:pb-0 text-center print:bg-white">
-            <h1 className="text-white print:text-black text-xl font-bold ">
+        <header className="animate-enter1 bg-primary/90 text-white ">
+          <div className="flex flex-col bg-primary py-6  justify-center items-center px-6 text-center ">
+            <h1 className="text-white  text-xl font-bold ">
               INGÉNIEUR LOGICIEL SENIOR — AI, Fullstack & DevOps
             </h1>
-            <h2 className="hidden md:inline print:inline text-white/50 print:text-black text-md font-medium">
+            <h2 className="hidden md:inline print:inline text-white/50  text-md font-medium">
               Typescript&nbsp;&nbsp;|&nbsp;&nbsp;Python&nbsp;&nbsp;|&nbsp;&nbsp;Cloud&nbsp;&nbsp;|&nbsp;&nbsp;Agentic
             </h2>
           </div>
@@ -169,18 +166,14 @@ export default function Page() {
                 className="float md:absolute print:absolute -top-5 rounded-full min-w-24 min-h-24 max-w-28 max-h-28 object-cover"
               />
             </div>
-            <div className="pl-4 md:pl-32 print:pl-32 print:py-2 py-6 px-4 flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-6">
+            <div className="pl-4 md:pl-32 print:pl-32  py-6 px-4 print:py-0 flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-4">
               <div className="flex flex-col justify-start mt-6 md:mt-0 md:ml-4 print:mt-0 print:ml-6">
                 <div className="font-bold text-2xl pb-4">Erik Aouizerate</div>
-                <div className="text-lg text-white/50 print:text-black">
-                  {yearsOld} ans
-                </div>
-                <div className="text-lg text-white/50 print:text-black">
+                <div className="text-lg text-white/50 ">{yearsOld} ans</div>
+                <div className="text-lg text-white/50 ">
                   Expérience : {yearsOld - 27} années
                 </div>
-                <div className="text-lg text-white/50 print:text-black">
-                  Anglais : B2
-                </div>
+                <div className="text-lg text-white/50 ">Anglais : B2</div>
               </div>
               <div className="flex flex-col text-base leading-tight gap-1 mt-2">
                 {/* <div className={contactLine}>
@@ -241,12 +234,12 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="relative block ml-6 mr-6 md:ml-16 md:mr-10 pb-8 text-white/70 print:text-black md:block print:flex  print:mt-4 print:pb-4">
+          <div className="relative block ml-6 mr-6 md:ml-16 md:mr-10 pb-8 text-white/70  md:block print:flex  print:mt-4 print:pb-4">
             <IconQuote
               size="5rem"
               className="hidden md:block print:hidden absolute -top-12 -left-12 text-secondary/20 rotate-180"
             />
-            <p className="text-sm">
+            <p className="text-sm print:text-xs">
               Ingénieur passionné, j&apos;interviens à toutes les étapes
               d&apos;un projet — de la conception à la mise en production — en
               alliant excellence technique et vision produit. J&apos;aime
@@ -257,11 +250,11 @@ export default function Page() {
             </p>
           </div>
         </header>
-        <main className={cx("pt-2 bg-white h-full print:bg-white print:pt-0")}>
+        <main className={cx(" bg-white h-full  print:pt-0")}>
           <Section
             Icon={IconColorSwatch}
             title="Compétences"
-            className={cx("animate-enter1  print:bg-white")}
+            className={cx("animate-enter1  ")}
             showAll={skillsActions.showAll}
             reset={skillsActions.reset}
             removeAll={skillsActions.removeAll}

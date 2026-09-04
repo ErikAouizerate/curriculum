@@ -7,6 +7,14 @@
   margin: 0; /* this affects the margin in the printer settings */
 }
 
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+}
+
 @layer utilities {
   .text-vertical {
     writing-mode: vertical-rl;
