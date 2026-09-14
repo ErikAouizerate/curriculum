@@ -12,7 +12,9 @@ FROM base AS dev
 
 COPY . /app/
 
-RUN chown -R node:node /app
+RUN chown -R node:node /app \
+  && mkdir -p /app/.next \
+  && chown node:node /app/.next
 
 USER node
 

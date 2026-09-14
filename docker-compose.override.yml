@@ -9,6 +9,7 @@ services:
     volumes:
       - .:/app
       - /app/node_modules # keep the container's pnpm store links, don't shadow with host's
+      - /app/.next # keep Next output off the host (avoids root-owned .next artifacts)
     environment:
       NODE_ENV: development
     command: pnpm dev

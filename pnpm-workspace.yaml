@@ -13,6 +13,11 @@ blockExoticSubdeps: true
 # (approve with `pnpm approve-builds`, or `allowBuilds:` below).
 strictDepBuilds: true
 
+# Do not auto-run `pnpm install` before scripts: it prompts to purge the modules
+# directory, which aborts without a TTY (e.g. `pnpm dev` inside Docker).
+# Dependencies are installed explicitly with `pnpm install`.
+verifyDepsBeforeRun: false
+
 # Allow-listed build scripts (deliberate approvals).
 allowBuilds:
   sharp: true
