@@ -34,3 +34,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# superpowers working artifacts — generated locally, never committed
+.superpowers/
+docs/superpowers/plans/

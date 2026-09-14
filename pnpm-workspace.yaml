@@ -1,4 +1,4 @@
-# Supply-chain hardening — see memory://main/guidelines/pnpm-policy-for-js-ts-projects
+# Supply-chain hardening — « pnpm Policy for JS-TS Projects » (Basic Memory, project "main")
 
 # Block installing a package version published less than 7 days ago (10080 minutes).
 minimumReleaseAge: 10080

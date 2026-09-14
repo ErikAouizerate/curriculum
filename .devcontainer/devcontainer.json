@@ -1,9 +1,0 @@
-{
-  "name": "curriculum-dev",
-  "dockerComposeFile": [
-    "../docker-compose.yml",
-    "../docker-compose.override.yml"
-  ],
-  "service": "web",
-  "workspaceFolder": "/app"
-}

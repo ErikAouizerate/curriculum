@@ -1,5 +1,7 @@
-# Dev-only additions, auto-merged by `docker compose up` (never deployed by Dokploy).
-# See memory://main/guidelines/devcontainer-docker-compose-pattern-for-dokploy-deployments
+# Dev-only additions, auto-merged by `docker compose up` (production is Vercel, never this file).
+# Local HTTP routing goes through the shared caddy-docker-proxy on the external
+# `local-proxy` network (see Basic Memory note « Local Development Challenges —
+# Caddy Reverse Proxy & Docker Compose Dashboard »). Site: http://curriculum.localhost
 services:
   web:
     build:
@@ -7,8 +9,17 @@ services:
     volumes:
       - .:/app
       - /app/node_modules # keep the container's pnpm store links, don't shadow with host's
-    ports:
-      - "3000:3000" # safe here — this file only runs on a developer machine
     environment:
       NODE_ENV: development
     command: pnpm dev
+    networks:
+      - default
+      - proxy
+    labels:
+      caddy: http://curriculum.localhost
+      caddy.reverse_proxy: "{{upstreams 3000}}"
+
+networks:
+  proxy:
+    external: true
+    name: local-proxy

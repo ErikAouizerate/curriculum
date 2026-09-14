@@ -12,7 +12,7 @@ Personal CV/résumé site — Next.js 14 (App Router) + React 18 + TypeScript + 
 - `pnpm dev` — dev server (http://localhost:3000)
 - `pnpm build` / `pnpm start` — production build / serve
 - `pnpm lint` — ESLint
-- `docker compose up` — optional containerized dev (merges `docker-compose.override.yml` onto `docker-compose.yml`: bind mount, port 3000, `pnpm dev`); or reopen the repo in VS Code with the devcontainer
+- `docker compose up` — optional containerized dev (merges `docker-compose.override.yml` onto `docker-compose.yml`: bind mount, `pnpm dev`, Caddy labels); serves at http://curriculum.localhost via the shared `local-proxy` network
 
 No test suite exists in this project.
 
@@ -53,7 +53,7 @@ Everything editorial (skills, jobs, schools, tool labels) lives as plain JS data
 
 ## Deviations from standard stack policy
 
-(Recorded as Basic Memory decisions — see `memory://main/guidelines/curriculum-stack-exceptions-to-webapp-policies`.)
+(Recorded as Basic Memory decisions — see « Curriculum — Stack Exceptions to Webapp Policies », project "main".)
 
 - Tailwind CSS v3 (not v4).
 - zustand for state, not Redux.
@@ -61,4 +61,4 @@ Everything editorial (skills, jobs, schools, tool labels) lives as plain JS data
 
 ## Deploy
 
-Vercel only. Docker/devcontainer are for local dev convenience — there is no Dokploy/Traefik and those infra policies don't apply here (see `memory://main/guidelines/curriculum-vercel-deployment-no-dokploy-no-traefik`).
+Vercel only. Docker is for local dev convenience — there is no Dokploy/Traefik and those infra policies don't apply here (see « Curriculum — Vercel Deployment (No Dokploy, No Traefik) », project "main"). Local dev is routed by the shared caddy-docker-proxy on the `local-proxy` network at http://curriculum.localhost.

@@ -7,4 +7,4 @@ services:
       target: production
 
     expose:
-      - "3000" # internal only; docker-compose.override.yml maps it to localhost for dev
+      - "3000" # internal only; routed by the local Caddy proxy for dev (see docker-compose.override.yml)
