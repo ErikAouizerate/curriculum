@@ -4,9 +4,10 @@ Personal CV/résumé site, deployed at https://www.erik-aouizerate.me/ via Verce
 
 ## Stack
 
-- Next.js 14 (App Router) + React 18 + TypeScript
-- Tailwind CSS v3 (see Deviations below)
+- Next.js 16 (App Router) + React 19 + TypeScript (6.x)
+- Tailwind CSS v4 (via `@tailwindcss/postcss`)
 - zustand for state (see Deviations below)
+- ESLint 9 with flat config (`eslint.config.mjs`)
 - pnpm (package manager, enforced)
 
 ## Global conventions
@@ -45,7 +46,7 @@ override, never in the base file.
 
 Recorded as Basic Memory decisions (`guidelines/curriculum/`).
 
-- **Stack exceptions** — Tailwind CSS v3 and zustand are kept (the Tailwind v4 + classic-Redux policy targets the Vite webapp stack and does not apply); some legacy plain JS/JSX files remain but all new code must be TypeScript; the pnpm policy applies fully. (Réf. « Curriculum — Stack Exceptions to Webapp Policies »)
+- **Stack exceptions** — zustand is kept for state (the classic-Redux policy targets the Vite webapp stack and does not apply); some legacy plain JS/JSX files remain but all new code must be TypeScript; the pnpm policy applies fully. (Réf. « Curriculum — Stack Exceptions to Webapp Policies »)
 - **Vercel deployment** — the Dokploy/Traefik infrastructure and Docker-Compose/Dokploy deployment policies do not apply; Docker is for local development only. (Réf. « Curriculum — Vercel Deployment (No Dokploy, No Traefik) »)
 
 ## Project structure

@@ -1,6 +1,6 @@
 # curriculum
 
-Personal CV/résumé site — Next.js 14 (App Router) + TypeScript + Tailwind CSS, deployed at [erik-aouizerate.me](https://www.erik-aouizerate.me/) via Vercel.
+Personal CV/résumé site — Next.js 16 (App Router) + React 19 + TypeScript + Tailwind CSS v4, deployed at [erik-aouizerate.me](https://www.erik-aouizerate.me/) via Vercel.
 
 ## Getting Started
 

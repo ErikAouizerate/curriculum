@@ -1,6 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #14213d;
+  --color-secondary: #fca311;
+}
 
 @page {
   size: auto; /* auto is the initial value */
@@ -15,10 +18,8 @@
   }
 }
 
-@layer utilities {
-  .text-vertical {
-    writing-mode: vertical-rl;
-  }
+@utility text-vertical {
+  writing-mode: vertical-rl;
 }
 
 body {
