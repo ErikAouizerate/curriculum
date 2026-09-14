@@ -166,7 +166,7 @@ export default function Page() {
                 className="float md:absolute print:absolute -top-5 rounded-full min-w-24 min-h-24 max-w-28 max-h-28 object-cover"
               />
             </div>
-            <div className="pl-4 md:pl-32 print:pl-32  py-6 px-4 print:py-0 flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-4">
+            <div className="pl-4 md:pl-40 print:pl-40  py-6 px-4 print:pb-0 flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-4">
               <div className="flex flex-col justify-start mt-6 md:mt-0 md:ml-4 print:mt-0 print:ml-6">
                 <div className="font-bold text-2xl pb-4">Erik Aouizerate</div>
                 <div className="text-lg text-white/50 ">{yearsOld} ans</div>
