@@ -159,7 +159,7 @@ export default function Page() {
           </div>
 
           <div className="relative md:flex md:flex-row py-4 md:py-0  md:relative print:relative print:py-0">
-            <div className="absolute right-4 md:-left-0 md:block print:block print:left-2 mt-4 md:mt-0 ml-4">
+            <div className="absolute right-4 md:left-0 md:block print:block print:left-2 mt-4 md:mt-0 ml-4">
               <Image
                 alt="Photo du profil"
                 src={avatar}
@@ -259,7 +259,7 @@ export default function Page() {
             reset={skillsActions.reset}
             removeAll={skillsActions.removeAll}
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 print:grid-cols-4 gap-4 md:gap-[1px] pt-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 print:grid-cols-4 gap-4 md:gap-px pt-6">
               <Skill
                 title="Développement"
                 data={skills.dev}
