@@ -204,20 +204,13 @@ export default function Skill({ data, remove, addSkills, toggleSmall }) {
 const Content = ({ data }) => {
   return (
     <>
-      <p
-        dangerouslySetInnerHTML={{
-          __html: data.description,
-        }}
-        className=" font-medium print:text-md"
-      ></p>
+      <p className=" font-medium print:text-md">{data.description}</p>
       <ul className="list-disc ml-6 my-3 print:text-sm">
         {data.tasks?.map((task, index) => {
           return (
-            <li
-              className="font-light"
-              dangerouslySetInnerHTML={{ __html: task }}
-              key={index}
-            />
+            <li className="font-light" key={index}>
+              {task}
+            </li>
           );
         })}
       </ul>

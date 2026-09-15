@@ -26,6 +26,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# security audit reports — generated locally, never committed
+/security-reports/
+
 # local env files
 .env*.local
 
