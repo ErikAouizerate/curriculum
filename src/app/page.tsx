@@ -144,7 +144,7 @@ export default function Page() {
         </div>
       )}
       <div
-        className={cx("md:w-[21cm] m-auto bg-stone-200 min-h-[29.7cm] ", {
+        className={cx("md:w-[21cm] m-auto bg-stone-200 print:bg-white min-h-[29.7cm] print:min-h-[29.7cm]", {
           // [""]: isForPrint,
         })}
       >
