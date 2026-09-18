@@ -250,7 +250,7 @@ export default function Page() {
             </p>
           </div>
         </header>
-        <main className={cx(" bg-white h-full  print:pt-0")}>
+        <main className={cx(" bg-white h-full pt-4")}>
           <Section
             Icon={IconColorSwatch}
             title="Compétences"

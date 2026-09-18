@@ -59,6 +59,13 @@ const labels = {
   db: "SQL / NoSQL",
 
   docker: "Docker",
+  incus: "Incus",
+  kvm: "KVM",
+  gitleaks: "Gitleaks",
+  opengrep: "OpenGrep",
+  trivy: "Trivy",
+  checkov: "Checkov",
+  osvScanner: "OSV-Scanner",
   terraform: "Terraform",
   grafana: "Grafana",
   prometheus: "Prometheus",

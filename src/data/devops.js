@@ -22,6 +22,13 @@ const data = [
       labels.helm,
       labels.openshift,
       labels.swarm,
+      labels.incus,
+      labels.kvm,
+      labels.gitleaks,
+      labels.opengrep,
+      labels.trivy,
+      labels.checkov,
+      labels.osvScanner,
     ],
   },
   {
