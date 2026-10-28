@@ -15,6 +15,10 @@ strictDepBuilds: true
 
 verifyDepsBeforeRun: warn
 
+# Non-interactive installs (agent in the VM, CI) must not abort when pnpm
+# purges node_modules after the store location changes (podman/VM vs host store).
+confirmModulesPurge: false
+
 # Allow-listed build scripts (deliberate approvals).
 allowBuilds:
   sharp: true

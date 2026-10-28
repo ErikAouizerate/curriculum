@@ -9,11 +9,11 @@ export default function Skill({ title, data, removeSkill }) {
   const isEdit = !!searchParams.get("edit");
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center ">
       <h3 className="text-lg font-bold self-start md:self-center print:self-center m-2 mt-0 print:text-md">
         {title}
       </h3>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 h-full justify-between">
         {data.map((skill, index) => (
           <div className="group/skill flex justify-between" key={index}>
             <div className="flex">

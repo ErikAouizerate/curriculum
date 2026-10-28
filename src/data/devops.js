@@ -9,6 +9,7 @@ import jest from "@/../public/icons/jest.webp";
 import artifactory from "@/../public/icons/artifactory.svg";
 import ansible from "@/../public/icons/ansible.svg";
 import capacitorjs from "@/../public/icons/capacitorjs.webp";
+import linux from "@/../public/icons/linux.png";
 
 import labels from "./labels";
 
@@ -47,7 +48,6 @@ const data = [
   {
     label: "Terraform",
     icon: terraform,
-    default: true,
     match: [labels.terraform, labels.awx],
   },
   {
@@ -86,6 +86,18 @@ const data = [
     label: "Mobile",
     icon: capacitorjs,
     match: [labels.capacitor],
+  },
+  {
+    label: "Linux",
+    icon: linux,
+    default: true,
+    match: [
+      labels.linux,
+      labels.ubuntu,
+      labels.rocky,
+      labels.mac,
+      labels.windows,
+    ],
   },
 ];
 

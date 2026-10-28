@@ -1,5 +1,4 @@
 import git from "@/../public/icons/git.png";
-import linux from "@/../public/icons/linux.png";
 import kanban from "@/../public/icons/kanban.png";
 import english from "@/../public/icons/english.png";
 import rgpd from "@/../public/icons/rgpd.png";
@@ -14,12 +13,7 @@ const data = [
     default: true,
     match: [labels.git, labels.github, labels.gitlab],
   },
-  {
-    label: "Linux",
-    icon: linux,
-    default: true,
-    match: [labels.linux, labels.ubuntu, labels.rocky, labels.mac, labels.windows],
-  },
+
   {
     label: "Agile",
     icon: kanban,
