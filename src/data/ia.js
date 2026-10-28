@@ -3,6 +3,7 @@ import mcp from "@/../public/icons/mcp.svg";
 import mlflow from "@/../public/icons/mlflow.svg";
 import finops from "@/../public/icons/finops.jpeg";
 import evalIcon from "@/../public/icons/eval.svg";
+import deepSeek from "@/../public/icons/deepseek.webp";
 import opencode from "@/../public/icons/opencode.png";
 import llm from "@/../public/icons/Icon_AI_brain_blue.svg.webp";
 import labels from "./labels";
@@ -19,9 +20,13 @@ const data = [
     icon: claude,
   },
   {
+    label: "DeepSeek",
+    icon: deepSeek,
+    default: true,
+  },
+  {
     label: "OpenCode",
     icon: opencode,
-    default: true,
     match: [labels.opencode],
   },
   {
