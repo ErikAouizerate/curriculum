@@ -1,0 +1,83 @@
+name: build-and-deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+      PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN: ${{ vars.PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type-check
+        run: pnpm check
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test
+        run: pnpm test
+
+      - name: Install Chromium for the PDF step
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Build static output
+        run: pnpm build
+
+      - name: Assert the public CV does not load the app runtime
+        run: |
+          if grep -q '_app/immutable/nodes' .vercel/output/static/index.html; then
+            echo "The public CV must not load the SvelteKit app bundle" >&2
+            exit 1
+          fi
+
+      - name: Generate PDF
+        run: pnpm pdf
+
+      - name: Compress PDF
+        run: |
+          command -v gs >/dev/null 2>&1 || (sudo apt-get update && sudo apt-get install -y ghostscript)
+          bash scripts/compress-pdf.sh .vercel/output/static/Erik_Aouizerate_CV.pdf
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: cv-pdf
+          path: .vercel/output/static/Erik_Aouizerate_CV.pdf
+          if-no-files-found: error
+
+      - name: Deploy to Vercel
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          pnpm exec vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+          pnpm exec vercel build --prod --token="$VERCEL_TOKEN"
+          pnpm pdf
+          bash scripts/compress-pdf.sh .vercel/output/static/Erik_Aouizerate_CV.pdf
+          pnpm exec vercel deploy --prebuilt --prod --yes --token="$VERCEL_TOKEN"

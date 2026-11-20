@@ -1,0 +1,83 @@
+<script lang="ts">
+  import CvHeader from "#lib/components/CvHeader.svelte";
+  import CvJob from "#lib/components/CvJob.svelte";
+  import CvSection from "#lib/components/CvSection.svelte";
+  import CvSkill from "#lib/components/CvSkill.svelte";
+  import type { CvActions, CvView } from "#lib/cv.js";
+
+  interface Props {
+    view: CvView;
+    editable?: boolean;
+    actions?: CvActions;
+  }
+
+  let { view, editable = false, actions }: Props = $props();
+
+  const canEdit = $derived(editable && actions !== undefined);
+</script>
+
+<div
+  class="md:w-[21cm] m-auto bg-stone-200 print:bg-white min-h-[29.7cm] print:min-h-[29.7cm]"
+>
+  <CvHeader />
+
+  <main class="bg-white h-full pt-4">
+    <CvSection
+      icon="skills"
+      title="Compétences"
+      editable={canEdit}
+      onShowAll={actions?.showAllSkills}
+      onReset={actions?.resetSkills}
+      onRemoveAll={actions?.removeAllSkills}
+    >
+      <div class="grid grid-cols-2 md:grid-cols-4 print:grid-cols-4 gap-4 md:gap-px pt-6">
+        {#each view.categories as category (category.key)}
+          <CvSkill
+            title={category.title}
+            skills={category.skills}
+            editable={canEdit}
+            onRemove={actions?.removeSkill}
+          />
+        {/each}
+      </div>
+    </CvSection>
+
+    <CvSection
+      icon="jobs"
+      title="Expériences professionnelles"
+      editable={canEdit}
+      onShowAll={actions?.showAllJobs}
+      onReset={actions?.resetJobs}
+    >
+      {#each view.jobs as item (item.index)}
+        <CvJob
+          job={item.job}
+          mode={item.mode}
+          editable={canEdit}
+          onRemove={() => actions?.removeJob(item.index)}
+          onToggleSmall={() => actions?.toggleSmall(item.index)}
+          onAddSkills={(keepCurrent) => actions?.addSkills(item.index, keepCurrent)}
+        />
+      {/each}
+    </CvSection>
+
+    <CvSection icon="schools" title="Formations">
+      <div class="print:pt-2 print:pb-2 pt-6 pb-6">
+        {#each view.schools as school, index (index)}
+          <div class="mb-2 last-of-type:mb-0">
+            <div class="float-left flex flex-col items-center -ml-14">
+              <div>{school.year}</div>
+            </div>
+            <h3 class="text-[0.88rem] font-bold">
+              {school.title}
+              <span class="font-normal">– {school.school}</span>
+            </h3>
+            {#if school.subtitle}
+              <h4 class="text-[0.88rem] text-gray-700">{school.subtitle}</h4>
+            {/if}
+          </div>
+        {/each}
+      </div>
+    </CvSection>
+  </main>
+</div>

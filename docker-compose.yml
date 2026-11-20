@@ -1,10 +1,9 @@
-# Local development only — production deploys via Vercel (no Dokploy/Traefik).
+# Local development only — production deploys via GitHub Actions to Vercel.
 services:
   web:
     build:
       context: .
       dockerfile: Dockerfile
-      target: production
 
     expose:
       - "3000" # internal only; routed by the local Caddy proxy for dev (see docker-compose.override.yml)

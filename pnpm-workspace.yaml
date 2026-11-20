@@ -21,7 +21,8 @@ confirmModulesPurge: false
 
 # Allow-listed build scripts (deliberate approvals).
 allowBuilds:
-  sharp: true
+  esbuild: true
+  playwright: true
 
 # Force patched versions of vulnerable transitive dependencies, constrained to
 # semver-compatible majors (see Trivy report: browserslist, nanoid, @babel/*, postcss).

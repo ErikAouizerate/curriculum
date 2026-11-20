@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="text-scale" content="scale" />
+    <link rel="icon" href="/favicon.ico" />
+    %sveltekit.head%
+  </head>
+  <body>
+    <div style="display: contents">%sveltekit.body%</div>
+
+    <!-- Progressive enhancement for the static CV page only (no framework, no hydration). -->
+    <script src="/cv.js" defer></script>
+  </body>
+</html>

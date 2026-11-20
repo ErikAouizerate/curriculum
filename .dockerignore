@@ -1,3 +1,6 @@
 .git
-.next
+.svelte-kit
+.vercel
+build
 node_modules
+static/Erik_Aouizerate_CV.pdf

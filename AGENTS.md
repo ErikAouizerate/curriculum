@@ -4,11 +4,12 @@ Personal CV/résumé site, deployed at https://www.erik-aouizerate.me/ via Verce
 
 ## Stack
 
-- Next.js 16 (App Router) + React 19 + TypeScript (6.x)
-- Tailwind CSS v4 (via `@tailwindcss/postcss`)
-- zustand for state (see Deviations below)
-- ESLint 9 with flat config (`eslint.config.mjs`)
+- SvelteKit 3 + Svelte 5 (runes) + TypeScript
+- Tailwind CSS v4 (via `@tailwindcss/vite`)
+- `@tabler/icons-svelte` for UI icons, `dayjs` for dates
+- ESLint 10 flat config (`eslint.config.mjs`), Vitest for unit tests
 - pnpm (package manager, enforced)
+- Static output: every route is prerendered; no database; Cloudflare Web Analytics only
 
 ## Global conventions
 
@@ -24,41 +25,95 @@ Content copied from Basic Memory (project "main", `guidelines/conventions/`).
 
 Content copied from Basic Memory (project "main", `guidelines/stack/`); exceptions in Deviations.
 
-- **pnpm** — all JS/TS projects must use pnpm; never npm or yarn (no `package-lock.json`, no `yarn.lock`). `pnpm-workspace.yaml` carries the supply-chain hardening (`minimumReleaseAge`, `minimumReleaseAgeStrict`, `blockExoticSubdeps`, `strictDepBuilds`); approve build scripts deliberately with `pnpm approve-builds` / `allowBuilds`. (Réf. « pnpm Policy for JS-TS Projects »)
-- **TypeScript by default** — write everything in TypeScript; plain JS only where the toolchain requires it (config files, plus the legacy files listed in Deviations). (Réf. « TypeScript by Default — Avoid Plain JS »)
+- **pnpm** — all JS/TS projects must use pnpm; never npm or yarn (no `package-lock.json`, no `yarn.lock`). `pnpm-workspace.yaml` carries the supply-chain hardening (`minimumReleaseAge`, `minimumReleaseAgeStrict`, `blockExoticSubdeps`, `strictDepBuilds`); approve build scripts deliberately with `pnpm approve-builds` / `allowBuilds`. A direct consequence: "latest" means "latest version older than 7 days"; `pnpm install` fails rather than silently picking a newer release. (Réf. « pnpm Policy for JS-TS Projects »)
+- **TypeScript by default** — write everything in TypeScript; plain JS only where the toolchain requires it (config files, the PDF script). (Réf. « TypeScript by Default — Avoid Plain JS »)
+
+## Rendering invariants
+
+These rules are what keep the CV fast and statically deployable.
+
+- **`/` must not ship the application runtime.** `src/routes/+page.js` exports `csr = false`; never
+  add a `client:*` directive or an interactive Svelte component to the public page. The only
+  allowed scripts are `static/cv.js` (share/print delegation) and the Cloudflare beacon rendered by
+  `src/routes/+layout.svelte` from `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN`. Verify that `index.html`
+  does not reference `_app/immutable/nodes`; CI enforces it.
+- **`src/lib/components/` stays presentational.** No browser API, no `$app/*` import, no editor
+  state. Components receive a `CvView` and optional callbacks, so the same code renders the static
+  CV and the editor.
+- **State lives in the URL fragment.** `/studio` reads and writes `#cv=<24 chars>`. Actions push a
+  history entry, so the browser Back button is the undo. Do not add a second source of truth.
+- **The codec is versioned.** Changing the job or skill catalog order/size changes the bit layout:
+  bump `CODEC_VERSION` and let old links fall back to the default CV.
+- **Content is separate from presentation.** Editorial changes go in `src/lib/content/`; dates are
+  `YYYY-MM`, and job tools reference `labels` so typos fail `pnpm test`.
 
 ## Deploy
 
-Deployed via **Vercel** (GitHub integration, push to `main`). There is no Dokploy and no Traefik, and no reverse-proxy labels belong in this repo: the Infrastructure and Docker-Compose/Dokploy deployment policies do not apply here (see Deviations).
+Production is deployed by **GitHub Actions** (`.github/workflows/build-and-deploy.yml`), not by the
+Vercel Git integration.
 
-- **Production access** — never perform direct actions on production (no `bash`, `docker`, `ssh`, restarts, or data changes). Hand the exact commands to the user, explain why, and wait for their output before continuing. (Réf. « Production Access — No Agent Actions, Only Commands for the User »)
+- Pull requests run install, check, lint, test, build and produce the PDF artifact; they never
+  deploy.
+- Pushes to `main` run `vercel pull`, `vercel build --prod`, generate the PDF into
+  `.vercel/output/static`, compress it with Ghostscript, then `vercel deploy --prebuilt --prod`.
+- Required secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`. Optional repository variable:
+  `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` (injected into the build; omit it to disable analytics). The Vercel project must
+  use the SvelteKit framework preset and the `pnpm build` build command.
+- Every route is prerendered; the adapter still emits a catch-all function used only for unknown
+  paths and error rendering, never for `/` or `/studio`.
+- `vercel.json` sets `ignoreCommand: "exit 0"`, so Vercel skips every Git-triggered build
+  (`0` = skip, `1` = build) and only the GitHub Action deploys. The Git integration can stay
+  connected.
+- **Production access** — never perform direct actions on production (no `bash`, `docker`, `ssh`,
+  restarts, deployments, or data changes). Hand the exact commands to the user, explain why, and
+  wait for their output before continuing. (Réf. « Production Access — No Agent Actions, Only
+  Commands for the User »)
 
-Docker is kept for **optional local development only**:
+Docker is kept for **optional local development only**, and the dev server is forced to port 3000
+so the shared Caddy proxy keeps serving `http://curriculum.localhost`:
 
 - `docker-compose.yml` — base service definition (build only, no host ports, no reverse-proxy labels)
-- `docker-compose.override.yml` — dev-only additions, auto-merged by `docker compose up` (bind mount, `pnpm dev`, local Caddy proxy labels)
-
-Local HTTP routing goes through the shared caddy-docker-proxy on the external `local-proxy`
-network: the dev site is served at `http://curriculum.localhost`. The proxy labels live in the
-override, never in the base file.
+- `docker-compose.override.yml` — dev-only additions, auto-merged by `docker compose up` (bind
+  mount, `pnpm dev`, local Caddy proxy labels)
 
 ## Deviations from standard policies
 
 Recorded as Basic Memory decisions (`guidelines/curriculum/`).
 
-- **Stack exceptions** — zustand is kept for state (the classic-Redux policy targets the Vite webapp stack and does not apply); some legacy plain JS/JSX files remain but all new code must be TypeScript; the pnpm policy applies fully. (Réf. « Curriculum — Stack Exceptions to Webapp Policies »)
-- **Vercel deployment** — the Dokploy/Traefik infrastructure and Docker-Compose/Dokploy deployment policies do not apply; Docker is for local development only. (Réf. « Curriculum — Vercel Deployment (No Dokploy, No Traefik) »)
+- **SvelteKit static instead of the Vite/React webapp stack** — the public CV must ship zero
+  JavaScript and the site must be deployable as static files. SvelteKit gives a per-page
+  `csr = false` MPA plus app-style routing/state for the future interactive modules.
+- **Cloudflare Web Analytics only** — Umami was removed; the only third-party script is the
+  Cloudflare beacon configured in `src/app.html`.
+- **Vercel via GitHub Actions** — the Dokploy/Traefik infrastructure and Docker-Compose/Dokploy
+  deployment policies do not apply; Docker is for local development only. The Vercel Git
+  integration is disabled in favour of `vercel --prebuilt` from CI, so the build-time PDF is part
+  of the deployment.
+- **State in the URL, no backend** — there is no server-side store; the CV selection is encoded in
+  the fragment and never sent to a server.
 
 ## Project structure
 
-- `src/app/` — Next.js App Router pages and components
-- `src/data/` — CV content data (jobs, schools, skills...)
-- `src/store/` — zustand store
+- `src/routes/` — `/` (static CV) and `/studio` (editor)
+- `src/lib/content/` — editorial data (jobs, skills, schools, labels, profile)
+- `src/lib/components/` — presentational CV components
+- `src/lib/cv.ts` — default state, view model, pure transitions
+- `src/lib/cv-codec.ts` / `cv-hash.ts` — state encoding and fragment access
+- `scripts/pdf.mjs` — static server + Playwright PDF generation
+- `docs/superpowers/specs/` — versioned design specs
+- `docs/assets/` — large design assets kept out of the deployed site
 
 ## Commands
 
-- `pnpm install` — install dependencies (respect `pnpm-workspace.yaml` hardening; approve build scripts deliberately with `pnpm approve-builds` / `allowBuilds`)
-- `pnpm dev` — dev server
-- `pnpm build` / `pnpm start` — production build / serve
+- `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 pnpm install` — install dependencies (respect
+  `pnpm-workspace.yaml`; approve build scripts deliberately with `pnpm approve-builds` /
+  `allowBuilds`)
+- `pnpm dev` — dev server on http://localhost:3000
+- `pnpm build` — static build into `.vercel/output/static`
+- `pnpm preview` — preview the production build
+- `pnpm check` — Svelte and TypeScript diagnostics
 - `pnpm lint` — ESLint
+- `pnpm test` — Vitest
+- `pnpm pdf` — generate `Erik_Aouizerate_CV.pdf` from the build
+- `bash scripts/compress-pdf.sh <pdf>` — compress a PDF with Ghostscript
 - `docker compose up` — optional containerized dev, served at http://curriculum.localhost

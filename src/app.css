@@ -1,0 +1,38 @@
+@import "@fontsource-variable/inter";
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #14213d;
+  --color-secondary: #fca311;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+@page {
+  size: auto; /* auto is the initial value */
+  margin: 0; /* this affects the margin in the printer settings */
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+}
+
+@utility text-vertical {
+  writing-mode: vertical-rl;
+}
+
+body {
+  @apply bg-gray-100 font-sans;
+}
+
+.custom-strong {
+  @apply underline font-semibold decoration-dotted underline-offset-4;
+}

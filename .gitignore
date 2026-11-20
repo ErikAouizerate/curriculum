@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -10,35 +8,34 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
+# sveltekit
+/.svelte-kit/
+/build/
 
-# production
-/build
+# generated CV PDF (built by scripts/pdf.mjs)
+/static/Erik_Aouizerate_CV.pdf
 
 # misc
 .DS_Store
 *.pem
-
-# debug
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 
 # security audit reports — generated locally, never committed
 /security-reports/
 
 # local env files
-.env*.local
+.env
+.env.*
+!.env.example
 
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
 
 # superpowers working artifacts — generated locally, never committed
 .superpowers/
 docs/superpowers/plans/
+.env*

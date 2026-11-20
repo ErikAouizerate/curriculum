@@ -1,17 +1,15 @@
 # Dev-only additions, auto-merged by `docker compose up` (production is Vercel, never this file).
-# Local HTTP routing goes through the shared caddy-docker-proxy on the external
-# `local-proxy` network (see Basic Memory note « Local Development Challenges —
-# Caddy Reverse Proxy & Docker Compose Dashboard »). Site: http://curriculum.localhost
+# Local HTTP routing goes through the shared caddy-docker-proxy on the external `local-proxy`
+# network: the dev site is served at http://curriculum.localhost
 services:
   web:
-    build:
-      target: dev
     volumes:
       - .:/app
       - /app/node_modules # keep the container's pnpm store links, don't shadow with host's
-      - /app/.next # keep Next output off the host (avoids root-owned .next artifacts)
+      - /app/.svelte-kit # keep generated types and build output off the host
     environment:
       NODE_ENV: development
+      VITE_DEV_HOST: 0.0.0.0
     command: pnpm dev
     networks:
       - default
