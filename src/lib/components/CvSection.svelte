@@ -1,12 +1,10 @@
 <script lang="ts">
-  import {
-    IconAerialLift,
-    IconArrowsVertical,
-    IconColorSwatch,
-    IconFilter,
-    IconSchool,
-    IconTrash,
-  } from "@tabler/icons-svelte";
+  import IconAerialLift from "@tabler/icons-svelte/icons/aerial-lift";
+  import IconArrowsVertical from "@tabler/icons-svelte/icons/arrows-vertical";
+  import IconColorSwatch from "@tabler/icons-svelte/icons/color-swatch";
+  import IconFilter from "@tabler/icons-svelte/icons/filter";
+  import IconSchool from "@tabler/icons-svelte/icons/school";
+  import IconTrash from "@tabler/icons-svelte/icons/trash";
   import type { Snippet } from "svelte";
 
   interface Props {

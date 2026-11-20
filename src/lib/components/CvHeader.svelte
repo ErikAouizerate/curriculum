@@ -1,12 +1,10 @@
 <script lang="ts">
-  import {
-    IconBrandGithub,
-    IconBrandLinkedin,
-    IconDeviceMobile,
-    IconMail,
-    IconQuote,
-    IconWorld,
-  } from "@tabler/icons-svelte";
+  import IconBrandGithub from "@tabler/icons-svelte/icons/brand-github";
+  import IconBrandLinkedin from "@tabler/icons-svelte/icons/brand-linkedin";
+  import IconDeviceMobile from "@tabler/icons-svelte/icons/device-mobile";
+  import IconMail from "@tabler/icons-svelte/icons/mail";
+  import IconQuote from "@tabler/icons-svelte/icons/quote";
+  import IconWorld from "@tabler/icons-svelte/icons/world";
   import dayjs from "dayjs";
 
   import { profile } from "#lib/content/profile.js";

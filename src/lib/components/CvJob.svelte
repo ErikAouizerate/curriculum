@@ -1,10 +1,8 @@
 <script lang="ts">
-  import {
-    IconArrowsVertical,
-    IconFilter,
-    IconTextPlus,
-    IconTrash,
-  } from "@tabler/icons-svelte";
+  import IconArrowsVertical from "@tabler/icons-svelte/icons/arrows-vertical";
+  import IconFilter from "@tabler/icons-svelte/icons/filter";
+  import IconTextPlus from "@tabler/icons-svelte/icons/text-plus";
+  import IconTrash from "@tabler/icons-svelte/icons/trash";
 
   import {
     formatMonth,

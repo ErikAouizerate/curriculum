@@ -1,13 +1,11 @@
 <script lang="ts">
-  import {
-    IconArrowBack,
-    IconArrowsVertical,
-    IconDownload,
-    IconFilter,
-    IconHome,
-    IconPrinter,
-    IconShare,
-  } from "@tabler/icons-svelte";
+  import IconArrowBack from "@tabler/icons-svelte/icons/arrow-back";
+  import IconArrowsVertical from "@tabler/icons-svelte/icons/arrows-vertical";
+  import IconDownload from "@tabler/icons-svelte/icons/download";
+  import IconFilter from "@tabler/icons-svelte/icons/filter";
+  import IconHome from "@tabler/icons-svelte/icons/home";
+  import IconPrinter from "@tabler/icons-svelte/icons/printer";
+  import IconShare from "@tabler/icons-svelte/icons/share";
   import { onMount } from "svelte";
 
   import CvDocument from "#lib/components/CvDocument.svelte";

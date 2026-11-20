@@ -1,10 +1,8 @@
 <script lang="ts">
-  import {
-    IconArrowRight,
-    IconDownload,
-    IconPrinter,
-    IconShare,
-  } from "@tabler/icons-svelte";
+  import IconArrowRight from "@tabler/icons-svelte/icons/arrow-right";
+  import IconDownload from "@tabler/icons-svelte/icons/download";
+  import IconPrinter from "@tabler/icons-svelte/icons/printer";
+  import IconShare from "@tabler/icons-svelte/icons/share";
 
   import CvDocument from "#lib/components/CvDocument.svelte";
   import { profile } from "#lib/content/profile.js";
