@@ -40,7 +40,7 @@
 
 <div class="group/job pt-5 last-of-type:mb-0 break-inside-avoid-page">
   <div
-    class="flex gap-1 items-center mt-1 print:float-left md:float-left md:flex-col print:flex-col print:gap-0 md:gap-0 print:-ml-14 md:ml-[4.2rem]"
+    class="flex gap-1 items-center mt-1 print:float-left md:float-left md:flex-col print:flex-col print:gap-0 md:gap-0 print:-ml-14 md:-ml-14"
   >
     {#if mode !== 2 && job.end}
       <div>{formatMonth(job.end)}</div>

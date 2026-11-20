@@ -26,7 +26,7 @@
 <header class="bg-primary/90 text-white">
   <div class="flex flex-col bg-primary py-6 justify-center items-center px-6 text-center">
     <h1 class="text-white text-xl font-bold">{profile.title}</h1>
-    <h2 class="hidden md:inline print:inline text-white/50 text-md font-medium">
+    <h2 class="hidden md:inline print:inline text-white/70 text-md font-medium">
       {profile.subtitle}
     </h2>
   </div>
@@ -46,9 +46,9 @@
     >
       <div class="flex flex-col justify-start mt-6 md:mt-0 md:ml-4 print:mt-0 print:ml-6">
         <div class="font-bold text-2xl pb-4">{profile.name}</div>
-        <div class="text-lg text-white/50">{yearsOld} ans</div>
-        <div class="text-lg text-white/50">Expérience : {experience} années</div>
-        <div class="text-lg text-white/50">{profile.english}</div>
+        <div class="text-lg text-white/70">{yearsOld} ans</div>
+        <div class="text-lg text-white/70">Expérience : {experience} années</div>
+        <div class="text-lg text-white/70">{profile.english}</div>
       </div>
       <div class="flex flex-col text-base leading-tight gap-1 mt-2">
         {#each profile.contacts as contact (contact.kind)}

@@ -21,7 +21,7 @@
   >
     {title}
   </h3>
-  <div class="flex flex-col gap-2 h-full justify-between">
+  <div class="flex flex-col gap-2 h-full justify-start">
     {#each visible as item (item.index)}
       <div class="group/skill flex justify-between">
         <div class="flex">
@@ -37,8 +37,7 @@
               </button>
             {/if}
             <img
-              class={editable ? "group-hover/skill:invisible" : ""}
-              style="width: 25px; height: auto"
+              class="h-[25px] w-[25px] object-contain {editable ? 'group-hover/skill:invisible' : ''}"
               src={item.skill.icon}
               alt={item.skill.label}
               width="25"

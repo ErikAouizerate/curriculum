@@ -36,7 +36,9 @@ These rules are what keep the CV fast and statically deployable.
   add a `client:*` directive or an interactive Svelte component to the public page. The only
   allowed scripts are `static/cv.js` (share/print delegation) and the Cloudflare beacon rendered by
   `src/routes/+layout.svelte` from `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN`. Verify that `index.html`
-  does not reference `_app/immutable/nodes`; CI enforces it.
+  does not reference `_app/immutable/nodes`; CI enforces it. `/studio` holds its first paint with
+  `<link rel="expect" href="#cv-page" blocking="render">`, so the editor never paints its
+  placeholder before the decoded CV exists.
 - **`src/lib/components/` stays presentational.** No browser API, no `$app/*` import, no editor
   state. Components receive a `CvView` and optional callbacks, so the same code renders the static
   CV and the editor.

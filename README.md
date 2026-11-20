@@ -10,7 +10,10 @@ Personal CV/résumé site — SvelteKit 3 + Svelte 5 + TypeScript + Tailwind CSS
   the Cloudflare beacon run on the page. The top-right arrow to `/studio` is currently visually
   hidden (opacity 0) but keeps a 56×56 clickable area; it appears on keyboard focus.
 - `/studio` — the interactive editor (filters, collapsed jobs, undo). Hydrated on demand; its
-  state lives entirely in the URL fragment as `#cv=<24 base64url characters>`.
+  state lives entirely in the URL fragment as `#cv=<24 base64url characters>`. On wide screens the
+  CV is pinned 50px from the left edge so the toolbars keep the right side, and a home button
+  returns to `/`. The page holds its first paint until `#cv-page` exists (`<link rel="expect">`),
+  so no placeholder is ever painted.
 - `src/lib/content/` — typed editorial content (jobs, skills, schools, labels, profile).
 - `src/lib/components/` — presentational Svelte components, no browser API, no state.
 - `src/lib/cv.ts` — default state, view model, pure state transitions.

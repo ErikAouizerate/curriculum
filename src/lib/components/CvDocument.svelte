@@ -9,15 +9,17 @@
     view: CvView;
     editable?: boolean;
     actions?: CvActions;
+    align?: "center" | "start";
   }
 
-  let { view, editable = false, actions }: Props = $props();
+  let { view, editable = false, actions, align = "center" }: Props = $props();
 
   const canEdit = $derived(editable && actions !== undefined);
 </script>
 
 <div
-  class="md:w-[21cm] m-auto bg-stone-200 print:bg-white min-h-[29.7cm] print:min-h-[29.7cm]"
+  id="cv-page"
+  class="cv-document {align === 'start' ? 'cv-document--start' : ''} md:w-[21cm] bg-stone-200 print:bg-white min-h-[29.7cm] print:min-h-[29.7cm]"
 >
   <CvHeader />
 
@@ -65,7 +67,9 @@
       <div class="print:pt-2 print:pb-2 pt-6 pb-6">
         {#each view.schools as school, index (index)}
           <div class="mb-2 last-of-type:mb-0">
-            <div class="float-left flex flex-col items-center -ml-14">
+            <div
+              class="flex flex-col items-start md:float-left md:-ml-14 print:float-left print:-ml-14"
+            >
               <div>{school.year}</div>
             </div>
             <h3 class="text-[0.88rem] font-bold">

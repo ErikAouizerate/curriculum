@@ -4,6 +4,7 @@
     IconArrowsVertical,
     IconDownload,
     IconFilter,
+    IconHome,
     IconPrinter,
     IconShare,
   } from "@tabler/icons-svelte";
@@ -28,6 +29,9 @@
   } from "#lib/cv.js";
   import { decodeCv, encodeCv } from "#lib/cv-codec.js";
   import { readCvCode, writeCvCode } from "#lib/cv-hash.js";
+
+  // `blocking` is not in Svelte's HTML typings yet, hence the spread below.
+  const renderBlocking = { blocking: "render" };
 
   let cv = $state<CvState>(defaultCvState());
   let ready = $state(false);
@@ -100,16 +104,23 @@
 <svelte:head>
   <title>CV interactif — Erik Aouizerate</title>
   <meta name="robots" content="noindex" />
+  <!-- Hold the first paint until the decoded CV is in the DOM: no placeholder flash. -->
+  <link rel="expect" href="#cv-page" {...renderBlocking} />
 </svelte:head>
 
 <div class="relative mb-6 pb-20 md:pb-0">
   {#if ready}
-    <CvDocument view={view} editable actions={actions} />
+    <CvDocument view={view} editable actions={actions} align="start" />
   {:else}
-    <div class="md:w-[21cm] m-auto bg-stone-200 min-h-[29.7cm]"></div>
+    <div
+      class="cv-document cv-document--start md:w-[21cm] bg-stone-200 min-h-[29.7cm]"
+    ></div>
   {/if}
 
   <div class={topActions}>
+    <a href="/" aria-label="Retour au CV statique" class={action}>
+      <IconHome size={40} />
+    </a>
     <button
       type="button"
       aria-label="Tout afficher"
