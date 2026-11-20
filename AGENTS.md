@@ -43,6 +43,10 @@ These rules are what keep the CV fast and statically deployable.
 - **`src/lib/components/` stays presentational.** No browser API, no `$app/*` import, no editor
   state. Components receive a `CvView` and optional callbacks, so the same code renders the static
   CV and the editor.
+- **Icons are imported by subpath.** The `@tabler/icons-svelte` root barrel re-exports more than
+  6 000 components; importing from `"@tabler/icons-svelte"` makes Vite compile all of them on the
+  first request in dev (measured: ~15 s against ~1 s). Always use
+  `import IconMail from "@tabler/icons-svelte/icons/mail"`.
 - **State lives in the URL fragment.** `/studio` reads and writes `#cv=<24 chars>`. Actions push a
   history entry, so the browser Back button is the undo. Do not add a second source of truth.
 - **The codec is versioned.** Changing the job or skill catalog order/size changes the bit layout:
@@ -81,8 +85,10 @@ Vercel Git integration.
   deploy time; verify them on a preview deployment with `curl -I`, not with `vite preview`.
 - **Production access** — never perform direct actions on production (no `bash`, `docker`, `ssh`,
   restarts, deployments, or data changes). Hand the exact commands to the user, explain why, and
-  wait for their output before continuing. (Réf. « Production Access — No Agent Actions, Only
-  Commands for the User »)
+  wait for their output before continuing. **Exception:** `git commit` and `git push` on this
+  repository are allowed when the user asks — the push to `main` is the sanctioned deployment path
+  (GitHub Actions → Vercel). (Réf. « Production Access — No Agent Actions, Only Commands for the
+  User »)
 
 Docker is kept for **optional local development only**, and the dev server is forced to port 3000
 so the shared Caddy proxy keeps serving `http://curriculum.localhost`:
