@@ -1,3 +1,11 @@
+# Erik Aouizerate — CV
+# AI assistants and agents are welcome to read the public CV.
+# The interactive editor is intentionally excluded.
+
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 Disallow: /studio
+
+# Agent guide: https://www.erik-aouizerate.me/llms.txt
+Sitemap: https://www.erik-aouizerate.me/sitemap.xml

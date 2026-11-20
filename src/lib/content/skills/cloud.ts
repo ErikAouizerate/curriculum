@@ -4,12 +4,12 @@ import { labels } from "#lib/content/labels.js";
 export const cloudSkills: Skill[] = [
   {
     label: labels.docker,
-    icon: "/icons/docker.png",
+    icon: "/icons/docker.webp",
     default: true,
   },
   {
     label: labels.kubernetes,
-    icon: "/icons/kubernetes.jpg",
+    icon: "/icons/kubernetes.webp",
     default: true,
   },
   {

@@ -35,7 +35,7 @@
     <div class="absolute right-4 md:left-0 md:block print:block print:left-2 mt-4 md:mt-0 ml-4">
       <img
         alt=""
-        src="/avatar.jpg"
+        src="/avatar.webp"
         width="112"
         height="112"
         class="float md:absolute print:absolute -top-5 rounded-full min-w-24 min-h-24 max-w-28 max-h-28 object-cover"

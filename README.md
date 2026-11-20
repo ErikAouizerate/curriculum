@@ -7,8 +7,9 @@ Personal CV/résumé site — SvelteKit 3 + Svelte 5 + TypeScript + Tailwind CSS
 
 - `/` — the public CV. Prerendered at build with `csr = false`: **no framework JavaScript is
   served**. Content is complete in `index.html`; only `static/cv.js` (share/print delegation) and
-  the Cloudflare beacon run on the page. The top-right arrow to `/studio` is currently visually
-  hidden (opacity 0) but keeps a 56×56 clickable area; it appears on keyboard focus.
+  the Cloudflare beacon run on the page. The only other script tag is the inert `Person` JSON-LD.
+  The top-right arrow to `/studio` is currently visually hidden (opacity 0) but keeps a 56×56
+  clickable area; it appears on keyboard focus.
 - `/studio` — the interactive editor (filters, collapsed jobs, undo). Hydrated on demand; its
   state lives entirely in the URL fragment as `#cv=<24 base64url characters>`. On wide screens the
   CV is pinned 50px from the left edge so the toolbars keep the right side, and a home button
@@ -67,6 +68,30 @@ The codec holds:
 | Jobs (hidden / complete / small) | 2 × 14 |
 | Skills | 1 × 75 |
 | Total | 107 of 144 |
+
+## Agent discovery
+
+The site exposes machine-readable entry points for search engines and AI agents:
+
+- `/llms.txt` — a Markdown map of the canonical CV resources.
+- `/llms-full.txt` — the full public CV in Markdown, generated at build from
+  `src/lib/content/` (never hand-edited).
+- `/sitemap.xml` — the canonical page URL.
+- `/robots.txt` — allows search and AI input, disallows model training
+  (`Content-Signal: search=yes, ai-input=yes, ai-train=no`) and excludes `/studio`.
+- The HTML head declares both files with `rel="describedby"` and
+  `rel="alternate" type="text/markdown"`.
+
+## Images, structured data and security headers
+
+- `static/icons/` only holds assets referenced by the content, as SVG or 64×64 WebP; the avatar is
+  a 224×224 WebP. `content.test.ts` rejects other raster formats and files over 10 KiB.
+- `/` embeds a schema.org `Person` JSON-LD block generated in `src/routes/+page.svelte` from
+  `src/lib/content/` (identity, contacts, schools and a balanced selection of default skills).
+  `/studio` deliberately has none.
+- `vercel.json` sets `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` and
+  `X-Frame-Options` for every path. Vercel applies these headers during `vercel build`/deploy;
+  `vite preview` does not, so check them on a preview deployment with `curl -I`.
 
 ## Deployment
 

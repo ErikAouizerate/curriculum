@@ -34,8 +34,9 @@ These rules are what keep the CV fast and statically deployable.
 
 - **`/` must not ship the application runtime.** `src/routes/+page.js` exports `csr = false`; never
   add a `client:*` directive or an interactive Svelte component to the public page. The only
-  allowed scripts are `static/cv.js` (share/print delegation) and the Cloudflare beacon rendered by
-  `src/routes/+layout.svelte` from `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN`. Verify that `index.html`
+  allowed scripts are `static/cv.js` (share/print delegation), the Cloudflare beacon rendered by
+  `src/routes/+layout.svelte` from `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN`, and the inert
+  `Person` JSON-LD block. Verify that `index.html`
   does not reference `_app/immutable/nodes`; CI enforces it. `/studio` holds its first paint with
   `<link rel="expect" href="#cv-page" blocking="render">`, so the editor never paints its
   placeholder before the decoded CV exists.
@@ -46,8 +47,17 @@ These rules are what keep the CV fast and statically deployable.
   history entry, so the browser Back button is the undo. Do not add a second source of truth.
 - **The codec is versioned.** Changing the job or skill catalog order/size changes the bit layout:
   bump `CODEC_VERSION` and let old links fall back to the default CV.
+- **Agent discovery is part of the public surface.** `static/llms.txt`, `static/robots.txt`,
+  `static/sitemap.xml` and the prerendered `src/routes/llms-full.txt/+server.ts` are shipped on
+  purpose. `llms-full.txt` is generated from `src/lib/content/`; never hand-edit it. `robots.txt`
+  currently sets `Content-Signal: search=yes, ai-input=yes, ai-train=no` and excludes `/studio`.
 - **Content is separate from presentation.** Editorial changes go in `src/lib/content/`; dates are
   `YYYY-MM`, and job tools reference `labels` so typos fail `pnpm test`.
+- **Images stay optimized.** `static/icons/` contains only referenced assets, as SVG or 64×64
+  WebP; the avatar is a 224×224 WebP. `content.test.ts` rejects other raster formats and icon
+  files over 10 KiB, so never point content at the original PNG/JPEG sources.
+- **The Person JSON-LD belongs to `/` only.** `src/routes/+page.svelte` generates it from
+  `src/lib/content/`; keep it consistent with the visible CV and never add it to `/studio`.
 
 ## Deploy
 
@@ -66,6 +76,9 @@ Vercel Git integration.
 - `vercel.json` sets `ignoreCommand: "exit 0"`, so Vercel skips every Git-triggered build
   (`0` = skip, `1` = build) and only the GitHub Action deploys. The Git integration can stay
   connected.
+- Baseline security headers (`nosniff`, `Referrer-Policy`, `Permissions-Policy`,
+  `X-Frame-Options: DENY`) are declared in `vercel.json` for every path. Vercel applies them at
+  deploy time; verify them on a preview deployment with `curl -I`, not with `vite preview`.
 - **Production access** — never perform direct actions on production (no `bash`, `docker`, `ssh`,
   restarts, deployments, or data changes). Hand the exact commands to the user, explain why, and
   wait for their output before continuing. (Réf. « Production Access — No Agent Actions, Only

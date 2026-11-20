@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
@@ -51,6 +51,14 @@ describe("CV content", () => {
     for (const skill of [...skillCatalog, ...tools]) {
       expect(skill.icon, skill.label).toMatch(/^\/icons\//);
       expect(existsSync(resolve("static", skill.icon.slice(1))), skill.icon).toBe(true);
+    }
+  });
+
+  it("ships optimized icon assets", () => {
+    for (const skill of [...skillCatalog, ...tools]) {
+      expect(skill.icon, skill.label).toMatch(/\.(svg|webp)$/);
+      const size = statSync(resolve("static", skill.icon.slice(1))).size;
+      expect(size, skill.icon).toBeLessThan(10 * 1024);
     }
   });
 

@@ -4,12 +4,12 @@ import { labels } from "#lib/content/labels.js";
 export const tools: Skill[] = [
   {
     label: labels.git,
-    icon: "/icons/git.png",
+    icon: "/icons/git.webp",
     default: true,
   },
   {
     label: labels.github,
-    icon: "/icons/github.png",
+    icon: "/icons/github.webp",
   },
   {
     label: labels.gitlab,
@@ -17,35 +17,35 @@ export const tools: Skill[] = [
   },
   {
     label: labels.anglais,
-    icon: "/icons/english.png",
+    icon: "/icons/english.webp",
     default: true,
   },
   {
     label: labels.scrum,
-    icon: "/icons/kanban.png",
+    icon: "/icons/kanban.webp",
     default: true,
   },
   {
     label: labels.kanban,
-    icon: "/icons/kanban.png",
+    icon: "/icons/kanban.webp",
   },
   {
     label: labels.rgpd,
-    icon: "/icons/rgpd.png",
+    icon: "/icons/rgpd.webp",
     default: true,
   },
   {
     label: labels.vscode,
-    icon: "/icons/vscode.png",
+    icon: "/icons/vscode.webp",
   },
   {
     label: labels.linux,
-    icon: "/icons/linux.png",
+    icon: "/icons/linux.webp",
     default: true,
   },
   {
     label: labels.mac,
-    icon: "/icons/macos.jpg",
+    icon: "/icons/macos.webp",
   },
   {
     label: labels.windows,
@@ -58,7 +58,7 @@ export const tools: Skill[] = [
   },
   {
     label: labels.rocky,
-    icon: "/icons/rocky.png",
+    icon: "/icons/rocky.webp",
     default: false,
   },
 ];

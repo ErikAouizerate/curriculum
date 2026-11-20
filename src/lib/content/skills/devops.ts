@@ -4,7 +4,7 @@ import { labels } from "#lib/content/labels.js";
 export const devopsSkills: Skill[] = [
   {
     label: "Docker",
-    icon: "/icons/docker.png",
+    icon: "/icons/docker.webp",
     match: [
       labels.docker,
       labels.kubernetes,
@@ -57,7 +57,7 @@ export const devopsSkills: Skill[] = [
   },
   {
     label: "Build",
-    icon: "/icons/webpack.jpg",
+    icon: "/icons/webpack.webp",
     match: [labels.webpack, labels.vite],
   },
   {
@@ -77,7 +77,7 @@ export const devopsSkills: Skill[] = [
   },
   {
     label: "Linux",
-    icon: "/icons/linux.png",
+    icon: "/icons/linux.webp",
     default: true,
     match: [
       labels.linux,

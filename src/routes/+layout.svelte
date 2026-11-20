@@ -13,6 +13,8 @@
     name="description"
     content="Site personnel d'Erik Aouizerate. Curriculum interactif. Contact pour mission freelance."
   />
+  <link rel="describedby" type="text/markdown" href="/llms.txt" />
+  <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="CV in Markdown" />
   {#if cloudflareToken}
     <script
       type="module"

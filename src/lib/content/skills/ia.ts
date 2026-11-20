@@ -4,13 +4,13 @@ import { labels } from "#lib/content/labels.js";
 export const iaSkills: Skill[] = [
   {
     label: "Claude code",
-    icon: "/icons/Claude_AI_symbol.svg.png",
+    icon: "/icons/Claude_AI_symbol.svg.webp",
     default: true,
     match: [labels.claude],
   },
   {
     label: "Gemini",
-    icon: "/icons/Claude_AI_symbol.svg.png",
+    icon: "/icons/Claude_AI_symbol.svg.webp",
   },
   {
     label: "DeepSeek",
@@ -19,7 +19,7 @@ export const iaSkills: Skill[] = [
   },
   {
     label: "OpenCode",
-    icon: "/icons/opencode.png",
+    icon: "/icons/opencode.webp",
     match: [labels.opencode],
   },
   {
@@ -39,7 +39,7 @@ export const iaSkills: Skill[] = [
   },
   {
     label: "FinOps",
-    icon: "/icons/finops.jpeg",
+    icon: "/icons/finops.webp",
     default: true,
   },
   {

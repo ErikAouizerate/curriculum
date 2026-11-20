@@ -1,0 +1,25 @@
+# Erik Aouizerate — CV
+
+> Senior software engineer (AI, fullstack, DevOps) based in Toulouse, France. This file maps the canonical CV resources for agents and LLM tools.
+
+## Canonical
+
+- [CV — HTML](https://www.erik-aouizerate.me/): complete CV, server-rendered, with no application JavaScript.
+- [CV — Markdown](https://www.erik-aouizerate.me/llms-full.txt): full CV content in Markdown for direct reading.
+- [CV — PDF](https://www.erik-aouizerate.me/Erik_Aouizerate_CV.pdf): printable A4 version.
+
+## Interactive
+
+- [CV editor](https://www.erik-aouizerate.me/studio): filter skills and experiences. State lives in the URL fragment (`#cv=...`); this page is `noindex` and disallowed in `robots.txt`.
+
+## Contact
+
+- Email: [erik.aouizerate.pro@gmail.com](mailto:erik.aouizerate.pro@gmail.com)
+- LinkedIn: [linkedin.com/in/erik-aouizerate](https://www.linkedin.com/in/erik-aouizerate-a9985257/)
+- GitHub: [github.com/ErikAouizerate](https://github.com/ErikAouizerate)
+- Website: [erik-aouizerate.me](https://www.erik-aouizerate.me/)
+
+## Usage
+
+The CV is public and may be read, indexed and cited. Training is not authorized
+(`Content-Signal: ai-train=no` in `robots.txt`).
