@@ -27,18 +27,23 @@ export const prerender = false;
 const MAX_OUTPUT_TOKENS = 2500;
 const USER_AGENT = "erik-aouizerate-portfolio/1.0";
 
-// Per visitor and site-wide caps. The global cap keeps the widget well under the model allowance.
-const limiters =
-  UPSTASH_REDIS_REST_URL && UPSTASH_REDIS_REST_TOKEN
-    ? (() => {
-        const redis = new Redis({ url: UPSTASH_REDIS_REST_URL, token: UPSTASH_REDIS_REST_TOKEN });
-        return [
-          new Ratelimit({ redis, prefix: "ask:ip:min", limiter: Ratelimit.slidingWindow(5, "1 m") }),
-          new Ratelimit({ redis, prefix: "ask:ip:day", limiter: Ratelimit.slidingWindow(20, "1 d") }),
-          new Ratelimit({ redis, prefix: "ask:global", limiter: Ratelimit.fixedWindow(200, "1 d") }),
-        ] as const;
-      })()
-    : null;
+type Limiters = readonly [Ratelimit, Ratelimit, Ratelimit];
+let limiters: Limiters | undefined;
+
+// Created on the first request, never at import: the build imports this module to analyse
+// routes, and Vercel only exposes the real values of sensitive variables at runtime.
+function getLimiters(): Limiters {
+  if (!limiters) {
+    const redis = new Redis({ url: UPSTASH_REDIS_REST_URL!, token: UPSTASH_REDIS_REST_TOKEN! });
+    // Per visitor and site-wide caps. The global cap keeps the widget under the model allowance.
+    limiters = [
+      new Ratelimit({ redis, prefix: "ask:ip:min", limiter: Ratelimit.slidingWindow(5, "1 m") }),
+      new Ratelimit({ redis, prefix: "ask:ip:day", limiter: Ratelimit.slidingWindow(20, "1 d") }),
+      new Ratelimit({ redis, prefix: "ask:global", limiter: Ratelimit.fixedWindow(200, "1 d") }),
+    ];
+  }
+  return limiters;
+}
 
 async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
   const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
@@ -52,8 +57,7 @@ async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
 }
 
 async function withinLimits(ip: string): Promise<boolean> {
-  if (!limiters) return false;
-  const [perMinute, perDay, global] = limiters;
+  const [perMinute, perDay, global] = getLimiters();
   // Visitor limits first, so a blocked visitor does not consume the global budget.
   if (!(await perMinute.limit(ip)).success) return false;
   if (!(await perDay.limit(ip)).success) return false;
@@ -88,7 +92,12 @@ async function* contentDeltas(body: ReadableStream<Uint8Array>): AsyncGenerator<
 }
 
 export const POST: RequestHandler = async ({ request, url, getClientAddress }) => {
-  if (!OPENCODE_API_KEY || !TURNSTILE_SECRET_KEY || !limiters) {
+  if (
+    !OPENCODE_API_KEY ||
+    !TURNSTILE_SECRET_KEY ||
+    !UPSTASH_REDIS_REST_URL ||
+    !UPSTASH_REDIS_REST_TOKEN
+  ) {
     error(503, "Assistant indisponible");
   }
   if (request.headers.get("origin") !== url.origin) error(403, "Origine refusée");
