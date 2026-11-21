@@ -10,6 +10,13 @@
   import { profile } from "#lib/content/profile.js";
   import type { ContactKind } from "#lib/content/profile.js";
 
+  interface Props {
+    /** Leaves room above the title for the page's floating actions on narrow screens. */
+    actionsSpace?: boolean;
+  }
+
+  let { actionsSpace = false }: Props = $props();
+
   const yearsOld = dayjs().diff(dayjs(profile.birthDate), "years");
   const experience = yearsOld - profile.experienceOffset;
 
@@ -23,7 +30,9 @@
 
 <header class="bg-primary/90 text-white">
   <div
-    class="flex flex-col bg-primary p-6 justify-center items-center text-center [view-transition-name:cv-banner]"
+    class="flex flex-col bg-primary p-6 justify-center items-center text-center [view-transition-name:cv-banner] {actionsSpace
+      ? 'pt-20 sheet:pt-6 print:pt-6'
+      : ''}"
   >
     <h1 class="text-white text-xl font-bold [view-transition-name:cv-title]">{profile.title}</h1>
     <h2 class="hidden md:inline print:inline text-white/70 font-medium">
@@ -52,7 +61,8 @@
       </div>
       <div class="flex flex-col text-base/tight gap-1 mt-2">
         {#each profile.contacts as contact (contact.kind)}
-          <div class={contactLine}>
+          <!-- `static/cv.js` shows the portfolio link of `/` once this phone line is scrolled to. -->
+          <div class={contactLine} data-cv-anchor={contact.kind === "phone" ? "portfolio-link" : undefined}>
             {#if isContact(contact.kind, "phone")}
               <IconDeviceMobile size={20} class="text-secondary" />
             {:else if isContact(contact.kind, "mail")}

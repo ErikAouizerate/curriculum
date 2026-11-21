@@ -122,6 +122,7 @@ export const jobs: Job[] = [
     start: "2025-03",
     end: "2025-05",
     title: "Développeur backend à Mintset – Toulouse – ",
+    project: "godofgames",
     description:
       "Autoformation en Golang, conception et développement d'un serveur de données fictives et d'un algorithme de gestion de ressources pour la plateforme Codingame",
     tasks: [
@@ -242,6 +243,7 @@ export const jobs: Job[] = [
     end: "2022-04",
     title:
       "Architecte logiciel et développeur fullstack à Linkeys – Toulouse – ",
+    project: "linkeys",
     description: `Refonte complète du jobboard Linkeys BtoB/BtoC, optimisant la gestion de plus de 200 entreprises et 40k utilisateurs.`,
     tasks: [
       "Optimisation du processus de cooptation, réduisant de 80 % leur temps de traitement",
@@ -332,6 +334,7 @@ export const jobs: Job[] = [
     start: "2016-09",
     end: "2018-10",
     title: "Développeur frontend à JobTeaser – Paris – ",
+    project: "jobteaser",
     description: `J'ai participé à la refonte de la plateforme afin de migrer le site vers une SPA en React.`,
     tasks: ["Onboarding", "UX"],
     tools: [

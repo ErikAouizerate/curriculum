@@ -13,11 +13,15 @@
     toolBorder,
     type JobMode,
   } from "#lib/cv.js";
+  import ProjectDialog from "#lib/components/ProjectDialog.svelte";
+  import type { Project } from "#lib/content/projects.js";
   import type { Job } from "#lib/content/types.js";
 
   interface Props {
     job: Job;
     mode: JobMode;
+    /** Thumbnail shown in the empty margin left of the CV sheet (wide screens, never printed). */
+    project?: Project;
     editable?: boolean;
     onRemove?: () => void;
     onToggleSmall?: () => void;
@@ -27,6 +31,7 @@
   let {
     job,
     mode,
+    project,
     editable = false,
     onRemove,
     onToggleSmall,
@@ -34,10 +39,49 @@
   }: Props = $props();
 
   const duration = $derived(jobDuration(job));
+  // Touch screens have no hover: a short tap on the title toggles the job actions instead.
+  let menuOpen = $state(false);
+
+  function toggleMenu(event: MouseEvent) {
+    if ((event as PointerEvent).pointerType === "touch") menuOpen = !menuOpen;
+  }
   const groupedTools = $derived(groupJobTools(job.tools));
 </script>
 
+<!-- `static/cv.js` opens the project dialog; without JavaScript the link opens the presentation
+     in a new tab. Never printed. -->
+{#snippet thumbnail(project: Project, placement: string)}
+  <a
+    href={project.screenshot ?? project.image}
+    target="_blank"
+    rel="noreferrer"
+    data-cv-action="open-dialog"
+    data-dialog="project-{project.id}"
+    aria-label="Voir le visuel du projet {project.title}"
+    class="shine-border print:hidden overflow-hidden rounded-xl bg-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg {placement}"
+  >
+    <img
+      src={project.image}
+      alt=""
+      width="640"
+      height="320"
+      loading="lazy"
+      class="aspect-2/1 w-full object-cover"
+    />
+    <span class="block px-3 py-2 text-sm font-semibold">{project.title}</span>
+  </a>
+{/snippet}
+
 <div class="group/job pt-5 last-of-type:mb-0 break-inside-avoid-page">
+  {#if project?.image}
+    <!-- No positioned ancestor up to #cv-page: `right` places it outside the sheet while the
+         static position keeps it level with this job. -->
+    {@render thumbnail(
+      project,
+      "hidden min-[1400px]:block absolute right-[calc(100%+2.5rem)] mt-6 w-60",
+    )}
+    <ProjectDialog id="project-{project.id}" {project} />
+  {/if}
   <div
     class="flex gap-1 items-center mt-1 print:float-left md:float-left md:flex-col print:flex-col print:gap-0 md:gap-0 print:-ml-14 md:-ml-14"
   >
@@ -52,11 +96,14 @@
     <div>{mode === 2 ? formatYear(job.start) : formatMonth(job.start)}</div>
   </div>
 
-  <h3 class="text-lg font-bold relative">
+  <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions (touch-only shortcut; keyboard and mouse users reach the buttons directly) -->
+  <h3 class="text-lg font-bold relative" onclick={editable ? toggleMenu : undefined}>
     {job.title}{duration}
     {#if editable}
       <div
-        class="flex absolute right-0 top-0 invisible group-hover/job:visible bg-white"
+        class="flex absolute right-0 top-0 group-hover/job:visible bg-white {menuOpen
+          ? 'visible'
+          : 'invisible'}"
       >
         {#if onToggleSmall}
           <button
@@ -130,4 +177,9 @@
       </div>
     {/each}
   </div>
+
+  {#if project?.image}
+    <!-- Below 1400px the margin is too narrow: the thumbnail closes the job instead. -->
+    {@render thumbnail(project, "relative mx-auto mt-3 block max-w-sm min-[1400px]:hidden")}
+  {/if}
 </div>

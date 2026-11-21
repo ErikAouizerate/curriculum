@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 
 import { jobs } from "#lib/content/jobs.js";
 import { labels } from "#lib/content/labels.js";
+import { projects } from "#lib/content/projects.js";
 import { schools } from "#lib/content/schools.js";
 import { cloudSkills } from "#lib/content/skills/cloud.js";
 import { devSkills } from "#lib/content/skills/dev.js";
@@ -35,6 +36,14 @@ describe("CV content", () => {
     for (const job of jobs) {
       expect(job.start, job.title).toMatch(/^\d{4}-\d{2}$/);
       if (job.end) expect(job.end, job.title).toMatch(/^\d{4}-\d{2}$/);
+    }
+  });
+
+  it("links jobs to projects that have a thumbnail", () => {
+    for (const job of jobs.filter((item) => item.project)) {
+      const project = projects.find((item) => item.id === job.project);
+      expect(project?.image, job.title).toMatch(/^\/projects\//);
+      expect(existsSync(resolve("static", project!.image!.slice(1))), job.title).toBe(true);
     }
   });
 

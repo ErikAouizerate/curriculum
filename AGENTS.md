@@ -36,7 +36,7 @@ These rules are what keep the CV fast and statically deployable.
   (`false` in every build; `true` under `pnpm dev` only, because a `csr = false` page receives no
   Vite client and would never hot-reload); never
   add a `client:*` directive or an interactive Svelte component to the public page. The only
-  allowed scripts are `static/cv.js` (share/print delegation), the Cloudflare beacon rendered by
+  allowed scripts are `static/cv.js` (share/print delegation, project dialogs; on `/` it also clears the saved portfolio answer), the Cloudflare beacon rendered by
   `src/routes/+layout.svelte` from `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN`, and the inert
   `Person` JSON-LD block. Verify that `index.html`
   does not reference `_app/immutable/nodes`; CI enforces it. `/studio` prerenders the CV header

@@ -38,11 +38,11 @@
       <IconSchool size={40} class="text-secondary" />
     {/if}
     <div
-      class="group/title flex items-center justify-between pl-4 border-b-2 border-black w-full ml-4 mr-6"
+      class="group/title flex min-w-0 items-center justify-between pl-4 border-b-2 border-black w-full ml-4 mr-6"
     >
-      <h2 class="text-2xl font-bold print:text-lg">{title}</h2>
+      <h2 class="min-w-0 text-2xl font-bold print:text-lg">{title}</h2>
       {#if editable}
-        <div class="invisible group-hover/title:visible flex gap-1">
+        <div class="invisible group-hover/title:visible flex shrink-0 gap-1">
           {#if onShowAll}
             <button
               type="button"

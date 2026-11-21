@@ -14,18 +14,22 @@
      * paint it (and take part in view transitions) before it knows which content to show.
      */
     showContent?: boolean;
+    /** The CV is the whole page (`/`, `/studio`), not a preview: project thumbnails in the margin. */
+    fullPage?: boolean;
+    /** Room above the title for floating actions shown at the top until they fit beside the sheet. */
+    headerSpace?: boolean;
   }
 
-  let { view, editable = false, actions, showContent = true }: Props = $props();
+  let { view, editable = false, actions, showContent = true, fullPage = false, headerSpace = false }: Props = $props();
 
   const canEdit = $derived(editable && actions !== undefined);
 </script>
 
 <div
   id="cv-page"
-  class="cv-document md:w-[21cm] bg-stone-200 print:bg-white min-h-[29.7cm] print:min-h-[29.7cm]"
+  class="cv-document relative md:w-[21cm] md:max-w-full bg-stone-200 print:bg-white min-h-[29.7cm] print:min-h-[29.7cm]"
 >
-  <CvHeader />
+  <CvHeader actionsSpace={headerSpace} />
 
   {#if showContent}
     <main class="bg-white h-full pt-4">
@@ -60,6 +64,7 @@
           <CvJob
             job={item.job}
             mode={item.mode}
+            project={fullPage ? item.project : undefined}
             editable={canEdit}
             onRemove={() => actions?.removeJob(item.index)}
             onToggleSmall={() => actions?.toggleSmall(item.index)}

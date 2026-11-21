@@ -6,7 +6,7 @@ Personal CV/résumé site — SvelteKit 3 + Svelte 5 + TypeScript + Tailwind CSS
 ## Architecture
 
 - `/` — the public CV. Prerendered at build with `csr = false`: **no framework JavaScript is
-  served**. Content is complete in `index.html`; only `static/cv.js` (share/print delegation) and
+  served**. Content is complete in `index.html`; only `static/cv.js` (share/print delegation, project dialogs, portfolio reset) and
   the Cloudflare beacon run on the page. The only other script tag is the inert `Person` JSON-LD.
   A top-right arrow links to `/portfolio`, whose header holds a back arrow to `/`.
 - `/portfolio` — hydrated page (`noindex`) hosting the **portfolio assistant**: a visitor pastes a

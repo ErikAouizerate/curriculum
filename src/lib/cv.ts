@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 
 import { jobs } from "#lib/content/jobs.js";
+import { projects, type Project } from "#lib/content/projects.js";
 import { schools } from "#lib/content/schools.js";
 import { cloudSkills } from "#lib/content/skills/cloud.js";
 import { devSkills } from "#lib/content/skills/dev.js";
@@ -42,6 +43,8 @@ export interface CvJobView {
   index: number;
   job: Job;
   mode: JobMode;
+  /** Project illustrating the job, when it has a thumbnail. */
+  project?: Project;
 }
 
 export interface CvSkillView {
@@ -99,7 +102,12 @@ export function toView(state: CvState): CvView {
 
   return {
     jobs: jobs
-      .map((job, index) => ({ index, job, mode: state.jobs[index] ?? JOB_HIDDEN }))
+      .map((job, index) => ({
+        index,
+        job,
+        mode: state.jobs[index] ?? JOB_HIDDEN,
+        project: projects.find((project) => project.id === job.project && project.image),
+      }))
       .filter(({ mode }) => mode !== JOB_HIDDEN),
     categories,
     schools,

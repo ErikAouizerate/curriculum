@@ -1,7 +1,9 @@
 <script lang="ts">
   import IconArrowRight from "@tabler/icons-svelte/icons/arrow-right";
   import IconBrandGithub from "@tabler/icons-svelte/icons/brand-github";
+  import IconHistory from "@tabler/icons-svelte/icons/history";
   import IconPhoto from "@tabler/icons-svelte/icons/photo";
+  import IconRefresh from "@tabler/icons-svelte/icons/refresh";
   import IconSend from "@tabler/icons-svelte/icons/send";
   import IconX from "@tabler/icons-svelte/icons/x";
   import { PUBLIC_TURNSTILE_SITE_KEY } from "$app/env/public";
@@ -104,9 +106,52 @@
   );
 
   // The last prompt and answer survive the full page loads to /studio and back, per tab only.
+  // `static/cv.js` removes them when the visitor goes back to `/`, which resets this page.
   const STORAGE_KEY = "portfolio:ask:v1";
   let received: AskEvent[] = [];
   let restored = false;
+
+  // The last answered searches, kept across visits so a chip can show an answer again without
+  // calling the assistant.
+  interface RecentSearch {
+    input: string;
+    events: AskEvent[];
+  }
+  const RECENT_KEY = "portfolio:recent:v1";
+  const MAX_RECENT = 3;
+  let recent = $state<RecentSearch[]>([]);
+
+  function loadRecent() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(RECENT_KEY) ?? "[]") as unknown;
+      if (!Array.isArray(saved)) return;
+      recent = saved
+        .filter(
+          (item): item is RecentSearch =>
+            typeof item?.input === "string" && Array.isArray(item?.events),
+        )
+        .slice(0, MAX_RECENT);
+    } catch {
+      // Ignore unreadable storage.
+    }
+  }
+
+  function remember(search: RecentSearch) {
+    recent = [
+      search,
+      ...recent.filter((item) => item.input.trim() !== search.input.trim()),
+    ].slice(0, MAX_RECENT);
+    try {
+      localStorage.setItem(RECENT_KEY, JSON.stringify(recent));
+    } catch {
+      // Storage unavailable: the chips only last for this visit.
+    }
+  }
+
+  function chipLabel(text: string): string {
+    const line = text.trim().replace(/\s+/g, " ");
+    return line.length > 24 ? `${line.slice(0, 24)}…` : line;
+  }
 
   function persist() {
     try {
@@ -129,17 +174,65 @@
       } | null;
       if (typeof saved?.input === "string") input = saved.input;
       if (Array.isArray(saved?.events) && saved.events.length) {
-        for (const event of saved.events as AskEvent[]) {
-          if (event.type === "cv" && !event.href.startsWith("/studio#cv="))
-            continue;
-          apply(event);
-        }
-        phase = "done";
+        replay(saved.events as AskEvent[]);
       }
     } catch {
       // Ignore unreadable or corrupted storage.
     }
     restored = true;
+  }
+
+  function replay(events: AskEvent[]) {
+    for (const event of events) {
+      if (event.type === "cv" && !event.href.startsWith("/studio#cv="))
+        continue;
+      apply(event);
+    }
+    phase = "done";
+  }
+
+  function clearAnswer() {
+    phase = "idle";
+    sentences = [];
+    skills = [];
+    matchedJobs = [];
+    matchedProjects = [];
+    cvHref = null;
+    cvState = null;
+    filter = new EventFilter();
+    received = [];
+    failure = null;
+  }
+
+  function resetPage() {
+    if (busy) return;
+    clearAnswer();
+    input = "";
+    persist();
+  }
+
+  function showRecent(search: RecentSearch) {
+    if (busy) return;
+    clearAnswer();
+    input = search.input;
+    replay(search.events);
+    persist();
+  }
+
+  // Back from `/` through the browser history, the page comes out of the back/forward cache with
+  // its old answer; `/` has removed the saved state, so start over like a fresh load.
+  function onPageShow(event: PageTransitionEvent) {
+    if (!event.persisted || busy) return;
+    let saved: string | null;
+    try {
+      saved = sessionStorage.getItem(STORAGE_KEY);
+    } catch {
+      return;
+    }
+    if (saved === null) {
+      clearAnswer();
+      input = "";
+    }
   }
 
   $effect(() => {
@@ -166,6 +259,7 @@
 
   onMount(() => {
     restore();
+    loadRecent();
     if (!PUBLIC_TURNSTILE_SITE_KEY || !turnstileBox) return;
     const box = turnstileBox;
     const win = window as unknown as {
@@ -232,16 +326,9 @@
     event.preventDefault();
     if (!canSend) return;
 
+    clearAnswer();
     phase = "analyse";
-    sentences = [];
-    skills = [];
-    matchedJobs = [];
-    matchedProjects = [];
-    cvHref = null;
-    cvState = null;
-    filter = new EventFilter();
-    received = [];
-    failure = null;
+    const asked = input;
 
     try {
       const response = await fetch("/api/ask", {
@@ -278,12 +365,15 @@
     } finally {
       phase = "done";
       persist();
+      if (!failure && received.some((item) => item.type !== "error")) {
+        remember({ input: asked, events: [...received] });
+      }
       resetTurnstile();
     }
   }
 </script>
 
-<svelte:window bind:innerWidth />
+<svelte:window bind:innerWidth onpageshow={onPageShow} />
 
 {#snippet projectBody(project: Project, why: string)}
   {#if project.image}
@@ -323,7 +413,27 @@
       utiles et génère un CV adapté.
     </p>
 
-    <form onsubmit={ask} class="mt-6 rounded-2xl bg-white p-4 shadow-sm">
+    {#if recent.length}
+      <div class="mt-6 flex flex-wrap items-center gap-2" aria-label="Recherches récentes">
+        {#each recent as search (search.input)}
+          <button
+            type="button"
+            title={search.input}
+            disabled={busy}
+            onclick={() => showRecent(search)}
+            class="flex max-w-full items-center gap-1.5 rounded-full border border-stone-300 bg-white px-3 py-1 text-sm hover:bg-stone-100 disabled:opacity-40"
+          >
+            <IconHistory size={16} class="shrink-0 text-stone-500" />
+            <span class="truncate">{chipLabel(search.input)}</span>
+          </button>
+        {/each}
+      </div>
+    {/if}
+
+    <form
+      onsubmit={ask}
+      class="{recent.length ? 'mt-3' : 'mt-6'} rounded-2xl bg-white p-4 shadow-sm"
+    >
       <textarea
         bind:value={input}
         maxlength={MAX_INPUT_LENGTH}
@@ -343,9 +453,21 @@
             {example.label}
           </button>
         {/each}
-        <span class="ml-auto text-xs text-stone-500"
+        <!-- One group, so the counter and both buttons wrap together, right-aligned. -->
+        <div class="ml-auto flex flex-wrap items-center justify-end gap-2">
+        <span class="text-xs text-stone-500"
           >{input.length}/{MAX_INPUT_LENGTH}</span
         >
+        {#if input || phase !== "idle"}
+          <button
+            type="button"
+            onclick={resetPage}
+            disabled={busy}
+            class="flex items-center gap-2 rounded-full border border-stone-300 px-4 py-2 font-semibold hover:bg-stone-100 disabled:opacity-40"
+          >
+            <IconRefresh size={18} /> Réinitialiser
+          </button>
+        {/if}
         <button
           type="submit"
           disabled={!canSend}
@@ -353,15 +475,16 @@
         >
           <IconSend size={18} /> Analyser
         </button>
+        </div>
       </div>
       <div bind:this={turnstileBox} class="mt-2"></div>
     </form>
 
     {#if phase !== "idle"}
-      <ol class="mt-8 flex gap-2 text-sm" aria-label="Progression">
+      <ol class="mt-8 flex gap-1 text-xs sm:gap-2 sm:text-sm" aria-label="Progression">
         {#each steps as step (step.phase)}
           <li
-            class="flex-1 rounded-full px-3 py-1 text-center transition-colors duration-500 {reached(
+            class="flex-1 rounded-full px-2 py-1 sm:px-3 text-center transition-colors duration-500 {reached(
               step.phase,
             )
               ? 'bg-primary text-white'

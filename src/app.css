@@ -5,6 +5,8 @@
   --color-primary: #14213d;
   --color-secondary: #fca311;
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  /* From here the floating actions fit in the margin right of the 21cm CV sheet. */
+  --breakpoint-sheet: 60rem;
 }
 
 @page {
@@ -113,6 +115,68 @@ body {
   50%,
   to {
     transform: translateX(-150%);
+  }
+}
+
+/* On narrow screens the portfolio link of `/` would sit on the CV title: `static/cv.js` adds
+   `cv-portfolio-link` to <html> (hidden) and `cv-portfolio-link-shown` once the phone number is
+   reached. Without JavaScript the link simply stays visible. */
+@utility portfolio-link {
+  transition:
+    opacity 300ms ease-out,
+    visibility 300ms;
+
+  @variant max-sheet {
+    :root.cv-portfolio-link:not(.cv-portfolio-link-shown) & {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
+
+/* Silver light running around the border of the project thumbnails, in the colors of
+   `portfolio-shine`. A conic gradient turns behind a mask that only keeps a 2px ring. */
+@property --shine-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@utility shine-border {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: none;
+    padding: 2px;
+    border-radius: inherit;
+    pointer-events: none;
+    background: conic-gradient(
+      from var(--shine-angle),
+      transparent 0deg 250deg,
+      rgb(203 213 225 / 0.9) 290deg,
+      rgb(255 255 255) 320deg,
+      rgb(203 213 225 / 0.9) 350deg,
+      transparent 360deg
+    );
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &::before {
+      display: block;
+      animation: shine-border 4s linear infinite;
+    }
+  }
+}
+
+@keyframes shine-border {
+  to {
+    --shine-angle: 360deg;
   }
 }
 
