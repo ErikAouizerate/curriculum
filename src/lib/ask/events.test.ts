@@ -71,6 +71,21 @@ describe("splitLines", () => {
 });
 
 describe("EventFilter", () => {
+  it("drops job-description sentences before the first one about Erik", () => {
+    const filter = new EventFilter();
+    const text = (delta: string) => filter.accept({ type: "text", delta });
+    expect(filter.accept({ type: "mode", value: "jd" })).toBe(true);
+    expect(text("Shotgun est une plateforme de billetterie pour l'événementiel musical.")).toBe(false);
+    expect(text("Erik Aouizerate correspond bien au poste.")).toBe(true);
+    expect(text("Points forts : TypeScript, Node.js et PostgreSQL.")).toBe(true);
+  });
+
+  it("keeps sentences without the name outside job descriptions", () => {
+    const filter = new EventFilter();
+    filter.accept({ type: "mode", value: "question" });
+    expect(filter.accept({ type: "text", delta: "Je ne parle que de son profil." })).toBe(true);
+  });
+
   it("drops duplicates and enforces limits", () => {
     const filter = new EventFilter();
     expect(filter.accept({ type: "skill", index: 2, level: "strong", term: "a" })).toBe(true);

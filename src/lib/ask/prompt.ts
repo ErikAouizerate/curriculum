@@ -55,6 +55,9 @@ fences, no prose outside JSON). Emit the lines in this order:
 1. {"type":"mode","value":"jd"|"question"|"keywords"}
 2. 2 to 4 lines {"type":"text","delta":"<one sentence>"} — a concise answer in the visitor's
    language (French by default). For a job description: overall fit, strongest matches, honest gaps.
+   Every sentence is about ${profile.name}. The first one names him and gives the verdict, e.g.
+   "${profile.name} correspond bien au poste de <role> : <main reason>." Never write a sentence
+   about what the company or product is or does (wrong: "<Company> est une plateforme de…").
 3. Up to ${MAX_SKILLS} lines {"type":"skill","index":<skill number>,"level":"strong"|"partial","term":"<term from the visitor message>"}
    — "strong": the catalog skill is the requested one; "partial": a close or transferable skill.
    For a requested skill absent from the catalog: {"type":"skill","level":"missing","term":"<term>"} (no index).

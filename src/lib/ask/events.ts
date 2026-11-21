@@ -1,4 +1,5 @@
 import { jobs as catalogJobs } from "#lib/content/jobs.js";
+import { profile } from "#lib/content/profile.js";
 import { projects } from "#lib/content/projects.js";
 import {
   JOB_COUNT,
@@ -36,6 +37,8 @@ export const MAX_PROJECTS = 3;
 const MODES = new Set<string>(["jd", "question", "keywords"]);
 const LEVELS = new Set<string>(["strong", "partial", "missing"]);
 const PROJECT_IDS = new Set(projects.map((project) => project.id));
+/** First and last name: an answer about a job description must open with a sentence naming him. */
+const NAME_PARTS = profile.name.toLowerCase().split(/\s+/);
 /** The most recent and representative jobs: a tailored CV always shows at least one of them. */
 const ANCHOR_JOBS = ["Airbus", "Météo France"].map((name) => {
   const i = catalogJobs.findIndex((job) => job.title.includes(name));
@@ -116,9 +119,22 @@ export class EventFilter {
   private projects = new Set<string>();
   private jobs = new Map<number, JobMode>();
   private selected = new Set<number>();
+  private mode: AskMode | null = null;
+  private named = false;
 
   accept(event: ModelEvent): boolean {
     switch (event.type) {
+      case "mode":
+        this.mode = event.value;
+        return true;
+      case "text": {
+        // The model tends to open a job description with a sentence presenting the company,
+        // despite the prompt: drop every sentence until the first one about the candidate.
+        if (this.mode !== "jd" || this.named) return true;
+        const delta = event.delta.toLowerCase();
+        this.named = NAME_PARTS.some((part) => delta.includes(part));
+        return this.named;
+      }
       case "skill": {
         const key = event.index === undefined ? `t:${event.term.toLowerCase()}` : `i:${event.index}`;
         if (this.skills.has(key) || this.skills.size >= MAX_SKILLS) return false;
