@@ -69,7 +69,9 @@ These rules are what keep the CV fast and statically deployable.
   `YYYY-MM`, and job tools reference `labels` so typos fail `pnpm test`.
 - **Images stay optimized.** `static/icons/` contains only referenced assets, as SVG or 64×64
   WebP; the avatar is a 224×224 WebP. `content.test.ts` rejects other raster formats and icon
-  files over 10 KiB, so never point content at the original PNG/JPEG sources.
+  files over 10 KiB, so never point content at the original PNG/JPEG sources. Icon files are named
+  after the logo they show, in lowercase kebab-case (`nodejs.webp`, `react-testing-library.webp`,
+  `database.webp`); the test enforces the pattern.
 - **The Person JSON-LD belongs to `/` only.** `src/routes/+page.svelte` generates it from
   `src/lib/content/`; keep it consistent with the visible CV and never add it to `/studio`.
 

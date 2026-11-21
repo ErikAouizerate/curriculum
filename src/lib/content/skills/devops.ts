@@ -72,7 +72,7 @@ export const devopsSkills: Skill[] = [
   },
   {
     label: "Mobile",
-    icon: "/icons/capacitorjs.webp",
+    icon: "/icons/capacitor.webp",
     match: [labels.capacitor],
   },
   {

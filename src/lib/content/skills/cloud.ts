@@ -24,7 +24,7 @@ export const cloudSkills: Skill[] = [
   },
   {
     label: labels.aws,
-    icon: "/icons/AWS.webp",
+    icon: "/icons/aws.webp",
     default: true,
   },
   {

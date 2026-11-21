@@ -62,6 +62,12 @@ describe("CV content", () => {
     }
   });
 
+  it("names icon files after the logo, in lowercase kebab-case", () => {
+    for (const skill of [...skillCatalog, ...tools]) {
+      expect(skill.icon, skill.label).toMatch(/^\/icons\/[a-z0-9]+(-[a-z0-9]+)*\.(svg|webp)$/);
+    }
+  });
+
   it("keeps at least one default skill per category", () => {
     for (const [name, skills] of skillGroups) {
       expect(skills.filter((skill) => skill.default).length, name).toBeGreaterThan(0);

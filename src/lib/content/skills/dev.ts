@@ -19,7 +19,7 @@ export const devSkills: Skill[] = [
   },
   {
     label: labels.node,
-    icon: "/icons/node.webp",
+    icon: "/icons/nodejs.webp",
     default: true,
     type: BACKEND,
   },
@@ -37,7 +37,7 @@ export const devSkills: Skill[] = [
   },
   {
     label: labels.javascript,
-    icon: "/icons/js.webp",
+    icon: "/icons/javascript.webp",
     type: FRONTEND,
   },
   {
@@ -117,12 +117,12 @@ export const devSkills: Skill[] = [
   },
   {
     label: labels.ol,
-    icon: "/icons/ol.svg",
+    icon: "/icons/openlayers.svg",
     type: FRONTEND,
   },
   {
     label: labels.reactTestingLibrary,
-    icon: "/icons/reactTestingLibrary.webp",
+    icon: "/icons/react-testing-library.webp",
     type: FRONTEND,
   },
   {
@@ -142,7 +142,7 @@ export const devSkills: Skill[] = [
   },
   {
     label: labels.fastApi,
-    icon: "/icons/FastAPI.svg",
+    icon: "/icons/fastapi.svg",
     type: BACKEND,
   },
   {
@@ -198,7 +198,7 @@ export const devSkills: Skill[] = [
 
   {
     label: labels.mongodb,
-    icon: "/icons/mongo.webp",
+    icon: "/icons/mongodb.webp",
     type: BACKEND,
   },
   {
@@ -213,7 +213,7 @@ export const devSkills: Skill[] = [
   },
   {
     label: labels.mariadb,
-    icon: "/icons/mysql.webp",
+    icon: "/icons/mariadb.svg",
     type: BACKEND,
   },
   {
@@ -243,7 +243,7 @@ export const devSkills: Skill[] = [
   },
   {
     label: labels.nw,
-    icon: "/icons/nw.webp",
+    icon: "/icons/nwjs.webp",
     type: BACKEND,
   },
   {
@@ -253,7 +253,7 @@ export const devSkills: Skill[] = [
   },
   {
     label: labels.db,
-    icon: "/icons/db.webp",
+    icon: "/icons/database.webp",
     type: BACKEND,
   },
 ];

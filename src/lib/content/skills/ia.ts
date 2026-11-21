@@ -4,13 +4,13 @@ import { labels } from "#lib/content/labels.js";
 export const iaSkills: Skill[] = [
   {
     label: "Claude code",
-    icon: "/icons/Claude_AI_symbol.svg.webp",
+    icon: "/icons/claude.webp",
     default: true,
     match: [labels.claude],
   },
   {
     label: "Gemini",
-    icon: "/icons/Claude_AI_symbol.svg.webp",
+    icon: "/icons/gemini.svg",
   },
   {
     label: "DeepSeek",
@@ -24,7 +24,7 @@ export const iaSkills: Skill[] = [
   },
   {
     label: "LLM / RAG",
-    icon: "/icons/Icon_AI_brain_blue.svg.webp",
+    icon: "/icons/ai-brain.webp",
     default: true,
     match: [labels.llm, labels.rag],
   },
@@ -43,7 +43,7 @@ export const iaSkills: Skill[] = [
     default: true,
   },
   {
-    label: "Évaluation des modèles",
-    icon: "/icons/eval.svg",
+    label: "Évaluation LLM",
+    icon: "/icons/weights-and-biases.svg",
   },
 ];
