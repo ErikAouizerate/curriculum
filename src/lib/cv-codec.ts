@@ -5,7 +5,7 @@ import {
   type JobMode,
 } from "#lib/cv.js";
 
-export const CODEC_VERSION = 1;
+export const CODEC_VERSION = 2;
 export const CODE_LENGTH = 24;
 
 const VERSION_BITS = 4;

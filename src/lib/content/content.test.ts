@@ -23,9 +23,9 @@ const skillGroups = [
 describe("CV content", () => {
   it("keeps the expected catalog size", () => {
     expect(JOB_COUNT).toBe(14);
-    expect(SKILL_COUNT).toBe(75);
+    expect(SKILL_COUNT).toBe(85);
     expect(devSkills).toHaveLength(49);
-    expect(iaSkills).toHaveLength(9);
+    expect(iaSkills).toHaveLength(19);
     expect(devopsSkills).toHaveLength(11);
     expect(cloudSkills).toHaveLength(6);
     expect(schools).toHaveLength(3);

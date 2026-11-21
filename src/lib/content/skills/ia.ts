@@ -18,9 +18,45 @@ export const iaSkills: Skill[] = [
     default: true,
   },
   {
+    label: "ChatGPT",
+    icon: "/icons/openai.svg",
+  },
+  {
+    label: "GLM",
+    icon: "/icons/zhipu.svg",
+  },
+  {
+    label: "Kimi",
+    icon: "/icons/moonshot.svg",
+  },
+  {
+    label: "Qwen",
+    icon: "/icons/alibaba-cloud.svg",
+  },
+  {
+    label: "Mistral",
+    icon: "/icons/mistral.svg",
+  },
+  {
+    label: "fal",
+    icon: "/icons/fal.svg",
+  },
+  {
     label: "OpenCode",
     icon: "/icons/opencode.webp",
     match: [labels.opencode],
+  },
+  {
+    label: "Pi",
+    icon: "/icons/pi.svg",
+  },
+  {
+    label: "OpenRouter",
+    icon: "/icons/openrouter.svg",
+  },
+  {
+    label: "9router",
+    icon: "/icons/9router.svg",
   },
   {
     label: "LLM / RAG",
@@ -45,5 +81,9 @@ export const iaSkills: Skill[] = [
   {
     label: "Évaluation LLM",
     icon: "/icons/weights-and-biases.svg",
+  },
+  {
+    label: "Langfuse",
+    icon: "/icons/langfuse.svg",
   },
 ];
