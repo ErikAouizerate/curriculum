@@ -43,8 +43,8 @@ export interface CvJobView {
   index: number;
   job: Job;
   mode: JobMode;
-  /** Project illustrating the job, when it has a thumbnail. */
-  project?: Project;
+  /** Projects illustrating the job that have a thumbnail. */
+  projects: Project[];
 }
 
 export interface CvSkillView {
@@ -106,7 +106,7 @@ export function toView(state: CvState): CvView {
         index,
         job,
         mode: state.jobs[index] ?? JOB_HIDDEN,
-        project: projects.find((project) => project.id === job.project && project.image),
+        projects: projects.filter((project) => job.projects?.includes(project.id) && project.image),
       }))
       .filter(({ mode }) => mode !== JOB_HIDDEN),
     categories,

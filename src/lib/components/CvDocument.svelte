@@ -64,7 +64,7 @@
           <CvJob
             job={item.job}
             mode={item.mode}
-            project={fullPage ? item.project : undefined}
+            projects={fullPage ? item.projects : []}
             editable={canEdit}
             onRemove={() => actions?.removeJob(item.index)}
             onToggleSmall={() => actions?.toggleSmall(item.index)}

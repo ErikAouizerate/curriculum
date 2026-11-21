@@ -24,10 +24,10 @@ const skillGroups = [
 describe("CV content", () => {
   it("keeps the expected catalog size", () => {
     expect(JOB_COUNT).toBe(14);
-    expect(SKILL_COUNT).toBe(85);
-    expect(devSkills).toHaveLength(49);
+    expect(SKILL_COUNT).toBe(87);
+    expect(devSkills).toHaveLength(50);
     expect(iaSkills).toHaveLength(19);
-    expect(devopsSkills).toHaveLength(11);
+    expect(devopsSkills).toHaveLength(12);
     expect(cloudSkills).toHaveLength(6);
     expect(schools).toHaveLength(3);
   });
@@ -40,10 +40,12 @@ describe("CV content", () => {
   });
 
   it("links jobs to projects that have a thumbnail", () => {
-    for (const job of jobs.filter((item) => item.project)) {
-      const project = projects.find((item) => item.id === job.project);
-      expect(project?.image, job.title).toMatch(/^\/projects\//);
-      expect(existsSync(resolve("static", project!.image!.slice(1))), job.title).toBe(true);
+    for (const job of jobs) {
+      for (const id of job.projects ?? []) {
+        const project = projects.find((item) => item.id === id);
+        expect(project?.image, `${job.title}: ${id}`).toMatch(/^\/projects\//);
+        expect(existsSync(resolve("static", project!.image!.slice(1))), id).toBe(true);
+      }
     }
   });
 

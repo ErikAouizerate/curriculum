@@ -22,8 +22,8 @@ export interface Job {
   description: string;
   tasks?: string[];
   tools: Label[];
-  /** Project id (`projects.ts`) whose thumbnail is shown beside the job on wide screens. */
-  project?: string;
+  /** Project ids (`projects.ts`) whose thumbnails are shown beside the job on wide screens. */
+  projects?: string[];
 }
 
 export interface School {

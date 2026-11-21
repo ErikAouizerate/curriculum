@@ -20,8 +20,8 @@
   interface Props {
     job: Job;
     mode: JobMode;
-    /** Thumbnail shown in the empty margin left of the CV sheet (wide screens, never printed). */
-    project?: Project;
+    /** Thumbnails shown in the empty margin left of the CV sheet (wide screens, never printed). */
+    projects?: Project[];
     editable?: boolean;
     onRemove?: () => void;
     onToggleSmall?: () => void;
@@ -31,7 +31,7 @@
   let {
     job,
     mode,
-    project,
+    projects = [],
     editable = false,
     onRemove,
     onToggleSmall,
@@ -73,14 +73,19 @@
 {/snippet}
 
 <div class="group/job pt-5 last-of-type:mb-0 break-inside-avoid-page">
-  {#if project?.image}
+  {#if projects.length}
     <!-- No positioned ancestor up to #cv-page: `right` places it outside the sheet while the
          static position keeps it level with this job. -->
-    {@render thumbnail(
-      project,
-      "hidden min-[1400px]:block absolute right-[calc(100%+2.5rem)] mt-6 w-60",
-    )}
-    <ProjectDialog id="project-{project.id}" {project} />
+    <div
+      class="hidden min-[1400px]:flex flex-col gap-4 absolute right-[calc(100%+2.5rem)] mt-6 w-60"
+    >
+      {#each projects as project (project.id)}
+        {@render thumbnail(project, "block")}
+      {/each}
+    </div>
+    {#each projects as project (project.id)}
+      <ProjectDialog id="project-{project.id}" {project} />
+    {/each}
   {/if}
   <div
     class="flex gap-1 items-center mt-1 print:float-left md:float-left md:flex-col print:flex-col print:gap-0 md:gap-0 print:-ml-14 md:-ml-14"
@@ -178,8 +183,12 @@
     {/each}
   </div>
 
-  {#if project?.image}
-    <!-- Below 1400px the margin is too narrow: the thumbnail closes the job instead. -->
-    {@render thumbnail(project, "relative mx-auto mt-3 block max-w-sm min-[1400px]:hidden")}
+  {#if projects.length}
+    <!-- Below 1400px the margin is too narrow: the thumbnails close the job instead. -->
+    <div class="mt-3 flex flex-wrap justify-center gap-4 print:hidden min-[1400px]:hidden">
+      {#each projects as project (project.id)}
+        {@render thumbnail(project, "relative block w-full max-w-sm")}
+      {/each}
+    </div>
   {/if}
 </div>

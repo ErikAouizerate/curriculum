@@ -51,6 +51,11 @@ export const devSkills: Skill[] = [
     type: FRONTEND,
   },
   {
+    label: labels.astro,
+    icon: "/icons/astro.svg",
+    type: FRONTEND,
+  },
+  {
     label: labels.vue,
     icon: "/icons/vuejs.svg",
     type: FRONTEND,

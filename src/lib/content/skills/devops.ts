@@ -87,4 +87,8 @@ export const devopsSkills: Skill[] = [
       labels.windows,
     ],
   },
+  {
+    label: labels.kali,
+    icon: "/icons/kali-linux.svg",
+  },
 ];

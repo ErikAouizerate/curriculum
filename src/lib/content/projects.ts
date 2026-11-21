@@ -108,6 +108,34 @@ export const projects: Project[] = [
   },
   // Client projects, imported from the previous portfolio (github.com/ErikAouizerate/portfolio).
   {
+    id: "audit-securite",
+    title: "Audit sécurité",
+    summary:
+      "Full offensive audit of a self-hosted web platform (pentest and red team), reported in a web app that links every test, every flaw and every fix, with attack chains and severity scores (2026).",
+    tools: [
+      labels.kali,
+      labels.linux,
+      labels.docker,
+      labels.gitleaks,
+      labels.opengrep,
+      labels.trivy,
+      labels.checkov,
+      labels.osvScanner,
+      labels.falco,
+    ],
+    image: "/projects/audit-securite.webp",
+    screenshot: "/projects/audit-securite-full.webp",
+  },
+  {
+    id: "serruriersfranciliens",
+    title: "Les Serruriers Franciliens",
+    summary:
+      "Takeover of a Squarespace site, domain and DNS migration, and a local SEO presence of 86 static pages for a locksmith company in Île-de-France (2026).",
+    tools: [labels.astro, labels.typescript, labels.tailwind, labels.github, labels.githubAction],
+    image: "/projects/serruriersfranciliens.webp",
+    screenshot: "/projects/serruriersfranciliens-full.webp",
+  },
+  {
     id: "godofgames",
     title: "God of Games",
     summary:
