@@ -147,7 +147,8 @@
     if (restored) persist();
   });
 
-  const projectCard = "block w-full overflow-hidden rounded-xl bg-white shadow transition";
+  const projectCard =
+    "block w-full overflow-hidden rounded-xl bg-white shadow-sm transition";
 
   // Client projects have no public link: their presentation opens in a native modal dialog.
   let shownProject = $state<Project | null>(null);
@@ -292,7 +293,7 @@
       width="640"
       height="320"
       loading="lazy"
-      class="aspect-[2/1] w-full object-cover"
+      class="aspect-2/1 w-full object-cover"
     />
   {/if}
   <span class="block p-4">
@@ -322,7 +323,7 @@
       utiles et génère un CV adapté.
     </p>
 
-    <form onsubmit={ask} class="mt-6 rounded-2xl bg-white p-4 shadow">
+    <form onsubmit={ask} class="mt-6 rounded-2xl bg-white p-4 shadow-sm">
       <textarea
         bind:value={input}
         maxlength={MAX_INPUT_LENGTH}
@@ -379,7 +380,7 @@
     {/if}
 
     {#if sentences.length}
-      <div class="mt-6 space-y-2 text-lg leading-relaxed" aria-live="polite">
+      <div class="mt-6 space-y-2 text-lg/relaxed" aria-live="polite">
         {#each sentences as sentence, i (i)}
           <p in:fade={{ duration: 300 }}>{sentence}</p>
         {/each}
@@ -509,7 +510,7 @@
     {:else}
       <!-- Hero from the previous portfolio, kept until the tailored CV exists. -->
       <div
-        class="relative flex min-h-[32rem] flex-col items-center justify-center overflow-hidden rounded-2xl bg-primary px-6 py-16 text-white shadow-lg"
+        class="relative flex min-h-128 flex-col items-center justify-center overflow-hidden rounded-2xl bg-primary px-6 py-16 text-white shadow-lg"
       >
         <div
           class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgb(252_163_17/0.18),transparent_60%)] {busy
@@ -582,11 +583,15 @@
   bind:this={dialog}
   onclose={() => (shownProject = null)}
   onclick={(event) => event.target === dialog && dialog?.close()}
-  aria-label={shownProject ? `Présentation du projet ${shownProject.title}` : undefined}
+  aria-label={shownProject
+    ? `Présentation du projet ${shownProject.title}`
+    : undefined}
   class="project-dialog m-auto w-[min(64rem,92vw)] overflow-hidden rounded-2xl bg-white p-0 shadow-2xl backdrop:bg-black/60"
 >
   {#if shownProject}
-    <div class="flex items-center justify-between gap-4 bg-primary px-5 py-3 text-white">
+    <div
+      class="flex items-center justify-between gap-4 bg-primary px-5 py-3 text-white"
+    >
       <h2 class="font-bold">{shownProject.title}</h2>
       <button
         type="button"

@@ -17,7 +17,7 @@
 
 <div class="flex flex-col items-center">
   <h3
-    class="text-lg font-bold self-start md:self-center print:self-center m-2 mt-0 print:text-md"
+    class="text-lg font-bold self-start md:self-center print:self-center m-2 mt-0"
   >
     {title}
   </h3>
@@ -37,7 +37,7 @@
               </button>
             {/if}
             <img
-              class="h-[25px] w-[25px] object-contain {editable ? 'group-hover/skill:invisible' : ''}"
+              class="size-[25px] object-contain {editable ? 'group-hover/skill:invisible' : ''}"
               src={item.skill.icon}
               alt={item.skill.label}
               width="25"

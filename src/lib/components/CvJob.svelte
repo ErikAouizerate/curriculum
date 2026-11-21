@@ -51,7 +51,7 @@
     <div>{mode === 2 ? formatYear(job.start) : formatMonth(job.start)}</div>
   </div>
 
-  <h3 class="print:text-md text-lg font-bold relative">
+  <h3 class="text-lg font-bold relative">
     {job.title}{duration}
     {#if editable}
       <div
@@ -100,7 +100,7 @@
   </h3>
 
   {#if mode !== 2}
-    <p class="font-medium print:text-md">{job.description}</p>
+    <p class="font-medium">{job.description}</p>
     {#if job.tasks?.length}
       <ul class="list-disc ml-6 my-3 print:text-sm">
         {#each job.tasks as task, index (index)}

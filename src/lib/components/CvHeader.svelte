@@ -23,10 +23,10 @@
 
 <header class="bg-primary/90 text-white">
   <div
-    class="flex flex-col bg-primary py-6 justify-center items-center px-6 text-center [view-transition-name:cv-banner]"
+    class="flex flex-col bg-primary p-6 justify-center items-center text-center [view-transition-name:cv-banner]"
   >
     <h1 class="text-white text-xl font-bold [view-transition-name:cv-title]">{profile.title}</h1>
-    <h2 class="hidden md:inline print:inline text-white/70 text-md font-medium">
+    <h2 class="hidden md:inline print:inline text-white/70 font-medium">
       {profile.subtitle}
     </h2>
   </div>
@@ -38,7 +38,7 @@
         src="/avatar.webp"
         width="112"
         height="112"
-        class="float md:absolute print:absolute -top-5 rounded-full [view-transition-name:cv-avatar] min-w-24 min-h-24 max-w-28 max-h-28 object-cover"
+        class="md:absolute print:absolute -top-5 rounded-full [view-transition-name:cv-avatar] min-w-24 min-h-24 max-w-28 max-h-28 object-cover"
       />
     </div>
     <div
@@ -50,7 +50,7 @@
         <div class="text-lg text-white/70">Expérience : {experience} années</div>
         <div class="text-lg text-white/70">{profile.english}</div>
       </div>
-      <div class="flex flex-col text-base leading-tight gap-1 mt-2">
+      <div class="flex flex-col text-base/tight gap-1 mt-2">
         {#each profile.contacts as contact (contact.kind)}
           <div class={contactLine}>
             {#if isContact(contact.kind, "phone")}
@@ -72,7 +72,7 @@
   </div>
 
   <div
-    class="relative block ml-6 mr-6 md:ml-16 md:mr-10 pb-8 text-white/70 md:block print:flex print:mt-4 print:pb-4"
+    class="relative block mx-6 md:ml-16 md:mr-10 pb-8 text-white/70 md:block print:flex print:mt-4 print:pb-4"
   >
     <IconQuote
       size={80}

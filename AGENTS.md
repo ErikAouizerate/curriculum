@@ -148,7 +148,7 @@ Recorded as Basic Memory decisions (`guidelines/curriculum/`).
 - `pnpm build` — static build into `.vercel/output/static`
 - `pnpm preview` — preview the production build
 - `pnpm check` — Svelte and TypeScript diagnostics
-- `pnpm lint` — ESLint
+- `pnpm lint` — ESLint, including Tailwind class checks (`eslint-plugin-better-tailwindcss`: canonical classes, conflicts, unknown/deprecated classes, also in class constants listed in `eslint.config.mjs`)
 - `pnpm test` — Vitest
 - `pnpm pdf` — generate `Erik_Aouizerate_CV.pdf` from the build
 - `bash scripts/compress-pdf.sh <pdf>` — compress a PDF with Ghostscript

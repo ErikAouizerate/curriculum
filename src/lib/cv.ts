@@ -266,7 +266,7 @@ export function groupJobTools(jobTools: readonly string[]): GroupedTool[][] {
 }
 
 export const toolBorder: Record<ToolGroup, string> = {
-  frontend: "border-[#fca311]",
+  frontend: "border-secondary",
   backend: "border-[#2a9d8f]",
   ia: "border-[#d64550]",
   cloud: "border-[#6C5CE7]",

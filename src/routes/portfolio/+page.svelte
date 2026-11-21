@@ -39,7 +39,7 @@
       href="/"
       data-sveltekit-reload
       aria-label="Revenir au CV"
-      class="block [view-transition-name:nav-arrow] rounded-full bg-white/80 p-2 text-primary shadow hover:bg-stone-200"
+      class="block [view-transition-name:nav-arrow] rounded-full bg-white/80 p-2 text-primary shadow-sm hover:bg-stone-200"
     >
       <IconArrowLeft size={40} />
     </a>

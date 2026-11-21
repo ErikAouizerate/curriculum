@@ -69,7 +69,7 @@
       </CvSection>
 
       <CvSection icon="schools" title="Formations">
-        <div class="print:pt-2 print:pb-2 pt-6 pb-6">
+        <div class="print:py-2 py-6">
           {#each view.schools as school, index (index)}
             <div class="mb-2 last-of-type:mb-0">
               <div

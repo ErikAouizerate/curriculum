@@ -69,7 +69,7 @@
     "script>";
 
   const topAction =
-    "print:hidden fixed z-10 top-4 right-4 md:right-auto md:ml-[calc(calc(calc(100vw-21cm)/2)+21cm)] rounded-full bg-white/80 p-2 text-primary shadow hover:bg-stone-200";
+    "print:hidden fixed z-10 top-4 right-4 md:right-auto md:ml-[calc(calc(calc(100vw-21cm)/2)+21cm)] rounded-full bg-white/80 p-2 text-primary shadow-sm hover:bg-stone-200";
   const bottomActions =
     "print:hidden fixed z-10 bottom-0 left-1/2 -translate-x-1/2 flex flex-row gap-2 m-4 rounded-full bg-white shadow-lg md:left-auto md:translate-x-0 md:flex-col md:rounded-none md:bg-transparent md:shadow-none md:ml-[calc(calc(calc(100vw-21cm)/2)+21cm)]";
   const action = "rounded-full cursor-pointer hover:bg-stone-200 p-2 text-primary";

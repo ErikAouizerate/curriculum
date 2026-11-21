@@ -77,7 +77,7 @@
       {/if}
     </div>
   </div>
-  <div class="pl-6 print:pl-16 md:pl-[4.8rem] pr-6">
+  <div class="px-6 print:pl-16 md:pl-[4.8rem]">
     {@render children()}
   </div>
 </section>
