@@ -97,7 +97,7 @@
     href="/portfolio"
     data-sveltekit-reload
     aria-label="Ouvrir le portfolio"
-    class="{topAction} rotate-180 [view-transition-name:nav-arrow]"
+    class="{topAction} portfolio-shine rotate-180 [view-transition-name:nav-arrow]"
   >
     <IconArrowLeft size={40} />
   </a>

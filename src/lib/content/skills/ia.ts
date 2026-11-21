@@ -65,7 +65,7 @@ export const iaSkills: Skill[] = [
     match: [labels.llm, labels.rag],
   },
   {
-    label: "Pipelines IA / ML",
+    label: "Pipelines IA",
     icon: "/icons/mlflow.svg",
   },
   {

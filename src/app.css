@@ -77,6 +77,45 @@ body {
   animation: 350ms ease-in 300ms both vt-fade-in;
 }
 
+/* Silver light sweeping across the portfolio button on `/`, CSS only. The element is rotated by
+   180deg (see nav-arrow above), so the band travels from +x to -x to move left to right on
+   screen. */
+@utility portfolio-shine {
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      70deg,
+      transparent 25%,
+      rgb(203 213 225 / 0.55) 42%,
+      rgb(255 255 255 / 0.95) 50%,
+      rgb(203 213 225 / 0.55) 58%,
+      transparent 75%
+    );
+    transform: translateX(150%);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &::after {
+      animation: portfolio-shine 2.5s ease-in-out 1s infinite;
+    }
+  }
+}
+
+@keyframes portfolio-shine {
+  from {
+    transform: translateX(150%);
+  }
+  50%,
+  to {
+    transform: translateX(-150%);
+  }
+}
+
 @keyframes vt-fade-out {
   to {
     opacity: 0;

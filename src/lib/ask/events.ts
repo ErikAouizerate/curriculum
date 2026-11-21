@@ -1,3 +1,4 @@
+import { jobs as catalogJobs } from "#lib/content/jobs.js";
 import { projects } from "#lib/content/projects.js";
 import {
   JOB_COUNT,
@@ -35,6 +36,12 @@ export const MAX_PROJECTS = 3;
 const MODES = new Set<string>(["jd", "question", "keywords"]);
 const LEVELS = new Set<string>(["strong", "partial", "missing"]);
 const PROJECT_IDS = new Set(projects.map((project) => project.id));
+/** The most recent and representative jobs: a tailored CV always shows at least one of them. */
+const ANCHOR_JOBS = ["Airbus", "Météo France"].map((name) => {
+  const i = catalogJobs.findIndex((job) => job.title.includes(name));
+  if (i === -1) throw new Error(`Anchor job not found: ${name}`);
+  return i;
+});
 
 function text(value: unknown, max: number): string | null {
   if (typeof value !== "string") return null;
@@ -134,7 +141,8 @@ export class EventFilter {
 
   /**
    * The tailored CV: matched skills only, and the jobs the model picked (the default jobs when it
-   * picked none). Null when nothing was matched, e.g. an off-topic question.
+   * picked none). The Airbus or Météo France job is always shown and every job is in full. Null
+   * when nothing was matched, e.g. an off-topic question.
    */
   cvState(): CvState | null {
     if (this.selected.size === 0) return null;
@@ -142,6 +150,10 @@ export class EventFilter {
       this.jobs.size === 0
         ? defaultJobModes()
         : Array.from({ length: JOB_COUNT }, (_, i) => this.jobs.get(i) ?? JOB_HIDDEN);
+    if (ANCHOR_JOBS.every((i) => jobs[i] === JOB_HIDDEN)) jobs[ANCHOR_JOBS[0]] = JOB_FULL;
+    for (let i = 0; i < JOB_COUNT; i += 1) {
+      if (jobs[i] !== JOB_HIDDEN) jobs[i] = JOB_FULL;
+    }
     const skills = Array.from({ length: SKILL_COUNT }, (_, i) => this.selected.has(i));
     return { jobs, skills };
   }

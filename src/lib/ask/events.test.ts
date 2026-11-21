@@ -2,9 +2,10 @@ import { describe, expect, it } from "vitest";
 
 import { EventFilter, MAX_PROJECTS, parseModelLine, splitLines } from "#lib/ask/events.js";
 import { systemPrompt } from "#lib/ask/prompt.js";
+import { jobs } from "#lib/content/jobs.js";
 import { projects } from "#lib/content/projects.js";
 import { decodeCv, encodeCv } from "#lib/cv-codec.js";
-import { JOB_COUNT, JOB_FULL, JOB_HIDDEN, JOB_SMALL, SKILL_COUNT, defaultJobModes } from "#lib/cv.js";
+import { JOB_COUNT, JOB_FULL, JOB_HIDDEN, SKILL_COUNT, defaultJobModes } from "#lib/cv.js";
 
 const line = (value: unknown) => JSON.stringify(value);
 
@@ -94,21 +95,55 @@ describe("EventFilter", () => {
     filter.accept({ type: "skill", index: 0, level: "strong", term: "a" });
     filter.accept({ type: "skill", index: 5, level: "partial", term: "b" });
     filter.accept({ type: "job", index: 1, mode: 1 });
-    filter.accept({ type: "job", index: 3, mode: 2 });
+    filter.accept({ type: "job", index: 3, mode: 1 });
+    filter.accept({ type: "job", index: 4, mode: 2 });
 
     const state = filter.cvState();
     expect(state).not.toBeNull();
     const decoded = decodeCv(encodeCv(state!));
     expect(decoded?.skills.flatMap((on, i) => (on ? [i] : []))).toEqual([0, 5]);
     expect(decoded?.jobs[1]).toBe(JOB_FULL);
-    expect(decoded?.jobs[3]).toBe(JOB_SMALL);
-    expect(decoded?.jobs.filter((mode) => mode !== JOB_HIDDEN)).toHaveLength(2);
+    expect(decoded?.jobs[3]).toBe(JOB_FULL);
+    expect(decoded?.jobs[4]).toBe(JOB_FULL);
+    expect(decoded?.jobs.filter((mode) => mode !== JOB_HIDDEN)).toHaveLength(3);
+  });
+
+  describe("tailored jobs", () => {
+    const airbus = jobs.findIndex((job) => job.title.includes("Airbus"));
+    const meteo = jobs.findIndex((job) => job.title.includes("Météo France"));
+    const pick = (picked: [number, 1 | 2][]) => {
+      const filter = new EventFilter();
+      filter.accept({ type: "skill", index: 0, level: "strong", term: "a" });
+      for (const [index, mode] of picked) filter.accept({ type: "job", index, mode });
+      return filter.cvState()!.jobs;
+    };
+
+    it("adds the Airbus job when neither Airbus nor Météo France was picked", () => {
+      const state = pick([[meteo + 1, 2]]);
+      expect(state[airbus]).toBe(JOB_FULL);
+      expect(state[meteo]).toBe(JOB_HIDDEN);
+    });
+
+    it("keeps Météo France alone when it was picked", () => {
+      expect(pick([[meteo, 2]])[airbus]).toBe(JOB_HIDDEN);
+    });
+
+    it("shows every picked job in full", () => {
+      const state = pick([
+        [meteo, 2],
+        [meteo + 1, 2],
+        [meteo + 2, 1],
+      ]);
+      expect(state.filter((mode) => mode !== JOB_HIDDEN)).toEqual([JOB_FULL, JOB_FULL, JOB_FULL]);
+    });
   });
 
   it("falls back to the default jobs when the model picked none", () => {
     const filter = new EventFilter();
     filter.accept({ type: "skill", index: 0, level: "strong", term: "a" });
-    expect(filter.cvState()?.jobs).toEqual(defaultJobModes());
+    expect(filter.cvState()?.jobs).toEqual(
+      defaultJobModes().map((mode) => (mode === JOB_HIDDEN ? JOB_HIDDEN : JOB_FULL)),
+    );
   });
 });
 

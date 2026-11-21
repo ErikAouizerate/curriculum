@@ -1,6 +1,7 @@
 <script lang="ts">
   import IconArrowsVertical from "@tabler/icons-svelte/icons/arrows-vertical";
   import IconFilter from "@tabler/icons-svelte/icons/filter";
+  import IconFold from "@tabler/icons-svelte/icons/fold";
   import IconTextPlus from "@tabler/icons-svelte/icons/text-plus";
   import IconTrash from "@tabler/icons-svelte/icons/trash";
 
@@ -60,11 +61,15 @@
         {#if onToggleSmall}
           <button
             type="button"
-            aria-label="Réduire ou déplier cette expérience"
+            aria-label={mode === 2 ? "Déplier cette expérience" : "Réduire cette expérience"}
             class="rounded-full hover:bg-stone-200 cursor-pointer p-1"
             onclick={onToggleSmall}
           >
-            <IconArrowsVertical size={28} />
+            {#if mode === 2}
+              <IconArrowsVertical size={28} />
+            {:else}
+              <IconFold size={28} />
+            {/if}
           </button>
         {/if}
         {#if onAddSkills}

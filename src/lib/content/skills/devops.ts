@@ -44,7 +44,7 @@ export const devopsSkills: Skill[] = [
     default: true,
   },
   {
-    label: "Grafana LGTM",
+    label: "Grafana",
     icon: "/icons/grafana.svg",
     default: true,
     match: [labels.grafana, labels.prometheus, labels.loki, labels.falco],
