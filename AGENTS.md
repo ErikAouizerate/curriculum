@@ -9,7 +9,7 @@ Personal CV/résumé site, deployed at https://www.erik-aouizerate.me/ via Verce
 - `@tabler/icons-svelte` for UI icons, `dayjs` for dates
 - ESLint 10 flat config (`eslint.config.mjs`), Vitest for unit tests
 - pnpm (package manager, enforced)
-- Static output: every route is prerendered; no database; Cloudflare Web Analytics only
+- Static output: every page is prerendered; one serverless endpoint (`/api/ask`); no database; Cloudflare Web Analytics + Turnstile
 
 ## Global conventions
 
@@ -32,14 +32,24 @@ Content copied from Basic Memory (project "main", `guidelines/stack/`); exceptio
 
 These rules are what keep the CV fast and statically deployable.
 
-- **`/` must not ship the application runtime.** `src/routes/+page.js` exports `csr = false`; never
+- **`/` must not ship the application runtime.** `src/routes/+page.js` exports `csr = dev`
+  (`false` in every build; `true` under `pnpm dev` only, because a `csr = false` page receives no
+  Vite client and would never hot-reload); never
   add a `client:*` directive or an interactive Svelte component to the public page. The only
   allowed scripts are `static/cv.js` (share/print delegation), the Cloudflare beacon rendered by
   `src/routes/+layout.svelte` from `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN`, and the inert
   `Person` JSON-LD block. Verify that `index.html`
-  does not reference `_app/immutable/nodes`; CI enforces it. `/studio` holds its first paint with
-  `<link rel="expect" href="#cv-page" blocking="render">`, so the editor never paints its
-  placeholder before the decoded CV exists.
+  does not reference `_app/immutable/nodes`; CI enforces it. `/studio` prerenders the CV header
+  (`CvDocument showContent={false}`): it does not depend on the fragment, so it paints at once and
+  takes part in the view transition; the content appears once `#cv=` is decoded. (A
+  `rel="expect"` render hold cannot wait for a client-rendered element: it releases at the end of
+  parsing.)
+- **Cross-page motion is CSS only.** `/` ↔ `/portfolio` ↔ `/studio` (full page loads) animate with
+  cross-document view transitions (`@view-transition` in `src/app.css`). The names `cv-banner`,
+  `cv-avatar`, `cv-title`, `cv-name` and `nav-arrow` (one left-arrow icon everywhere; the one on `/` is rotated
+  180deg on the element, so the morph interpolates the half-turn) must
+  stay unique per page; never add JS to drive this animation. Links between these pages carry
+  `data-sveltekit-reload` so dev (hydrated) also does full page loads and plays the transition.
 - **`src/lib/components/` stays presentational.** No browser API, no `$app/*` import, no editor
   state. Components receive a `CvView` and optional callbacks, so the same code renders the static
   CV and the editor.
@@ -104,18 +114,23 @@ Recorded as Basic Memory decisions (`guidelines/curriculum/`).
 - **SvelteKit static instead of the Vite/React webapp stack** — the public CV must ship zero
   JavaScript and the site must be deployable as static files. SvelteKit gives a per-page
   `csr = false` MPA plus app-style routing/state for the future interactive modules.
-- **Cloudflare Web Analytics only** — Umami was removed; the only third-party script is the
-  Cloudflare beacon configured in `src/app.html`.
+- **Cloudflare only for third-party scripts** — Umami was removed; the third-party scripts are the
+  Cloudflare beacon configured in `src/app.html` and, on `/portfolio` only, Cloudflare Turnstile.
 - **Vercel via GitHub Actions** — the Dokploy/Traefik infrastructure and Docker-Compose/Dokploy
   deployment policies do not apply; Docker is for local development only. The Vercel Git
   integration is disabled in favour of `vercel --prebuilt` from CI, so the build-time PDF is part
   of the deployment.
-- **State in the URL, no backend** — there is no server-side store; the CV selection is encoded in
-  the fragment and never sent to a server.
+- **State in the URL, one stateless endpoint** — there is no database; the CV selection is encoded
+  in the fragment and never sent to a server. The only backend is `POST /api/ask` (portfolio
+  assistant): Upstash Redis holds rate-limit counters only, and visitor prompts are never stored.
+- **Portfolio assistant on OpenCode Go** — accepted risk: OpenCode's terms describe Go as for
+  internal coding-agent use. The base URL/key are env vars so switching to OpenCode Zen
+  (pay-as-you-go, same models) needs no code change. Its global cap shares the Go allowance.
 
 ## Project structure
 
-- `src/routes/` — `/` (static CV) and `/studio` (editor)
+- `src/routes/` — `/` (static CV), `/portfolio` (assistant), `/studio` (editor), `api/ask` (assistant endpoint)
+- `src/lib/ask/` — assistant system prompt, event validation and tailored-CV state (pure, tested)
 - `src/lib/content/` — editorial data (jobs, skills, schools, labels, profile)
 - `src/lib/components/` — presentational CV components
 - `src/lib/cv.ts` — default state, view model, pure transitions

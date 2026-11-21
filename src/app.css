@@ -33,17 +33,58 @@
   margin-inline: auto;
 }
 
-@media screen and (width >= 48rem) {
-  /* The studio keeps the CV against the left edge to leave room for the toolbars. */
-  .cv-document--start {
-    margin-inline: 50px auto;
-  }
-}
-
 body {
   @apply bg-gray-100 font-sans;
 }
 
 .custom-strong {
   @apply underline font-semibold decoration-dotted underline-offset-4;
+}
+
+/*
+ * Cross-document view transitions: `/` and `/portfolio` are plain page loads (csr = false), so the
+ * header morph is done by the browser from shared `view-transition-name`s, with zero JavaScript.
+ * Unsupported browsers simply navigate without animation.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+::view-transition-group(cv-banner),
+::view-transition-group(cv-avatar),
+::view-transition-group(cv-title),
+::view-transition-group(cv-name) {
+  animation-duration: 450ms;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Every nav arrow is the same left-pointing icon; the one on `/` is the element itself rotated by
+   180deg. The group interpolates the element transform, so `/` <-> portfolio/studio plays a
+   half-turn while portfolio <-> studio only moves the arrow. */
+
+::view-transition-group(nav-arrow) {
+  animation-duration: 450ms;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+::view-transition-old(root) {
+  animation: 200ms ease-out both vt-fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 350ms ease-in 300ms both vt-fade-in;
+}
+
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
 }

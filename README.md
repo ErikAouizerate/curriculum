@@ -8,13 +8,27 @@ Personal CV/résumé site — SvelteKit 3 + Svelte 5 + TypeScript + Tailwind CSS
 - `/` — the public CV. Prerendered at build with `csr = false`: **no framework JavaScript is
   served**. Content is complete in `index.html`; only `static/cv.js` (share/print delegation) and
   the Cloudflare beacon run on the page. The only other script tag is the inert `Person` JSON-LD.
-  The top-right arrow to `/studio` is currently visually hidden (opacity 0) but keeps a 56×56
-  clickable area; it appears on keyboard focus.
+  A top-right arrow links to `/portfolio`, whose header holds a back arrow to `/`.
+- `/portfolio` — hydrated page (`noindex`) hosting the **portfolio assistant**: a visitor pastes a
+  job description, asks a question or lists keywords; `POST /api/ask` streams NDJSON events
+  (sentences, matched skills, relevant jobs, projects from `src/lib/content/projects.ts`: public GitHub repositories plus the client
+  projects imported from the previous portfolio, with thumbnails in `static/projects/`; client projects open their full
+  presentation, `*-full.webp`, in a native `<dialog>`)
+  and ends with a tailored-CV link `/studio#cv=…` built with the existing codec. The prompt is
+  always on the left 3/5 (from `lg`); the CV in the right 2/5 is scaled with CSS `zoom` to fit; the right column shows the animated hero of the previous portfolio (`Scramble.svelte`), then the tailored CV
+  (`CvDocument`), which grows live as skills and
+  jobs stream in (its `view-transition-name`s are neutralised so the page transitions keep working). Every model line
+  is validated against the catalog (`src/lib/ask/events.ts`), so unknown skills or projects
+  never reach the page. The last prompt and answer are kept in `sessionStorage`
+  (per tab, best effort), so returning from `/studio` restores them. Navigating from `/` uses a
+  cross-document view transition (pure CSS in `src/app.css`): the avatar, title and name share
+  `view-transition-name`s (`cv-banner`, `cv-avatar`, `cv-title`, `cv-name`) with `CvHeader`: the
+  first banner becomes the nav bar and the rest morphs into the top-left heading while the rest of the page fades in. Unsupported browsers and
+  `prefers-reduced-motion: reduce` get a plain navigation.
 - `/studio` — the interactive editor (filters, collapsed jobs, undo). Hydrated on demand; its
-  state lives entirely in the URL fragment as `#cv=<24 base64url characters>`. On wide screens the
-  CV is pinned 50px from the left edge so the toolbars keep the right side, and a home button
-  returns to `/`. The page holds its first paint until `#cv-page` exists (`<link rel="expect">`),
-  so no placeholder is ever painted.
+  state lives entirely in the URL fragment as `#cv=<24 base64url characters>`. Like `/`, the CV is
+  centred and the toolbars sit just right of it on wide screens; its left arrow returns to `/portfolio`. The CV header is prerendered so it paints at
+  once (and morphs from `/portfolio`); skills and jobs appear once the fragment is decoded.
 - `src/lib/content/` — typed editorial content (jobs, skills, schools, labels, profile).
 - `src/lib/components/` — presentational Svelte components, no browser API, no state.
 - `src/lib/cv.ts` — default state, view model, pure state transitions.
@@ -108,8 +122,18 @@ integration can stay connected. Required repository secrets: `VERCEL_TOKEN`, `VE
 settings, use the **SvelteKit** framework preset and the `pnpm build` build command; `vercel build`
 runs it again before the PDF is added to `.vercel/output/static`.
 
-Every route is prerendered. `@sveltejs/adapter-vercel` still emits a catch-all function for unknown
-paths and error rendering; it is never used for `/` or `/studio`.
+Every page is prerendered. `@sveltejs/adapter-vercel` emits a catch-all function for unknown
+paths and error rendering, and one function for `/api/ask`.
+
+The assistant endpoint checks, in order: same `Origin`, input length (≤ 10 000 chars), a Cloudflare
+Turnstile token, then Upstash rate limits (5/min and 20/day per IP, 200/day site-wide), before
+calling an OpenAI-compatible `chat/completions` stream (`max_tokens` 2500, `reasoning_effort: "none"`). Server variables, all
+optional (without them the endpoint answers 503): `OPENCODE_API_KEY`, `OPENCODE_BASE_URL`
+(default `https://opencode.ai/inference/go`), `OPENCODE_MODEL` (default `claude-haiku-5-5`),
+`TURNSTILE_SECRET_KEY`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`; build variable
+`PUBLIC_TURNSTILE_SITE_KEY`. Set them in the Vercel project (`vercel pull` brings them to CI).
+Cloudflare's always-pass test keys (`1x00000000000000000000AA` /
+`1x0000000000000000000000000000000AA`) work locally.
 
 The PDF is compressed with Ghostscript (`/ebook`, 150 dpi images) before the artifact upload and the
 deployment.

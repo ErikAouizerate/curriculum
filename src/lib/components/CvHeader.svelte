@@ -22,8 +22,10 @@
 </script>
 
 <header class="bg-primary/90 text-white">
-  <div class="flex flex-col bg-primary py-6 justify-center items-center px-6 text-center">
-    <h1 class="text-white text-xl font-bold">{profile.title}</h1>
+  <div
+    class="flex flex-col bg-primary py-6 justify-center items-center px-6 text-center [view-transition-name:cv-banner]"
+  >
+    <h1 class="text-white text-xl font-bold [view-transition-name:cv-title]">{profile.title}</h1>
     <h2 class="hidden md:inline print:inline text-white/70 text-md font-medium">
       {profile.subtitle}
     </h2>
@@ -36,14 +38,14 @@
         src="/avatar.webp"
         width="112"
         height="112"
-        class="float md:absolute print:absolute -top-5 rounded-full min-w-24 min-h-24 max-w-28 max-h-28 object-cover"
+        class="float md:absolute print:absolute -top-5 rounded-full [view-transition-name:cv-avatar] min-w-24 min-h-24 max-w-28 max-h-28 object-cover"
       />
     </div>
     <div
       class="pl-4 md:pl-40 print:pl-40 py-6 px-4 print:pb-0 flex flex-col md:flex-row print:flex-row justify-between w-full md:gap-0 gap-4"
     >
       <div class="flex flex-col justify-start mt-6 md:mt-0 md:ml-4 print:mt-0 print:ml-6">
-        <div class="font-bold text-2xl pb-4">{profile.name}</div>
+        <div class="font-bold text-2xl mb-4 w-fit [view-transition-name:cv-name]">{profile.name}</div>
         <div class="text-lg text-white/70">{yearsOld} ans</div>
         <div class="text-lg text-white/70">Expérience : {experience} années</div>
         <div class="text-lg text-white/70">{profile.english}</div>

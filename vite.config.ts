@@ -13,9 +13,6 @@ export default defineConfig({
           if (path === "/Erik_Aouizerate_CV.pdf") return;
           throw new Error(message);
         },
-        // The studio holds its first paint with rel="expect" on #cv-page, which
-        // only exists once the client has decoded the CV from the URL fragment.
-        handleMissingId: ({ id }) => (id === "cv-page" ? "ignore" : "fail"),
       },
       compilerOptions: {
         // Force runes mode outside node_modules.

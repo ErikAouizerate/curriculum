@@ -1,9 +1,9 @@
 <script lang="ts">
   import IconArrowBack from "@tabler/icons-svelte/icons/arrow-back";
+  import IconArrowLeft from "@tabler/icons-svelte/icons/arrow-left";
   import IconArrowsVertical from "@tabler/icons-svelte/icons/arrows-vertical";
   import IconDownload from "@tabler/icons-svelte/icons/download";
   import IconFilter from "@tabler/icons-svelte/icons/filter";
-  import IconHome from "@tabler/icons-svelte/icons/home";
   import IconPrinter from "@tabler/icons-svelte/icons/printer";
   import IconShare from "@tabler/icons-svelte/icons/share";
   import { onMount } from "svelte";
@@ -27,9 +27,6 @@
   } from "#lib/cv.js";
   import { decodeCv, encodeCv } from "#lib/cv-codec.js";
   import { readCvCode, writeCvCode } from "#lib/cv-hash.js";
-
-  // `blocking` is not in Svelte's HTML typings yet, hence the spread below.
-  const renderBlocking = { blocking: "render" };
 
   let cv = $state<CvState>(defaultCvState());
   let ready = $state(false);
@@ -92,7 +89,7 @@
   });
 
   const topActions =
-    "fixed z-10 top-0 right-0 flex flex-row gap-1 m-2 md:flex-col md:m-4 md:ml-[calc(calc(calc(100vw-21cm)/2)+21cm)]";
+    "print:hidden fixed z-10 top-0 right-0 flex flex-row gap-1 m-2 md:right-auto md:flex-col md:m-4 md:ml-[calc(calc(calc(100vw-21cm)/2)+21cm)]";
   const bottomActions =
     "print:hidden fixed z-10 bottom-0 left-1/2 -translate-x-1/2 flex flex-row gap-2 m-2 rounded-full bg-white shadow-lg md:left-auto md:translate-x-0 md:flex-col md:rounded-none md:bg-transparent md:shadow-none md:m-4 md:ml-[calc(calc(calc(100vw-21cm)/2)+21cm)]";
   const action =
@@ -102,22 +99,21 @@
 <svelte:head>
   <title>CV interactif — Erik Aouizerate</title>
   <meta name="robots" content="noindex" />
-  <!-- Hold the first paint until the decoded CV is in the DOM: no placeholder flash. -->
-  <link rel="expect" href="#cv-page" {...renderBlocking} />
 </svelte:head>
 
 <div class="relative mb-6 pb-20 md:pb-0">
-  {#if ready}
-    <CvDocument view={view} editable actions={actions} align="start" />
-  {:else}
-    <div
-      class="cv-document cv-document--start md:w-[21cm] bg-stone-200 min-h-[29.7cm]"
-    ></div>
-  {/if}
+  <!-- The header is prerendered (it does not depend on the fragment), so it is painted at once
+       and morphs from /portfolio; the content waits for the decoded `#cv=` state. -->
+  <CvDocument view={view} editable actions={actions} showContent={ready} />
 
   <div class={topActions}>
-    <a href="/" aria-label="Retour au CV statique" class={action}>
-      <IconHome size={40} />
+    <a
+      href="/portfolio"
+      data-sveltekit-reload
+      aria-label="Revenir au portfolio"
+      class="{action} [view-transition-name:nav-arrow]"
+    >
+      <IconArrowLeft size={40} />
     </a>
     <button
       type="button"

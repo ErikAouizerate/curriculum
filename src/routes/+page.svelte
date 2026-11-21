@@ -1,5 +1,5 @@
 <script lang="ts">
-  import IconArrowRight from "@tabler/icons-svelte/icons/arrow-right";
+  import IconArrowLeft from "@tabler/icons-svelte/icons/arrow-left";
   import IconDownload from "@tabler/icons-svelte/icons/download";
   import IconPrinter from "@tabler/icons-svelte/icons/printer";
   import IconShare from "@tabler/icons-svelte/icons/share";
@@ -92,13 +92,14 @@
 <div class="relative mb-6 pb-20 md:pb-0">
   <CvDocument {view} />
 
-  <!-- Visually hidden for now; the 56x56 clickable area is kept. -->
+  <!-- data-sveltekit-reload keeps a full page load in dev too, so the view transition runs. -->
   <a
-    href="/studio"
-    aria-label="Ouvrir la version interactive"
-    class="{topAction} opacity-0 focus-visible:opacity-100"
+    href="/portfolio"
+    data-sveltekit-reload
+    aria-label="Ouvrir le portfolio"
+    class="{topAction} rotate-180 [view-transition-name:nav-arrow]"
   >
-    <IconArrowRight size={40} />
+    <IconArrowLeft size={40} />
   </a>
 
   <div class={bottomActions}>
