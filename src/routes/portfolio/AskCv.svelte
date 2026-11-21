@@ -240,8 +240,9 @@
     if (restored) persist();
   });
 
+  // Flex column: a <button> card stretched by the grid would otherwise centre its content.
   const projectCard =
-    "block w-full overflow-hidden rounded-xl bg-white shadow-sm transition";
+    "flex w-full flex-col justify-start overflow-hidden rounded-xl bg-white shadow-sm transition";
 
   // Client projects have no public link: their presentation opens in a native modal dialog.
   let shownProject = $state<Project | null>(null);
