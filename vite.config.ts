@@ -3,10 +3,41 @@ import { sveltekit } from "@sveltejs/kit/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
     tailwindcss(),
     sveltekit({
+      // Every page is prerendered, so SvelteKit emits the policy as a <meta> tag baked into the
+      // HTML. Destinations: the app itself, the Cloudflare beacon and the Turnstile widget. Style
+      // attributes cannot be hashed, hence 'unsafe-inline' for styles only.
+      // Off in dev: Vite's HMR pipeline injects inline scripts a static policy would block.
+      csp:
+        command === "build"
+          ? {
+              mode: "hash",
+              directives: {
+                "default-src": ["self"],
+                "script-src": [
+                  "self",
+                  "https://challenges.cloudflare.com",
+                  "https://static.cloudflareinsights.com",
+                ],
+                "style-src": ["self", "unsafe-inline"],
+                "img-src": ["self"],
+                "font-src": ["self"],
+                "connect-src": [
+                  "self",
+                  "https://challenges.cloudflare.com",
+                  "https://cloudflareinsights.com",
+                ],
+                "frame-src": ["https://challenges.cloudflare.com"],
+                "frame-ancestors": ["none"],
+                "base-uri": ["none"],
+                "form-action": ["self"],
+                "object-src": ["none"],
+              },
+            }
+          : undefined,
       prerender: {
         handleHttpError: ({ path, message }) => {
           // Generated after the build by scripts/pdf.mjs.
@@ -29,4 +60,4 @@ export default defineConfig({
     strictPort: true,
   },
   preview: { port: 3000, strictPort: true },
-});
+}));

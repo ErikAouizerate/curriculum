@@ -271,6 +271,8 @@
       widgetId =
         win.turnstile?.render(box, {
           sitekey: PUBLIC_TURNSTILE_SITE_KEY,
+          // Checked server-side: a token solved for another action is refused.
+          action: "ask",
           appearance: "interaction-only",
           callback: (token: string) => (turnstileToken = token),
           "expired-callback": () => (turnstileToken = null),

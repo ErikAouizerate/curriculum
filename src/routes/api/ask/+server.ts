@@ -1,6 +1,6 @@
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
-import { error } from "@sveltejs/kit";
+import { json } from "@sveltejs/kit";
 import {
   OPENCODE_API_KEY,
   OPENCODE_BASE_URL,
@@ -10,6 +10,7 @@ import {
   UPSTASH_REDIS_REST_URL,
 } from "$app/env/private";
 
+import { clientIp, ipKey } from "#lib/ask/client-ip.js";
 import {
   EventFilter,
   MAX_INPUT_LENGTH,
@@ -18,6 +19,7 @@ import {
   type AskEvent,
 } from "#lib/ask/events.js";
 import { systemPrompt } from "#lib/ask/prompt.js";
+import { turnstileError, type TurnstilePayload } from "#lib/ask/turnstile.js";
 import { encodeCv } from "#lib/cv-codec.js";
 import type { RequestHandler } from "./$types";
 
@@ -27,7 +29,17 @@ export const prerender = false;
 const MAX_OUTPUT_TOKENS = 2500;
 const USER_AGENT = "erik-aouizerate-portfolio/1.0";
 
-type Limiters = readonly [Ratelimit, Ratelimit, Ratelimit];
+interface Limiters {
+  preIp: Ratelimit;
+  preGlobal: Ratelimit;
+  ipMinute: Ratelimit;
+  ipDay: Ratelimit;
+  global: Ratelimit;
+}
+
+/** Verdict of one limiter: allowed, or refused with the delay to advertise. */
+type Limit = { ok: true } | { ok: false; retryAfter: number };
+
 let limiters: Limiters | undefined;
 
 // Created on the first request, never at import: the build imports this module to analyse
@@ -35,33 +47,94 @@ let limiters: Limiters | undefined;
 function getLimiters(): Limiters {
   if (!limiters) {
     const redis = new Redis({ url: UPSTASH_REDIS_REST_URL!, token: UPSTASH_REDIS_REST_TOKEN! });
-    // Per visitor and site-wide caps. The global cap keeps the widget under the model allowance.
-    limiters = [
-      new Ratelimit({ redis, prefix: "ask:ip:min", limiter: Ratelimit.slidingWindow(5, "1 m") }),
-      new Ratelimit({ redis, prefix: "ask:ip:day", limiter: Ratelimit.slidingWindow(20, "1 d") }),
-      new Ratelimit({ redis, prefix: "ask:global", limiter: Ratelimit.fixedWindow(200, "1 d") }),
-    ];
+    // `timeout` makes a slow Redis throw instead of holding the function; `check` then fails open.
+    const timeout = 1000;
+    limiters = {
+      // Runs before Turnstile, which cannot protect the calls made to verify a token: it bounds
+      // the function invocations and the outbound checks. Looser than the visitor quota below, so
+      // it never refuses a visitor the assistant would have accepted.
+      preIp: new Ratelimit({
+        redis,
+        prefix: "ask:pre:ip",
+        limiter: Ratelimit.slidingWindow(10, "1 m"),
+        timeout,
+      }),
+      preGlobal: new Ratelimit({
+        redis,
+        prefix: "ask:pre:all",
+        limiter: Ratelimit.slidingWindow(300, "1 m"),
+        timeout,
+      }),
+      // Per visitor and site-wide caps. The global cap keeps the widget under the model allowance.
+      ipMinute: new Ratelimit({
+        redis,
+        prefix: "ask:ip:min",
+        limiter: Ratelimit.slidingWindow(5, "1 m"),
+        timeout,
+      }),
+      ipDay: new Ratelimit({
+        redis,
+        prefix: "ask:ip:day",
+        limiter: Ratelimit.slidingWindow(20, "1 d"),
+        timeout,
+      }),
+      global: new Ratelimit({
+        redis,
+        prefix: "ask:global",
+        limiter: Ratelimit.fixedWindow(200, "1 d"),
+        timeout,
+      }),
+    };
   }
   return limiters;
 }
 
-async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
-  const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({ secret: TURNSTILE_SECRET_KEY, response: token, remoteip: ip }),
-  });
-  if (!response.ok) return false;
-  const result = (await response.json()) as { success?: boolean };
-  return result.success === true;
+async function check(limiter: Ratelimit, identifier: string): Promise<Limit> {
+  try {
+    const { success, reset } = await limiter.limit(identifier);
+    if (success) return { ok: true };
+    const seconds = Math.ceil((reset - Date.now()) / 1000);
+    return { ok: false, retryAfter: Math.min(86_400, Math.max(1, seconds)) };
+  } catch (cause) {
+    // Redis unreachable or too slow: serve the visitor instead of taking the assistant down.
+    // Turnstile and the quotas below still apply.
+    console.error("[ask] rate limiter degraded", cause);
+    return { ok: true };
+  }
 }
 
-async function withinLimits(ip: string): Promise<boolean> {
-  const [perMinute, perDay, global] = getLimiters();
-  // Visitor limits first, so a blocked visitor does not consume the global budget.
-  if (!(await perMinute.limit(ip)).success) return false;
-  if (!(await perDay.limit(ip)).success) return false;
-  return (await global.limit("all")).success;
+async function verifyTurnstile(token: string, ip: string, hostname: string): Promise<boolean> {
+  const id = crypto.randomUUID().slice(0, 8);
+  try {
+    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ secret: TURNSTILE_SECRET_KEY, response: token, remoteip: ip }),
+      signal: AbortSignal.timeout(4000),
+    });
+    if (!response.ok) {
+      console.error(`[ask ${id}] turnstile http ${response.status}`);
+      return false;
+    }
+    const payload = (await response.json()) as TurnstilePayload;
+    const refusal = turnstileError(payload, hostname);
+    // Logged only: the visitor always gets the same message, so a wrong secret looks like a bot.
+    if (refusal) console.error(`[ask ${id}] turnstile ${refusal}`);
+    return refusal === null;
+  } catch (cause) {
+    console.error(`[ask ${id}] turnstile unreachable`, cause);
+    return false;
+  }
+}
+
+/** Refusal with the headers that keep a shared cache from replaying it. */
+function deny(status: number, message: string, retryAfter?: number): Response {
+  const headers: Record<string, string> = {
+    "cache-control": "private, no-store",
+    vary: "origin",
+  };
+  if (retryAfter !== undefined) headers["retry-after"] = String(retryAfter);
+  return json({ status, message }, { status, headers });
 }
 
 function encode(event: AskEvent): Uint8Array {
@@ -91,25 +164,49 @@ async function* contentDeltas(body: ReadableStream<Uint8Array>): AsyncGenerator<
   }
 }
 
-export const POST: RequestHandler = async ({ request, url, getClientAddress }) => {
+export const POST: RequestHandler = async ({ request, url }) => {
   if (
     !OPENCODE_API_KEY ||
     !TURNSTILE_SECRET_KEY ||
     !UPSTASH_REDIS_REST_URL ||
     !UPSTASH_REDIS_REST_TOKEN
   ) {
-    error(503, "Assistant indisponible");
+    return deny(503, "Assistant indisponible");
   }
-  if (request.headers.get("origin") !== url.origin) error(403, "Origine refusée");
+  // Cheapest first: an unwanted origin touches neither Redis nor Cloudflare.
+  if (request.headers.get("origin") !== url.origin) return deny(403, "Origine refusée");
 
   const body = (await request.json().catch(() => null)) as { input?: unknown; token?: unknown } | null;
   const input = typeof body?.input === "string" ? body.input.trim() : "";
   const token = typeof body?.token === "string" ? body.token : "";
-  if (!input || input.length > MAX_INPUT_LENGTH) error(400, "Message vide ou trop long");
+  if (!input || input.length > MAX_INPUT_LENGTH) return deny(400, "Message vide ou trop long");
 
-  const ip = getClientAddress();
-  if (!token || !(await verifyTurnstile(token, ip))) error(403, "Vérification anti-robot échouée");
-  if (!(await withinLimits(ip))) error(429, "Trop de demandes, réessayez plus tard");
+  const ip = clientIp(request.headers);
+  const key = await ipKey(ip);
+
+  // Before Turnstile, so a flood of junk tokens still costs neither an invocation storm nor
+  // unlimited calls to Cloudflare.
+  const [burst, burstGlobal] = await Promise.all([
+    check(getLimiters().preIp, key),
+    check(getLimiters().preGlobal, "all"),
+  ]);
+  const refused = burst.ok ? burstGlobal : burst;
+  if (!refused.ok) return deny(429, "Trop de demandes, réessayez plus tard", refused.retryAfter);
+
+  if (!token || !(await verifyTurnstile(token, ip, url.hostname))) {
+    return deny(403, "Vérification anti-robot échouée");
+  }
+
+  // Visitor limits first, so a blocked visitor does not consume the global budget.
+  const { ipMinute, ipDay, global } = getLimiters();
+  for (const [limiter, identifier] of [
+    [ipMinute, key],
+    [ipDay, key],
+    [global, "all"],
+  ] as const) {
+    const quota = await check(limiter, identifier);
+    if (!quota.ok) return deny(429, "Trop de demandes, réessayez plus tard", quota.retryAfter);
+  }
 
   const upstream = await fetch(`${OPENCODE_BASE_URL.replace(/\/$/, "")}/v1/chat/completions`, {
     method: "POST",
@@ -133,7 +230,7 @@ export const POST: RequestHandler = async ({ request, url, getClientAddress }) =
       ],
     }),
   });
-  if (!upstream.ok || !upstream.body) error(502, "Le modèle n'a pas répondu");
+  if (!upstream.ok || !upstream.body) return deny(502, "Le modèle n'a pas répondu");
   const upstreamBody = upstream.body;
 
   const stream = new ReadableStream<Uint8Array>({

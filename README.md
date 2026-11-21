@@ -106,6 +106,13 @@ The site exposes machine-readable entry points for search engines and AI agents:
 - `vercel.json` sets `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` and
   `X-Frame-Options` for every path. Vercel applies these headers during `vercel build`/deploy;
   `vite preview` does not, so check them on a preview deployment with `curl -I`.
+- The Content Security Policy is declared in `vite.config.ts` (`sveltekit({ csp })`, hash mode) and
+  only for `vite build`: Vite's dev pipeline injects inline scripts a static policy would block.
+  Prerendered pages carry it as a `<meta>` tag, the runtime error pages as an HTTP header. The only
+  third parties allowed are the Cloudflare beacon and the Turnstile widget; `style-src` keeps
+  `'unsafe-inline'` because CSP hashes do not cover `style` attributes. A new third-party script,
+  font, image host or inline `fetch` needs a matching directive; verify with a browser (no
+  `securitypolicyviolation`) before shipping.
 
 ## Deployment
 
@@ -125,9 +132,14 @@ runs it again before the PDF is added to `.vercel/output/static`.
 Every page is prerendered. `@sveltejs/adapter-vercel` emits a catch-all function for unknown
 paths and error rendering, and one function for `/api/ask`.
 
-The assistant endpoint checks, in order: same `Origin`, input length (≤ 10 000 chars), a Cloudflare
-Turnstile token, then Upstash rate limits (5/min and 20/day per IP, 200/day site-wide), before
-calling an OpenAI-compatible `chat/completions` stream (`max_tokens` 2500, `reasoning_effort: "none"`). Server variables, all
+The assistant endpoint checks, in order: same `Origin`, input length (≤ 10 000 chars), a burst
+limit (10/min per visitor, 300/min site-wide), a Cloudflare Turnstile token (action `ask`,
+hostname and 300 s age checked), then the visitor quotas (5/min and 20/day per IP, 200/day
+site-wide), before
+calling an OpenAI-compatible `chat/completions` stream (`max_tokens` 2500, `reasoning_effort: "none"`). The rate-limit identity is
+the client network — `/64` for IPv6, the address for IPv4 — hashed with SHA-256, so Redis never
+stores an address. A Redis failure fails open: an outage degrades the quotas instead of taking the
+assistant down. Server variables, all
 optional (without them the endpoint answers 503): `OPENCODE_API_KEY`, `OPENCODE_BASE_URL`
 (default `https://opencode.ai/inference/go`), `OPENCODE_MODEL` (default `claude-haiku-5-5`),
 `TURNSTILE_SECRET_KEY`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`; build variable

@@ -44,6 +44,12 @@ These rules are what keep the CV fast and statically deployable.
   takes part in the view transition; the content appears once `#cv=` is decoded. (A
   `rel="expect"` render hold cannot wait for a client-rendered element: it releases at the end of
   parsing.)
+- **The CSP is build-only and hash-based.** Declared in `vite.config.ts` (`sveltekit({ csp })`,
+  `mode: "hash"`), enabled for `vite build` only — Vite's dev pipeline injects inline scripts a
+  static policy would block. Prerendered pages carry it as a `<meta>` tag, runtime error pages as
+  an HTTP header. Any new third-party script, font, image host or `fetch` destination needs a
+  matching directive, and `style-src` keeps `'unsafe-inline'` because CSP hashes do not cover
+  `style` attributes. Verify with a browser (no `securitypolicyviolation`) before shipping.
 - **Cross-page motion is CSS only.** `/` ↔ `/portfolio` ↔ `/studio` (full page loads) animate with
   cross-document view transitions (`@view-transition` in `src/app.css`). The names `cv-banner`,
   `cv-avatar`, `cv-title`, `cv-name` and `nav-arrow` (one left-arrow icon everywhere; the one on `/` is rotated
@@ -132,7 +138,7 @@ Recorded as Basic Memory decisions (`guidelines/curriculum/`).
 ## Project structure
 
 - `src/routes/` — `/` (static CV), `/portfolio` (assistant), `/studio` (editor), `api/ask` (assistant endpoint)
-- `src/lib/ask/` — assistant system prompt, event validation and tailored-CV state (pure, tested)
+- `src/lib/ask/` — assistant system prompt, event validation, tailored-CV state, client-identity and Turnstile checks (pure, tested)
 - `src/lib/content/` — editorial data (jobs, skills, schools, labels, profile)
 - `src/lib/components/` — presentational CV components
 - `src/lib/cv.ts` — default state, view model, pure transitions
