@@ -112,7 +112,7 @@ export const labels = {
   rgpd: "RGPD",
   vscode: "VS Code",
   linux: "Linux",
-  kali: "Kali Linux",
+  kali: "Kali",
   mac: "macOS",
   windows: "Windows",
   rocky: "Rocky",
