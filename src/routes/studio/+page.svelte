@@ -91,7 +91,7 @@
   const topActions =
     "print:hidden fixed z-10 top-0 right-0 flex flex-row gap-1 m-2 sheet:right-auto sheet:flex-col sheet:m-4 sheet:ml-[calc(calc(calc(100vw-21cm)/2)+21cm)]";
   const bottomActions =
-    "print:hidden fixed z-10 bottom-0 left-1/2 -translate-x-1/2 flex flex-row gap-2 m-2 rounded-full bg-white shadow-lg sheet:left-auto sheet:translate-x-0 sheet:flex-col sheet:rounded-none sheet:bg-transparent sheet:shadow-none sheet:m-4 sheet:ml-[calc(calc(calc(100vw-21cm)/2)+21cm)]";
+    "print:hidden fixed z-10 bottom-0 left-1/2 -translate-x-1/2 flex flex-row gap-2 mb-2 rounded-full bg-white shadow-lg sheet:left-auto sheet:translate-x-0 sheet:flex-col sheet:rounded-none sheet:bg-transparent sheet:shadow-none sheet:m-4 sheet:ml-[calc(calc(calc(100vw-21cm)/2)+21cm)]";
   const action =
     "rounded-full cursor-pointer hover:bg-stone-200 p-2 text-primary bg-white/70";
 </script>
