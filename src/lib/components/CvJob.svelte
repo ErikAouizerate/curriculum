@@ -72,7 +72,9 @@
   </a>
 {/snippet}
 
-<div class="group/job pt-5 last-of-type:mb-0 break-inside-avoid-page">
+<!-- A narrow print layout (Chrome Android scales the page with its zoom) loses several cm of page
+     height: the job may then split across pages instead of leaving page 1 without experience. -->
+<div class="group/job pt-5 last-of-type:mb-0 break-inside-avoid-page max-md:print:break-inside-auto">
   {#if projects.length}
     <!-- No positioned ancestor up to #cv-page: `right` places it outside the sheet while the
          static position keeps it level with this job. -->
@@ -102,7 +104,7 @@
   </div>
 
   <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions (touch-only shortcut; keyboard and mouse users reach the buttons directly) -->
-  <h3 class="text-lg font-bold relative" onclick={editable ? toggleMenu : undefined}>
+  <h3 class="text-lg font-bold relative break-after-avoid" onclick={editable ? toggleMenu : undefined}>
     {job.title}{duration}
     {#if editable}
       <div
@@ -161,7 +163,7 @@
     {#if job.tasks?.length}
       <ul class="list-disc ml-6 my-3 print:text-sm">
         {#each job.tasks as task, index (index)}
-          <li class="font-light">{task}</li>
+          <li class="font-light break-inside-avoid">{task}</li>
         {/each}
       </ul>
     {/if}
