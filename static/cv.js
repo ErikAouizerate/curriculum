@@ -33,6 +33,27 @@ if (window.location.pathname === "/") {
     );
   }
 }
+// Project dialogs form a carousel in CV order: only the jobs shown on the CV render one.
+function projectDialogs() {
+  return [...document.querySelectorAll("dialog.project-dialog")];
+}
+
+function showSiblingDialog(current, step) {
+  const dialogs = projectDialogs();
+  const index = dialogs.indexOf(current);
+  if (index === -1 || dialogs.length < 2) return;
+  current.close();
+  dialogs[(index + step + dialogs.length) % dialogs.length].showModal();
+}
+
+window.addEventListener("keydown", (event) => {
+  if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+  const open = projectDialogs().find((dialog) => dialog.open);
+  if (!open) return;
+  event.preventDefault();
+  showSiblingDialog(open, event.key === "ArrowRight" ? 1 : -1);
+});
+
 window.addEventListener("click", (event) => {
   // A click on the backdrop of a modal dialog targets the dialog itself: close it.
   if (event.target instanceof HTMLDialogElement && event.target.open) {
@@ -49,6 +70,8 @@ window.addEventListener("click", (event) => {
     const dialog = document.getElementById(target.getAttribute("data-dialog") ?? "");
     if (dialog instanceof HTMLDialogElement) {
       event.preventDefault();
+      const alone = projectDialogs().length < 2;
+      for (const nav of document.querySelectorAll(".dialog-nav")) nav.hidden = alone;
       dialog.showModal();
     }
     return;
@@ -56,6 +79,11 @@ window.addEventListener("click", (event) => {
 
   if (action === "close-dialog") {
     target.closest("dialog")?.close();
+    return;
+  }
+
+  if (action === "dialog-prev" || action === "dialog-next") {
+    showSiblingDialog(target.closest("dialog"), action === "dialog-next" ? 1 : -1);
     return;
   }
 
