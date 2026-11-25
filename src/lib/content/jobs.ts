@@ -10,7 +10,7 @@ export const jobs: Job[] = [
     description: `Développement et déploiement d'une infrastructure complète. Applications métier, mémoire partagée des agents et pilotage de la consommation des modèles, de la conception à la production.`,
     tasks: [
       "Sandboxing & audit de sécurité : agent de code isolé en VM KVM et audit local & CI de sécurité depuis une image Docker unique",
-      "Monitoring IA : suivi des coûts et du volume de tokens des sessions d'IA, avec coût par projet et par fonctionnalité (FinOps), pour mesurer le retour sur investissement de l'agentic coding",
+      "Monitoring IA : suivi des coûts et du volume de tokens des sessions d'IA, avec coût par projet et par fonctionnalité (FinOps), pour mesurer le retour sur investissement de l'agentic coding. Budget mensuel actuel : 30€",
       "Basic Memory : mémoire persistante partagée entre les assistants IA, sécurisée et synchronisée entre machines",
       "Workflow LLM : production de livrables au quotidien avec des agents IA (code, tests, infra, monitoring, documentation)",
     ],
